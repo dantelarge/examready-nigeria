@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Your exam results — see your score, grade, and full question review on ExamReady Nigeria." />
+  <title>Results — ExamReady Nigeria</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-logo" aria-label="ExamReady Nigeria Home">
+      <div class="logo-icon" aria-hidden="true">📚</div>
+      <span><span class="logo-name">ExamReady</span> <span class="logo-accent">Nigeria</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="subjects.html">Subjects</a>
+      <a href="subjects.html">Practice</a>
+      <a href="exam.html">Mock Exam</a>
+      <a href="leaderboard.html">Leaderboard</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <a href="subjects.html">Subjects</a>
+  <a href="subjects.html">Practice</a>
+  <a href="exam.html">Mock Exam</a>
+  <a href="leaderboard.html">Leaderboard</a>
+</div>
+
+<main>
+  <!-- No results state -->
+  <div id="noResultsState" class="error-card hidden" style="margin-top:40px;">
+    <span class="error-icon" aria-hidden="true">📋</span>
+    <h2>No Results Found</h2>
+    <p>It looks like you haven't completed an exam yet. Go practice first!</p>
+    <a href="subjects.html" class="btn btn-primary">Choose a Subject</a>
+  </div>
+
+  <!-- Results content -->
+  <div id="resultsContent" class="results-layout hidden">
+
+    <!-- Score hero -->
+    <div class="results-hero">
+      <div class="score-circle-wrap">
+        <div class="score-circle" id="resultScoreCircle">
+          <div class="score-inner">
+            <div class="score-fraction" id="resultScoreFraction">-/-</div>
+            <div class="score-pct" id="resultScorePct">--%</div>
+          </div>
+        </div>
+      </div>
+      <div class="grade-badge" id="resultGradeBadge">-</div>
+      <h2 id="resultSubjectName">Subject</h2>
+      <p class="results-subject" id="resultExamType">Practice Mode</p>
+      <p id="resultMessage" style="color:var(--muted);font-size:.9375rem;max-width:440px;margin:0 auto;"></p>
+      <div class="results-actions">
+        <button class="btn btn-outline-blue" id="tryAgainBtn">Try Again</button>
+        <a href="subjects.html" class="btn btn-outline">Back to Subjects</a>
+      </div>
+    </div>
+
+    <!-- Leaderboard submission -->
+    <div class="lb-submit-card">
+      <h2>🏆 Submit to Leaderboard</h2>
+      <p class="lb-submit-desc">Share your score with other Nigerian students. Enter a nickname to appear on the leaderboard.</p>
+      <div class="submit-row">
+        <input
+          type="text"
+          class="form-input"
+          id="nicknameInput"
+          placeholder="Your nickname (e.g. JambChampion23)"
+          maxlength="30"
+          aria-label="Nickname for leaderboard"
+        />
+        <button class="btn btn-primary" id="submitLbBtn">Submit Score</button>
+      </div>
+      <div class="submit-feedback" id="submitFeedback"></div>
+    </div>
+
+    <!-- Question review -->
+    <div class="review-card">
+      <div class="review-card-header">
+        <span>📝 Full Question Review</span>
+        <span id="reviewSummaryTag" style="font-size:.8rem;opacity:.75;font-weight:500;"></span>
+      </div>
+      <div id="reviewList"></div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer class="footer">
+  <strong>ExamReady Nigeria</strong> &copy; 2024 &mdash;
+  Free exam prep for every Nigerian student 🇳🇬
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/results.js"></script>
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer = document.getElementById('navDrawer');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    navDrawer.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    navDrawer.setAttribute('aria-hidden', !open);
+  });
+  navDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navDrawer.classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>

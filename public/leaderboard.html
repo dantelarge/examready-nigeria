@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ExamReady Nigeria Leaderboard — see the top-scoring students across all subjects." />
+  <title>Leaderboard — ExamReady Nigeria</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-logo" aria-label="ExamReady Nigeria Home">
+      <div class="logo-icon" aria-hidden="true">📚</div>
+      <span><span class="logo-name">ExamReady</span> <span class="logo-accent">Nigeria</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="subjects.html">Subjects</a>
+      <a href="subjects.html">Practice</a>
+      <a href="exam.html">Mock Exam</a>
+      <a href="leaderboard.html" class="active">Leaderboard</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <a href="subjects.html">Subjects</a>
+  <a href="subjects.html">Practice</a>
+  <a href="exam.html">Mock Exam</a>
+  <a href="leaderboard.html" class="active">Leaderboard</a>
+</div>
+
+<main>
+  <div class="leaderboard-layout">
+
+    <!-- Page heading + filter -->
+    <div class="lb-page-header">
+      <h1>🏆 Leaderboard</h1>
+      <div class="filter-row">
+        <label for="subjectFilter">Filter:</label>
+        <select class="form-select" id="subjectFilter" aria-label="Filter by subject">
+          <option value="">All Subjects</option>
+          <!-- Populated by JS -->
+        </select>
+      </div>
+    </div>
+
+    <!-- Top 3 podium -->
+    <div class="podium-row" id="podiumRow" aria-label="Top 3 students" role="region"></div>
+
+    <!-- Loading state -->
+    <div id="loadingState" class="spinner-wrap">
+      <div class="spinner" role="status" aria-label="Loading leaderboard"></div>
+      <p>Loading leaderboard…</p>
+    </div>
+
+    <!-- Table -->
+    <div class="lb-table-wrap hidden" id="tableWrap">
+      <table class="lb-table" aria-label="Leaderboard rankings">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Nickname</th>
+            <th>Subject</th>
+            <th>Score</th>
+            <th>Percentage</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="lbTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Empty state -->
+    <div class="lb-empty hidden" id="emptyState">
+      <span class="lb-empty-icon" aria-hidden="true">🏅</span>
+      <p>No scores yet for this filter. Be the first to submit!</p>
+      <a href="subjects.html" class="btn btn-primary" style="margin-top:16px;">Start Practising</a>
+    </div>
+
+    <!-- Error state -->
+    <div class="lb-empty hidden" id="errorState">
+      <span class="lb-empty-icon" aria-hidden="true">⚠️</span>
+      <p id="errorMessage">Could not load leaderboard. Try again later.</p>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer class="footer">
+  <strong>ExamReady Nigeria</strong> &copy; 2024 &mdash;
+  Free exam prep for every Nigerian student 🇳🇬
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/leaderboard.js"></script>
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer = document.getElementById('navDrawer');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    navDrawer.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    navDrawer.setAttribute('aria-hidden', !open);
+  });
+  navDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navDrawer.classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>

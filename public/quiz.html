@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Practice mode — answer questions one at a time with instant feedback on ExamReady Nigeria." />
+  <title>Practice Quiz — ExamReady Nigeria</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-logo" aria-label="ExamReady Nigeria Home">
+      <div class="logo-icon" aria-hidden="true">📚</div>
+      <span><span class="logo-name">ExamReady</span> <span class="logo-accent">Nigeria</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="subjects.html">Subjects</a>
+      <a href="subjects.html" class="active">Practice</a>
+      <a href="exam.html">Mock Exam</a>
+      <a href="leaderboard.html">Leaderboard</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <a href="subjects.html">Subjects</a>
+  <a href="subjects.html" class="active">Practice</a>
+  <a href="exam.html">Mock Exam</a>
+  <a href="leaderboard.html">Leaderboard</a>
+</div>
+
+<main>
+  <div class="quiz-layout">
+    <!-- Loading state -->
+    <div id="loadingState" class="spinner-wrap">
+      <div class="spinner" role="status" aria-label="Loading questions"></div>
+      <p>Loading questions…</p>
+    </div>
+
+    <!-- Error state -->
+    <div id="errorState" class="error-card hidden">
+      <span class="error-icon" aria-hidden="true">⚠️</span>
+      <h2>Couldn't Load Questions</h2>
+      <p id="errorMessage">Please check your connection and try again.</p>
+      <a href="subjects.html" class="btn btn-primary">Back to Subjects</a>
+    </div>
+
+    <!-- Quiz UI -->
+    <div id="quizUI" class="hidden">
+      <!-- Meta row -->
+      <div class="quiz-meta">
+        <div class="quiz-subject-title" id="quizSubjectTitle">
+          <span id="subjectEmoji" aria-hidden="true"></span>
+          <span id="subjectName"></span>
+        </div>
+        <div class="score-counter" id="scoreCounter" aria-live="polite">Score: 0</div>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-wrap" aria-label="Quiz progress">
+        <div class="progress-label">
+          <span id="progressText">Question 1 of 10</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+          <div class="progress-fill" id="progressFill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Question card -->
+      <div class="question-card" id="questionCard">
+        <div class="question-number-tag" id="questionTag">Question 1</div>
+        <p class="question-text" id="questionText">Loading…</p>
+        <div class="options-list" id="optionsList" role="list"></div>
+        <div class="explanation-box" id="explanationBox">
+          <div class="explanation-label">Explanation</div>
+          <p id="explanationText"></p>
+        </div>
+      </div>
+
+      <!-- Next button -->
+      <div class="quiz-footer">
+        <button class="btn btn-primary hidden" id="nextBtn">Next Question →</button>
+      </div>
+
+      <!-- Final score card (shown at end) -->
+      <div class="final-score-card hidden" id="finalScoreCard">
+        <div class="score-circle-wrap">
+          <div class="score-circle" id="finalScoreCircle">
+            <div class="score-inner">
+              <div class="score-fraction" id="finalScoreFraction">0/10</div>
+              <div class="score-pct" id="finalScorePct">0%</div>
+            </div>
+          </div>
+          <div class="grade-badge" id="finalGradeBadge">F</div>
+        </div>
+        <p id="finalMessage" style="color:var(--muted);margin-bottom:24px;"></p>
+        <div class="final-score-actions">
+          <a href="results.html" class="btn btn-primary" id="viewResultsBtn">View Full Results</a>
+          <button class="btn btn-outline" id="tryAgainBtn">Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer class="footer">
+  <strong>ExamReady Nigeria</strong> &copy; 2024 &mdash;
+  Free exam prep for every Nigerian student 🇳🇬
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/quiz.js"></script>
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer = document.getElementById('navDrawer');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    navDrawer.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    navDrawer.setAttribute('aria-hidden', !open);
+  });
+  navDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navDrawer.classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>

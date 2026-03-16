@@ -1,0 +1,12 @@
+{
+  "name": "examready-nigeria",
+  "version": "1.0.0",
+  "description": "Free JAMB & WAEC exam prep platform for Nigerian students",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

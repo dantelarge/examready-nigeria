@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Choose a JAMB or WAEC subject to start practising on ExamReady Nigeria." />
+  <title>Subjects — ExamReady Nigeria</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-logo" aria-label="ExamReady Nigeria Home">
+      <div class="logo-icon" aria-hidden="true">📚</div>
+      <span><span class="logo-name">ExamReady</span> <span class="logo-accent">Nigeria</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="subjects.html" class="active">Subjects</a>
+      <a href="subjects.html">Practice</a>
+      <a href="exam.html">Mock Exam</a>
+      <a href="leaderboard.html">Leaderboard</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <a href="subjects.html" class="active">Subjects</a>
+  <a href="subjects.html">Practice</a>
+  <a href="exam.html">Mock Exam</a>
+  <a href="leaderboard.html">Leaderboard</a>
+</div>
+
+<main>
+  <!-- ── Page Header ────────────────────────────────────────── -->
+  <header class="page-header">
+    <h1>Choose a Subject</h1>
+    <p>Select a subject to start practising or take a full mock exam</p>
+  </header>
+
+  <!-- ── Subjects Grid ──────────────────────────────────────── -->
+  <section class="section" aria-labelledby="subjects-grid-heading">
+    <div class="container">
+      <h2 class="sr-only" id="subjects-grid-heading">Subject list</h2>
+      <div class="subjects-full-grid" id="subjectsGrid">
+        <!-- Rendered by JS if a specific subject param exists, otherwise all are shown -->
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer class="footer">
+  <strong>ExamReady Nigeria</strong> &copy; 2024 &mdash;
+  Free exam prep for every Nigerian student 🇳🇬
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // ── Hamburger ──
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer = document.getElementById('navDrawer');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    navDrawer.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    navDrawer.setAttribute('aria-hidden', !open);
+  });
+  navDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navDrawer.classList.remove('open');
+    });
+  });
+
+  // ── Render subject cards ──
+  (function renderSubjects() {
+    const grid = document.getElementById('subjectsGrid');
+    const param = getQueryParam('subject'); // from main.js
+
+    // If a specific subject is in the URL, highlight it first or just show all
+    const list = SUBJECTS; // exported from main.js
+
+    grid.innerHTML = list.map(s => {
+      const encoded = encodeURIComponent(s.name);
+      return `
+        <div class="subject-card-full">
+          <span class="subject-emoji" aria-hidden="true">${s.emoji}</span>
+          <div class="subj-info">
+            <div class="subject-name">${s.name}</div>
+            <span class="subject-badge">10 Questions</span>
+            <div class="card-actions">
+              <a href="quiz.html?subject=${encoded}" class="btn btn-primary btn-sm">Practice</a>
+              <a href="exam.html?subject=${encoded}"  class="btn btn-outline btn-sm">Mock Exam</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // If a subject param exists, scroll to that card (nice UX touch)
+    if (param) {
+      const cards = grid.querySelectorAll('.subject-card-full');
+      for (const card of cards) {
+        if (card.querySelector('.subject-name').textContent.trim().toLowerCase() === param.toLowerCase()) {
+          setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+          card.style.borderColor = 'var(--blue)';
+          card.style.boxShadow = '0 0 0 3px var(--blue-light)';
+          break;
+        }
+      }
+    }
+  })();
+</script>
+</body>
+</html>

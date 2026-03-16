@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Timed mock exam — simulate the real JAMB or WAEC exam experience on ExamReady Nigeria." />
+  <title>Mock Exam — ExamReady Nigeria</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-logo" aria-label="ExamReady Nigeria Home">
+      <div class="logo-icon" aria-hidden="true">📚</div>
+      <span><span class="logo-name">ExamReady</span> <span class="logo-accent">Nigeria</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="subjects.html">Subjects</a>
+      <a href="subjects.html">Practice</a>
+      <a href="exam.html" class="active">Mock Exam</a>
+      <a href="leaderboard.html">Leaderboard</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <a href="subjects.html">Subjects</a>
+  <a href="subjects.html">Practice</a>
+  <a href="exam.html" class="active">Mock Exam</a>
+  <a href="leaderboard.html">Leaderboard</a>
+</div>
+
+<main>
+  <!-- Loading state -->
+  <div id="loadingState" class="spinner-wrap" style="margin-top:60px;">
+    <div class="spinner" role="status" aria-label="Loading exam"></div>
+    <p>Preparing your exam…</p>
+  </div>
+
+  <!-- Error state -->
+  <div id="errorState" class="error-card hidden" style="margin-top:40px;">
+    <span class="error-icon" aria-hidden="true">⚠️</span>
+    <h2>Couldn't Load Exam</h2>
+    <p id="errorMessage">Please check your connection and try again.</p>
+    <a href="subjects.html" class="btn btn-primary">Back to Subjects</a>
+  </div>
+
+  <!-- Exam UI -->
+  <div id="examUI" class="exam-page-wrap hidden">
+
+    <!-- ── Left: Question panel ─────────────────────────── -->
+    <div class="exam-main-col">
+      <div class="exam-card">
+        <div class="exam-card-header">
+          <h2 id="examSubjectTitle">Mock Exam</h2>
+          <span class="exam-subject-pill" id="examSubjectPill"></span>
+        </div>
+        <div class="exam-card-body">
+          <!-- Progress bar -->
+          <div class="exam-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="examProgressBar">
+            <div class="exam-progress-fill" id="examProgressFill" style="width:0%"></div>
+          </div>
+          <div class="exam-progress-label" id="examProgressLabel">Question 1 of 10</div>
+
+          <!-- Question -->
+          <div class="question-number-tag" id="examQTag">Question 1</div>
+          <p class="question-text" id="examQText">Loading…</p>
+
+          <!-- Options -->
+          <div class="options-list" id="examOptionsList" role="list"></div>
+
+          <!-- Navigation row -->
+          <div class="exam-nav-row">
+            <button class="btn btn-outline-blue btn-sm" id="prevBtn" disabled>← Previous</button>
+            <button class="flag-btn" id="flagBtn" aria-pressed="false">🚩 Flag</button>
+            <button class="btn btn-primary btn-sm" id="nextExamBtn">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Right: Sidebar ──────────────────────────────── -->
+    <div class="exam-side-col">
+
+      <!-- Timer -->
+      <div class="exam-card" style="margin-bottom:16px;">
+        <div class="timer-block">
+          <div class="timer-label">Time Remaining</div>
+          <div class="timer-value" id="timerDisplay" aria-live="polite" aria-atomic="true">45:00</div>
+        </div>
+      </div>
+
+      <!-- Question navigator -->
+      <div class="exam-card" style="margin-bottom:16px;">
+        <div class="exam-card-header" style="padding:12px 16px;">
+          <h2>Question Navigator</h2>
+        </div>
+        <div class="nav-grid" id="navGrid" role="group" aria-label="Question navigator"></div>
+        <div class="nav-legend">
+          <span><span class="legend-dot answered" aria-hidden="true"></span>Answered</span>
+          <span><span class="legend-dot flagged" aria-hidden="true"></span>Flagged</span>
+          <span><span class="legend-dot unanswered" aria-hidden="true"></span>Unanswered</span>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button class="btn btn-danger btn-block" id="submitExamBtn">Submit Exam</button>
+    </div>
+
+  </div>
+
+  <!-- Submit Confirmation Modal -->
+  <div id="submitModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:9000; align-items:center; justify-content:center;">
+    <div style="background:var(--white); border-radius:var(--radius-card); padding:32px 28px; max-width:440px; width:90%; box-shadow:var(--shadow-lg); text-align:center;">
+      <div style="font-size:2.5rem; margin-bottom:12px;">📋</div>
+      <h2 style="margin-bottom:8px; font-size:1.25rem;">Submit Your Exam?</h2>
+      <p style="color:var(--muted); font-size:.9rem; margin-bottom:8px;" id="modalAnsweredCount"></p>
+      <p style="color:var(--muted); font-size:.9rem; margin-bottom:24px;">You cannot change your answers after submitting.</p>
+      <div style="display:flex; gap:12px; justify-content:center;">
+        <button class="btn btn-outline-blue" id="cancelSubmitBtn">Cancel</button>
+        <button class="btn btn-danger" id="confirmSubmitBtn">Yes, Submit</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer class="footer">
+  <strong>ExamReady Nigeria</strong> &copy; 2024 &mdash;
+  Free exam prep for every Nigerian student 🇳🇬
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/exam.js"></script>
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer = document.getElementById('navDrawer');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    navDrawer.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    navDrawer.setAttribute('aria-hidden', !open);
+  });
+  navDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navDrawer.classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>
