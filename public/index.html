@@ -6,6 +6,11 @@
   <meta name="description" content="ExamReady Nigeria — Nigeria's #1 free JAMB & WAEC exam prep platform. Practice past questions, take mock exams, and track your progress." />
   <title>ExamReady Nigeria — JAMB &amp; WAEC Exam Prep</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0052cc" />
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
 </head>
 <body>
 
@@ -21,7 +26,11 @@
       <a href="subjects.html">Practice</a>
       <a href="exam.html">Mock Exam</a>
       <a href="leaderboard.html">Leaderboard</a>
+      <a href="notes.html">Study Notes</a>
+      <a href="progress.html">My Progress</a>
+      <a href="premium.html" style="color:var(--gold);font-weight:800;">⭐ Premium</a>
     </div>
+    <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
     <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -32,11 +41,18 @@
   <a href="subjects.html">Practice</a>
   <a href="exam.html">Mock Exam</a>
   <a href="leaderboard.html">Leaderboard</a>
+  <a href="notes.html">Study Notes</a>
+  <a href="progress.html">My Progress</a>
+  <a href="premium.html" style="color:var(--gold);font-weight:800;">⭐ Premium</a>
 </div>
 
 <main>
   <!-- ── Hero ──────────────────────────────────────────────── -->
   <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-dots" aria-hidden="true"></div>
+    <div class="hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-glow-2" aria-hidden="true"></div>
+    <div class="hero-glow-3" aria-hidden="true"></div>
     <div class="container">
       <div class="hero-badge">🇳🇬 Built for Nigerian Students</div>
       <h1 id="hero-heading">
@@ -58,7 +74,7 @@
   <section class="stats-bar" aria-label="Platform statistics">
     <div class="container">
       <div class="stat-item">
-        <div class="stat-number">100+</div>
+        <div class="stat-number">400+</div>
         <div class="stat-label">Questions</div>
       </div>
       <div class="stat-item">
@@ -75,6 +91,15 @@
       </div>
     </div>
   </section>
+
+  <!-- AdSense slot — replace IDs after you get approved by Google AdSense -->
+  <!-- <ins class="adsbygoogle"
+       style="display:block;text-align:center;"
+       data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+       data-ad-slot="YOUR_AD_SLOT_ID"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->
 
   <!-- ── Features ───────────────────────────────────────────── -->
   <section class="section" aria-labelledby="features-heading">
@@ -117,64 +142,64 @@
       </div>
       <div class="subjects-grid">
 
-        <a href="subjects.html?subject=Mathematics" class="subject-card">
+        <a href="subjects.html?subject=Mathematics" class="subject-card" data-subject="mathematics">
           <span class="subject-emoji" aria-hidden="true">🔢</span>
           <div class="subject-name">Mathematics</div>
-          <span class="subject-badge">10 Questions</span>
+          <span class="subject-badge">40 Questions</span>
         </a>
 
-        <a href="subjects.html?subject=English+Language" class="subject-card">
+        <a href="subjects.html?subject=English+Language" class="subject-card" data-subject="english">
           <span class="subject-emoji" aria-hidden="true">📝</span>
           <div class="subject-name">English Language</div>
-          <span class="subject-badge">10 Questions</span>
+          <span class="subject-badge">40 Questions</span>
         </a>
 
-        <a href="subjects.html?subject=Physics" class="subject-card">
+        <a href="subjects.html?subject=Physics" class="subject-card" data-subject="physics">
           <span class="subject-emoji" aria-hidden="true">⚡</span>
           <div class="subject-name">Physics</div>
-          <span class="subject-badge">10 Questions</span>
+          <span class="subject-badge">40 Questions</span>
         </a>
 
-        <a href="subjects.html?subject=Chemistry" class="subject-card">
+        <a href="subjects.html?subject=Chemistry" class="subject-card" data-subject="chemistry">
           <span class="subject-emoji" aria-hidden="true">🧪</span>
           <div class="subject-name">Chemistry</div>
-          <span class="subject-badge">10 Questions</span>
+          <span class="subject-badge">40 Questions</span>
         </a>
 
-        <a href="subjects.html?subject=Biology" class="subject-card">
+        <a href="subjects.html?subject=Biology" class="subject-card" data-subject="biology">
           <span class="subject-emoji" aria-hidden="true">🌿</span>
           <div class="subject-name">Biology</div>
-          <span class="subject-badge">10 Questions</span>
+          <span class="subject-badge">40 Questions</span>
         </a>
 
-        <a href="subjects.html?subject=Government" class="subject-card">
+        <a href="subjects.html?subject=Government" class="subject-card" data-subject="government">
           <span class="subject-emoji" aria-hidden="true">🏛️</span>
           <div class="subject-name">Government</div>
-          <span class="subject-badge">10 Questions</span>
+          <span class="subject-badge">40 Questions</span>
         </a>
 
-        <a href="subjects.html?subject=Economics" class="subject-card">
+        <a href="subjects.html?subject=Economics" class="subject-card" data-subject="economics">
           <span class="subject-emoji" aria-hidden="true">💹</span>
           <div class="subject-name">Economics</div>
-          <span class="subject-badge">10 Questions</span>
+          <span class="subject-badge">40 Questions</span>
         </a>
 
-        <a href="subjects.html?subject=Literature+in+English" class="subject-card">
+        <a href="subjects.html?subject=Literature+in+English" class="subject-card" data-subject="literature">
           <span class="subject-emoji" aria-hidden="true">📖</span>
           <div class="subject-name">Literature in English</div>
-          <span class="subject-badge">10 Questions</span>
+          <span class="subject-badge">40 Questions</span>
         </a>
 
-        <a href="subjects.html?subject=Geography" class="subject-card">
+        <a href="subjects.html?subject=Geography" class="subject-card" data-subject="geography">
           <span class="subject-emoji" aria-hidden="true">🌍</span>
           <div class="subject-name">Geography</div>
-          <span class="subject-badge">10 Questions</span>
+          <span class="subject-badge">40 Questions</span>
         </a>
 
-        <a href="subjects.html?subject=Commerce" class="subject-card">
+        <a href="subjects.html?subject=Commerce" class="subject-card" data-subject="commerce">
           <span class="subject-emoji" aria-hidden="true">🏪</span>
           <div class="subject-name">Commerce</div>
-          <span class="subject-badge">10 Questions</span>
+          <span class="subject-badge">40 Questions</span>
         </a>
 
       </div>
@@ -189,6 +214,7 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/premium-gate.js"></script>
 <script>
   // Hamburger toggle
   const hamburger = document.getElementById('hamburger');

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Study notes for JAMB and WAEC subjects on ExamReady Nigeria. Quick revision summaries for every subject." />
+  <title>Study Notes — ExamReady Nigeria</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0052cc" />
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <style>
+    .notes-layout { max-width: 900px; margin: 0 auto; padding: 32px 20px 60px; }
+
+    /* Subject selector tabs */
+    .notes-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .notes-tab {
+      padding: 8px 16px;
+      border: 2px solid var(--border);
+      border-radius: 100px;
+      font-size: .8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--white);
+      color: var(--muted);
+      transition: all var(--transition);
+    }
+    .notes-tab:hover { border-color: var(--blue); color: var(--blue); }
+    .notes-tab.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+    /* Notes panel */
+    .notes-panel { display: none; }
+    .notes-panel.active { display: block; }
+
+    .notes-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .notes-header-emoji { font-size: 2.25rem; }
+    .notes-header h2 { font-size: 1.5rem; font-weight: 800; }
+    .notes-header p { color: var(--muted); font-size: .875rem; margin-top: 2px; }
+
+    /* Topic cards */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .topics-grid { grid-template-columns: 1fr; } }
+
+    .topic-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 20px 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .topic-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .topic-title::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+    }
+    .topic-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .topic-points li {
+      font-size: .8375rem;
+      color: var(--text);
+      line-height: 1.55;
+      padding-left: 14px;
+      position: relative;
+    }
+    .topic-points li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
+    .notes-cta {
+      margin-top: 28px;
+      padding: 20px 24px;
+      background: var(--blue-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .notes-cta p { font-weight: 600; color: var(--blue); font-size: .9375rem; }
+    .notes-cta .cta-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-logo" aria-label="ExamReady Nigeria Home">
+      <div class="logo-icon" aria-hidden="true">📚</div>
+      <span><span class="logo-name">ExamReady</span> <span class="logo-accent">Nigeria</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="subjects.html">Subjects</a>
+      <a href="subjects.html">Practice</a>
+      <a href="exam.html">Mock Exam</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="notes.html" class="active">Study Notes</a>
+      <a href="progress.html">My Progress</a>
+      <a href="premium.html" style="color:var(--gold);font-weight:800;">⭐ Premium</a>
+    </div>
+    <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <a href="subjects.html">Subjects</a>
+  <a href="subjects.html">Practice</a>
+  <a href="exam.html">Mock Exam</a>
+  <a href="leaderboard.html">Leaderboard</a>
+  <a href="notes.html" class="active">Study Notes</a>
+  <a href="progress.html">My Progress</a>
+</div>
+
+<main>
+  <header class="page-header">
+    <h1>📒 Study Notes</h1>
+    <p>Key revision points for every subject — read before you practice</p>
+  </header>
+
+  <div class="notes-layout">
+
+    <!-- ── Subject tabs ── -->
+    <div class="notes-tabs" id="notesTabs" role="tablist" aria-label="Subject notes"></div>
+
+    <!-- ── Notes panels ── -->
+    <div id="notesPanels"></div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <strong>ExamReady Nigeria</strong> &copy; 2024 &mdash;
+  Free exam prep for every Nigerian student 🇳🇬
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/premium-gate.js"></script>
+<script src="js/pdf-download.js"></script>
+<script src="js/notes.js"></script>
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer  = document.getElementById('navDrawer');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    navDrawer.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    navDrawer.setAttribute('aria-hidden', !open);
+  });
+  navDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navDrawer.classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>

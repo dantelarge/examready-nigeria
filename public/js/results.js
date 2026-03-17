@@ -44,6 +44,9 @@
     return;
   }
 
+  /* ── Save to local progress history ── */
+  saveToHistory(result);
+
   /* ── Show results ── */
   resultsContent.classList.remove('hidden');
 
@@ -75,6 +78,31 @@
     const correct   = answers.filter(a => a.isCorrect).length;
     const incorrect = answers.length - correct;
     reviewSummary.textContent = `${correct} correct, ${incorrect} incorrect`;
+  }
+
+  /* ── PDF download button ── */
+  const pdfBtn = document.getElementById('downloadResultsPdfBtn');
+  if (pdfBtn) {
+    pdfBtn.addEventListener('click', () => {
+      const pdfResult = {
+        subject,
+        mode: mode === 'mock' ? 'Mock Exam' : 'Practice',
+        score,
+        total,
+        pct,
+        grade,
+        date: result.date,
+        questions: (answers || []).map(a => ({
+          question:    a.question   || '',
+          options:     a.options    || {},
+          answer:      a.answer     || '',
+          chosen:      a.chosen     || 'Skipped',
+          correct:     a.correct    || false,
+          explanation: a.explanation|| '',
+        })),
+      };
+      downloadResultsPDF(pdfResult);
+    });
   }
 
   /* ── Try Again button ── */

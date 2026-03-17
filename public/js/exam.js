@@ -7,9 +7,15 @@
 'use strict';
 
 (async function initExam() {
+  /* ── Daily mock exam limit gate ── */
+  if (typeof gateMockExam === 'function' && !gateMockExam()) {
+    document.getElementById('loadingState').classList.add('hidden');
+    return; // overlay shown by gateMockExam()
+  }
+
   /* ── Constants ── */
   const TOTAL_TIME_SECS = 45 * 60; // 45 minutes
-  const EXAM_COUNT = 10;            // demo: 10 questions
+  const EXAM_COUNT = 20;            // 20 random questions per exam
 
   /* ── DOM refs ── */
   const loadingEl       = document.getElementById('loadingState');
@@ -122,7 +128,11 @@
     examQText.textContent = q.question;
 
     // Options
-    const options = Array.isArray(q.options) ? q.options : [q.optionA, q.optionB, q.optionC, q.optionD];
+    const options = Array.isArray(q.options)
+      ? q.options
+      : (q.options && typeof q.options === 'object')
+        ? ['A','B','C','D'].map(k => q.options[k])
+        : [q.optionA, q.optionB, q.optionC, q.optionD];
     examOptsList.innerHTML = '';
     options.forEach((opt, i) => {
       const btn = document.createElement('button');
@@ -256,7 +266,11 @@
     let score = 0;
 
     const userAnswers = questions.map((q, i) => {
-      const options = Array.isArray(q.options) ? q.options : [q.optionA, q.optionB, q.optionC, q.optionD];
+      const options = Array.isArray(q.options)
+      ? q.options
+      : (q.options && typeof q.options === 'object')
+        ? ['A','B','C','D'].map(k => q.options[k])
+        : [q.optionA, q.optionB, q.optionC, q.optionD];
       const chosenIndex = answered[i] !== undefined ? answered[i] : null;
       const correctIndex = getCorrectIndex(q, options);
       const isCorrect = chosenIndex !== null && chosenIndex === correctIndex;
@@ -290,6 +304,9 @@
       answers: userAnswers,
       date:    new Date().toISOString(),
     };
+
+    // Record mock exam usage for daily limit tracking
+    if (typeof recordMockExamTaken === 'function') recordMockExamTaken();
 
     sessionStorage.setItem('examResult', JSON.stringify(resultData));
     window.location.href = 'results.html';

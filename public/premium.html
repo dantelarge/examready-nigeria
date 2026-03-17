@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Upgrade to ExamReady Nigeria Premium — ad-free practice, unlimited mock exams, PDF downloads and performance analytics." />
+  <title>Go Premium — ExamReady Nigeria</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0052cc" />
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <style>
+    /* ── Pricing page styles ── */
+    .pricing-layout { max-width: 1000px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    .pricing-hero {
+      text-align: center;
+      padding: 56px 20px 48px;
+      background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 40%, #065f46 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.1) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .pricing-hero .container { position: relative; z-index: 1; }
+    .pricing-hero h1 {
+      font-size: clamp(1.75rem, 5vw, 2.75rem);
+      font-weight: 900;
+      letter-spacing: -.5px;
+      margin-bottom: 14px;
+    }
+    .pricing-hero h1 span {
+      background: linear-gradient(90deg, #fde68a, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pricing-hero p { font-size: 1.0625rem; color: rgba(255,255,255,.85); max-width: 500px; margin: 0 auto; }
+
+    /* Plans grid */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+    @media (max-width: 768px) { .plans-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; } }
+
+    .plan-card {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px 28px;
+      position: relative;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .plan-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+    .plan-card.featured {
+      border-color: var(--blue);
+      box-shadow: var(--shadow-blue);
+      transform: scale(1.03);
+    }
+    .plan-card.featured:hover { transform: scale(1.03) translateY(-4px); }
+
+    .plan-badge {
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 800;
+      padding: 5px 18px;
+      border-radius: 100px;
+      white-space: nowrap;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-blue);
+    }
+
+    .plan-name {
+      font-size: 1.0625rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .plan-price {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+      margin-bottom: 4px;
+      letter-spacing: -.5px;
+    }
+    .plan-price sup { font-size: 1.125rem; vertical-align: super; font-weight: 700; }
+    .plan-price sub { font-size: .875rem; color: var(--muted); font-weight: 600; vertical-align: baseline; }
+    .plan-desc { font-size: .8375rem; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .plan-features li {
+      font-size: .875rem;
+      color: var(--text-2);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+    .plan-features li .feat-icon {
+      width: 20px; height: 20px; min-width: 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem;
+      font-weight: 800;
+      margin-top: 1px;
+    }
+    .feat-icon.yes { background: var(--green-light); color: var(--green); }
+    .feat-icon.no  { background: var(--border); color: var(--muted); }
+
+    /* How to pay */
+    .how-to-pay {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 36px 32px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+    .how-to-pay h2 { font-size: 1.375rem; font-weight: 800; margin-bottom: 6px; letter-spacing: -.3px; }
+    .how-to-pay > p { color: var(--muted); margin-bottom: 28px; font-size: .9375rem; }
+
+    .payment-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 640px) { .payment-steps { grid-template-columns: 1fr; } }
+
+    .payment-step {
+      text-align: center;
+      padding: 20px 16px;
+      background: var(--bg);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border);
+    }
+    .step-num {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1rem;
+      margin: 0 auto 12px;
+      box-shadow: var(--shadow-blue);
+    }
+    .payment-step h4 { font-size: .9rem; font-weight: 700; margin-bottom: 6px; }
+    .payment-step p  { font-size: .8125rem; color: var(--muted); line-height: 1.55; }
+
+    /* FAQ */
+    .faq-section { margin-bottom: 40px; }
+    .faq-section h2 { font-size: 1.375rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -.3px; }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      padding: 16px 20px;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: .9375rem;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: background var(--transition);
+    }
+    .faq-q:hover { background: var(--bg); }
+    .faq-q::after {
+      content: '+';
+      font-size: 1.375rem;
+      font-weight: 300;
+      color: var(--blue);
+      flex-shrink: 0;
+      transition: transform var(--transition);
+    }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease, padding .3s ease;
+      font-size: .875rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 20px 16px; }
+
+    /* Revenue info box */
+    .revenue-box {
+      background: linear-gradient(135deg, #ecfdf5, #eff6ff);
+      border: 1px solid var(--blue-mid);
+      border-radius: var(--radius-card);
+      padding: 28px 32px;
+      margin-bottom: 40px;
+    }
+    [data-theme="dark"] .revenue-box { background: var(--bg-2); }
+    .revenue-box h3 { font-size: 1.125rem; font-weight: 800; margin-bottom: 12px; color: var(--text); }
+    .revenue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 640px) { .revenue-grid { grid-template-columns: 1fr; } }
+    .revenue-item { text-align: center; }
+    .revenue-item .rev-num {
+      font-size: 1.5rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .revenue-item .rev-label { font-size: .78rem; color: var(--muted); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-logo" aria-label="ExamReady Nigeria Home">
+      <div class="logo-icon" aria-hidden="true">📚</div>
+      <span><span class="logo-name">ExamReady</span> <span class="logo-accent">Nigeria</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="subjects.html">Subjects</a>
+      <a href="subjects.html">Practice</a>
+      <a href="exam.html">Mock Exam</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="notes.html">Study Notes</a>
+      <a href="progress.html">My Progress</a>
+    </div>
+    <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <a href="subjects.html">Subjects</a>
+  <a href="subjects.html">Practice</a>
+  <a href="exam.html">Mock Exam</a>
+  <a href="leaderboard.html">Leaderboard</a>
+  <a href="notes.html">Study Notes</a>
+  <a href="progress.html">My Progress</a>
+</div>
+
+<main>
+  <!-- Hero -->
+  <section class="pricing-hero">
+    <div class="container">
+      <div class="hero-badge" style="margin-bottom:20px;">⭐ Unlock Your Full Potential</div>
+      <h1>Go <span>Premium</span> — Ace JAMB &amp; WAEC</h1>
+      <p>Remove ads, unlock unlimited practice, and get detailed analytics to track every improvement.</p>
+    </div>
+  </section>
+
+  <div class="pricing-layout">
+
+    <!-- Plans -->
+    <!-- Premium status shown when already subscribed -->
+  <div id="premiumStatusCard"></div>
+
+  <div class="plans-grid" id="plansGrid">
+
+      <!-- Free -->
+      <div class="plan-card">
+        <div class="plan-name">Free</div>
+        <div class="plan-price">₦<span>0</span><sub>/month</sub></div>
+        <div class="plan-desc">Everything you need to get started — no credit card required.</div>
+        <ul class="plan-features">
+          <li><span class="feat-icon yes">✓</span> 40 questions per subject</li>
+          <li><span class="feat-icon yes">✓</span> Practice &amp; Mock Exam modes</li>
+          <li><span class="feat-icon yes">✓</span> Study Notes for all subjects</li>
+          <li><span class="feat-icon yes">✓</span> Basic progress tracking</li>
+          <li><span class="feat-icon yes">✓</span> Leaderboard access</li>
+          <li><span class="feat-icon no">✗</span> Ads shown</li>
+          <li><span class="feat-icon no">✗</span> PDF downloads</li>
+          <li><span class="feat-icon no">✗</span> Detailed analytics</li>
+        </ul>
+        <a href="subjects.html" class="btn btn-outline-blue btn-block">Start Free</a>
+      </div>
+
+      <!-- Premium (featured) -->
+      <div class="plan-card featured">
+        <div class="plan-badge">⭐ Most Popular</div>
+        <div class="plan-name">Premium</div>
+        <div class="plan-price">₦<span>500</span><sub>/month</sub></div>
+        <div class="plan-desc">The full experience. Best value for serious JAMB &amp; WAEC candidates.</div>
+        <ul class="plan-features">
+          <li><span class="feat-icon yes">✓</span> Everything in Free</li>
+          <li><span class="feat-icon yes">✓</span> <strong>Ad-free</strong> experience</li>
+          <li><span class="feat-icon yes">✓</span> <strong>Unlimited</strong> mock exams per day</li>
+          <li><span class="feat-icon yes">✓</span> PDF cheat-sheet downloads</li>
+          <li><span class="feat-icon yes">✓</span> Subject performance analytics</li>
+          <li><span class="feat-icon yes">✓</span> Weak topic identification</li>
+          <li><span class="feat-icon yes">✓</span> Priority email support</li>
+          <li><span class="feat-icon yes">✓</span> Early access to new features</li>
+        </ul>
+        <button class="btn btn-primary btn-block" onclick="payWithPaystack()">
+          Get Premium — ₦500/mo
+        </button>
+      </div>
+
+      <!-- School Plan -->
+      <div class="plan-card">
+        <div class="plan-name">School / Tutorial</div>
+        <div class="plan-price">₦<span>5k</span><sub>/month</sub></div>
+        <div class="plan-desc">For tutorial centres and secondary schools — up to 100 student accounts.</div>
+        <ul class="plan-features">
+          <li><span class="feat-icon yes">✓</span> Everything in Premium</li>
+          <li><span class="feat-icon yes">✓</span> Up to 100 student accounts</li>
+          <li><span class="feat-icon yes">✓</span> Teacher/admin dashboard</li>
+          <li><span class="feat-icon yes">✓</span> Class performance reports</li>
+          <li><span class="feat-icon yes">✓</span> Custom question sets</li>
+          <li><span class="feat-icon yes">✓</span> Bulk PDF downloads</li>
+          <li><span class="feat-icon yes">✓</span> Phone &amp; email support</li>
+          <li><span class="feat-icon yes">✓</span> School branding options</li>
+        </ul>
+        <a href="https://wa.me/2348160630956?text=Hi%2C%20I%27m%20interested%20in%20the%20School%20Plan%20for%20ExamReady%20Nigeria" class="btn btn-outline btn-block" target="_blank" rel="noopener">💬 WhatsApp Us</a>
+      </div>
+    </div>
+
+    <!-- How to Pay -->
+    <div class="how-to-pay">
+      <h2>💳 How to Subscribe</h2>
+      <p>Safe, instant payment via Paystack — Nigeria's most trusted payment platform. Pay with card, bank transfer, or USSD.</p>
+      <div class="payment-steps">
+        <div class="payment-step">
+          <div class="step-num">1</div>
+          <h4>Click "Get Premium"</h4>
+          <p>Tap the button above. You'll be taken to a secure Paystack checkout page.</p>
+        </div>
+        <div class="payment-step">
+          <div class="step-num">2</div>
+          <h4>Pay ₦500</h4>
+          <p>Use your debit card, bank transfer, USSD (*737#, *901#), or mobile money.</p>
+        </div>
+        <div class="payment-step">
+          <div class="step-num">3</div>
+          <h4>Unlock Instantly</h4>
+          <p>Your premium access is activated immediately. No waiting, no paperwork.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2>❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-q">Can I cancel anytime?</button>
+        <div class="faq-a">Yes. You can cancel your subscription at any time from your account settings. You'll keep access until the end of your current billing period.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is the free version really free forever?</button>
+        <div class="faq-a">Absolutely. ExamReady Nigeria will always have a free tier. The free plan gives you 40 questions per subject, practice mode, study notes, and the leaderboard — no credit card needed.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Which payment methods are accepted?</button>
+        <div class="faq-a">We accept all Nigerian debit/credit cards (Visa, Mastercard, Verve), bank transfers, USSD codes (*737# GTB, *901# Access Bank, etc.), and mobile wallets via Paystack.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is my payment information safe?</button>
+        <div class="faq-a">Yes. All payments are processed by Paystack, which is PCI-DSS compliant. We never store your card details on our servers.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you offer student discounts?</button>
+        <div class="faq-a">We already price our Premium plan at ₦500/month specifically to be affordable for Nigerian students. Follow our social media pages for occasional promo codes.</div>
+      </div>
+    </div>
+
+    <!-- Personal Mentorship CTA -->
+    <div style="background:linear-gradient(135deg,#075e54,#128c7e);color:#fff;border-radius:var(--radius-card);padding:28px 32px;margin-bottom:40px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+      <div style="font-size:2.5rem;">💬</div>
+      <div style="flex:1;min-width:200px;">
+        <div style="font-size:1.1rem;font-weight:800;margin-bottom:6px;">Personal JAMB &amp; WAEC Mentorship</div>
+        <div style="font-size:.9rem;opacity:.9;">Get 1-on-1 coaching, study plans &amp; exam tips directly on WhatsApp. Limited slots available.</div>
+      </div>
+      <a href="https://wa.me/2348160630956?text=Hi%2C%20I%27d%20like%20to%20get%20personal%20mentorship%20for%20JAMB%20%26%20WAEC" target="_blank" rel="noopener" style="display:inline-block;padding:12px 24px;background:#fff;color:#075e54;border-radius:8px;font-weight:800;text-decoration:none;font-size:.9rem;white-space:nowrap;">
+        📲 Chat on WhatsApp
+      </a>
+    </div>
+
+    <!-- Revenue opportunity note (informational for site owner) -->
+    <div class="revenue-box" id="revenueBox" style="display:none;">
+      <h3>📈 Revenue Projection (Owner View)</h3>
+      <div class="revenue-grid">
+        <div class="revenue-item">
+          <div class="rev-num" id="proj1k">₦250k</div>
+          <div class="rev-label">500 premium users/mo</div>
+        </div>
+        <div class="revenue-item">
+          <div class="rev-num" id="proj5k">₦1.25M</div>
+          <div class="rev-label">2,500 premium users/mo</div>
+        </div>
+        <div class="revenue-item">
+          <div class="rev-num" id="proj10k">₦5M+</div>
+          <div class="rev-label">10,000 premium users/mo</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <strong>ExamReady Nigeria</strong> &copy; 2024 &mdash;
+  Free exam prep for every Nigerian student 🇳🇬
+  &nbsp;|&nbsp;
+  <a href="mailto:hello@examreadynigeria.com">Contact Us</a>
+</footer>
+
+<!-- Paystack inline script (replace YOUR_PUBLIC_KEY with your actual Paystack public key) -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script src="js/main.js"></script>
+<script src="js/premium-gate.js"></script>
+<script>
+  /* ── Hamburger ── */
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer  = document.getElementById('navDrawer');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    navDrawer.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    navDrawer.setAttribute('aria-hidden', !open);
+  });
+  navDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navDrawer.classList.remove('open');
+    });
+  });
+
+  /* ── FAQ accordion ── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* ── Email modal ── */
+  function payWithPaystack() {
+    // Show inline email modal instead of prompt()
+    const existing = document.getElementById('emailModal');
+    if (existing) existing.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'emailModal';
+    modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+    modal.innerHTML = `
+      <div style="background:var(--white,#fff);border-radius:16px;padding:32px 28px;max-width:380px;width:100%;box-shadow:0 25px 50px rgba(0,0,0,.35);">
+        <div style="font-size:2rem;text-align:center;margin-bottom:12px;">💳</div>
+        <h3 style="font-size:1.125rem;font-weight:800;margin-bottom:6px;text-align:center;color:var(--text,#111);">Subscribe — ₦500/month</h3>
+        <p style="font-size:.85rem;color:var(--muted,#6b7280);text-align:center;margin-bottom:20px;">Enter your email to continue to Paystack secure checkout.</p>
+        <input
+          type="email"
+          id="paystackEmail"
+          class="form-input"
+          placeholder="your@email.com"
+          style="width:100%;margin-bottom:14px;box-sizing:border-box;"
+          autocomplete="email"
+        />
+        <button onclick="launchPaystack()" class="btn btn-primary btn-block" style="margin-bottom:10px;">Pay ₦500 Securely →</button>
+        <button onclick="document.getElementById('emailModal').remove()" style="width:100%;padding:10px;border:1.5px solid var(--border,#e5e7eb);background:none;border-radius:8px;cursor:pointer;color:var(--muted,#6b7280);font-size:.875rem;font-weight:600;">Cancel</button>
+      </div>
+    `;
+    modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+    document.body.appendChild(modal);
+    document.getElementById('paystackEmail').focus();
+  }
+
+  function launchPaystack() {
+    const emailInput = document.getElementById('paystackEmail');
+    const email = emailInput ? emailInput.value.trim() : '';
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      showToast('Please enter a valid email address.', 'error');
+      return;
+    }
+
+    const handler = PaystackPop.setup({
+      key:      'pk_test_d203da630e792cf0d824533c458ec',
+      email:    email,
+      amount:   50000,
+      currency: 'NGN',
+      ref:      'EXAM_' + Date.now(),
+      metadata: { custom_fields: [{ display_name: 'Plan', value: 'Premium Monthly' }] },
+      callback: function() {
+        const modal = document.getElementById('emailModal');
+        if (modal) modal.remove();
+        setPremium(email, 31);
+        showToast('✅ Payment successful! Welcome to Premium 🎉', 'success', 5000);
+        renderPremiumStatus();
+        setTimeout(() => { window.location.href = 'subjects.html'; }, 2000);
+      },
+      onClose: function() {}
+    });
+    handler.openIframe();
+  }
+</script>
+</body>
+</html>

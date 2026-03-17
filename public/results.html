@@ -6,6 +6,11 @@
   <meta name="description" content="Your exam results — see your score, grade, and full question review on ExamReady Nigeria." />
   <title>Results — ExamReady Nigeria</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0052cc" />
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
 </head>
 <body>
 
@@ -21,7 +26,11 @@
       <a href="subjects.html">Practice</a>
       <a href="exam.html">Mock Exam</a>
       <a href="leaderboard.html">Leaderboard</a>
+      <a href="notes.html">Study Notes</a>
+      <a href="progress.html">My Progress</a>
+      <a href="premium.html" style="color:var(--gold);font-weight:800;">⭐ Premium</a>
     </div>
+    <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
     <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -32,6 +41,9 @@
   <a href="subjects.html">Practice</a>
   <a href="exam.html">Mock Exam</a>
   <a href="leaderboard.html">Leaderboard</a>
+  <a href="notes.html">Study Notes</a>
+  <a href="progress.html">My Progress</a>
+  <a href="premium.html" style="color:var(--gold);font-weight:800;">⭐ Premium</a>
 </div>
 
 <main>
@@ -63,8 +75,19 @@
       <div class="results-actions">
         <button class="btn btn-outline-blue" id="tryAgainBtn">Try Again</button>
         <a href="subjects.html" class="btn btn-outline">Back to Subjects</a>
+        <button class="btn btn-outline" id="downloadResultsPdfBtn" title="Download results PDF (Premium)">📄 Save PDF</button>
+        <a href="premium.html" class="btn btn-primary" style="background:linear-gradient(135deg,#d97706,#b45309);border-color:#d97706;">⭐ Go Premium</a>
       </div>
     </div>
+
+    <!-- AdSense slot — replace IDs with your real Google AdSense IDs -->
+    <!-- <ins class="adsbygoogle"
+         style="display:block;margin:8px 0 20px;"
+         data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+         data-ad-slot="YOUR_AD_SLOT_ID"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->
 
     <!-- Leaderboard submission -->
     <div class="lb-submit-card">
@@ -103,6 +126,9 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/premium-gate.js"></script>
+<script src="js/pdf-download.js"></script>
+<script src="js/progress.js"></script>
 <script src="js/results.js"></script>
 <script>
   // Hamburger

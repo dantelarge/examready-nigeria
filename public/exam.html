@@ -6,6 +6,11 @@
   <meta name="description" content="Timed mock exam — simulate the real JAMB or WAEC exam experience on ExamReady Nigeria." />
   <title>Mock Exam — ExamReady Nigeria</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0052cc" />
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
 </head>
 <body>
 
@@ -21,7 +26,11 @@
       <a href="subjects.html">Practice</a>
       <a href="exam.html" class="active">Mock Exam</a>
       <a href="leaderboard.html">Leaderboard</a>
+      <a href="notes.html">Study Notes</a>
+      <a href="progress.html">My Progress</a>
+      <a href="premium.html" style="color:var(--gold);font-weight:800;">⭐ Premium</a>
     </div>
+    <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
     <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -32,6 +41,9 @@
   <a href="subjects.html">Practice</a>
   <a href="exam.html" class="active">Mock Exam</a>
   <a href="leaderboard.html">Leaderboard</a>
+  <a href="notes.html">Study Notes</a>
+  <a href="progress.html">My Progress</a>
+  <a href="premium.html" style="color:var(--gold);font-weight:800;">⭐ Premium</a>
 </div>
 
 <main>
@@ -135,6 +147,7 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/premium-gate.js"></script>
 <script src="js/exam.js"></script>
 <script>
   // Hamburger

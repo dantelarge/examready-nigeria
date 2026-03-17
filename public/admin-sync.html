@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sync Questions — ExamReady Admin</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <style>
+    .sync-layout { max-width: 640px; margin: 40px auto; padding: 0 20px 60px; }
+    .sync-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 32px; box-shadow: var(--shadow-sm); }
+    .sync-card h2 { font-size: 1.375rem; font-weight: 800; margin-bottom: 8px; }
+    .sync-card p { color: var(--muted); font-size: .9rem; margin-bottom: 24px; line-height: 1.6; }
+    .sync-result { margin-top: 20px; padding: 16px; border-radius: 8px; font-size: .875rem; display: none; }
+    .sync-result.success { background: var(--green-light); color: var(--green-dark); }
+    .sync-result.error { background: var(--red-light,#fee2e2); color: #b91c1c; }
+    .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+    .status-item { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+    .status-subject { font-size: .8rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .status-counts { font-size: .75rem; color: var(--muted); }
+    code { background: var(--bg); padding: 2px 6px; border-radius: 4px; font-size: .8rem; }
+  </style>
+</head>
+<body>
+<nav class="navbar" role="navigation">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">📚</div>
+      <span><span class="logo-name">ExamReady</span> <span class="logo-accent">Nigeria</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="subjects.html">Subjects</a>
+    </div>
+    <button class="dark-toggle" id="darkToggle">🌙</button>
+  </div>
+</nav>
+
+<main>
+  <header class="page-header">
+    <h1>🔄 Sync Questions from ALOC API</h1>
+    <p>Fetch real JAMB &amp; WAEC past questions from questions.aloc.com.ng</p>
+  </header>
+
+  <div class="sync-layout">
+
+    <div class="sync-card" style="margin-bottom:24px;">
+      <h2>Step 1 — Get Your Free Token</h2>
+      <p>
+        Sign up at <strong>questions.aloc.com.ng</strong> to get a free access token
+        (7,000 free API calls included). Your token looks like: <code>ALOC-78bfe77b49fb3e407bf8</code>
+      </p>
+      <a href="https://questions.aloc.com.ng" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+        🔗 Get Free Token
+      </a>
+    </div>
+
+    <div class="sync-card" style="margin-bottom:24px;">
+      <h2>Step 2 — Run the Sync</h2>
+      <p>
+        Enter your ALOC token below and click Sync. This will fetch up to 40 real past questions
+        per subject (10 subjects = ~400 new questions) and add them to your question bank.
+        Already-synced questions are automatically skipped.
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <input
+          type="text"
+          id="tokenInput"
+          class="form-input"
+          placeholder="ALOC-xxxxxxxxxxxxxxxx"
+          style="flex:1;min-width:220px;"
+        />
+        <button class="btn btn-primary" id="syncBtn" onclick="runSync()">
+          🔄 Sync Questions
+        </button>
+      </div>
+
+      <div class="sync-result" id="syncResult"></div>
+    </div>
+
+    <div class="sync-card">
+      <h2>Current Question Bank Status</h2>
+      <p>Questions currently in your database by subject:</p>
+      <button class="btn btn-outline btn-sm" onclick="loadStatus()">Refresh Status</button>
+      <div class="status-grid" id="statusGrid" style="margin-top:16px;"></div>
+      <div id="totalCount" style="margin-top:12px;font-weight:700;color:var(--blue);font-size:.9rem;"></div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <strong>ExamReady Nigeria</strong> — Admin Panel
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  async function runSync() {
+    const token  = document.getElementById('tokenInput').value.trim();
+    const btn    = document.getElementById('syncBtn');
+    const result = document.getElementById('syncResult');
+
+    if (!token) {
+      result.style.display = 'block';
+      result.className = 'sync-result error';
+      result.textContent = 'Please enter your ALOC token.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = '⏳ Syncing… (may take 30–60 seconds)';
+    result.style.display = 'none';
+
+    try {
+      const res  = await fetch('/api/sync-questions', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ token }),
+      });
+      const data = await res.json();
+
+      result.style.display = 'block';
+      if (res.ok) {
+        result.className = 'sync-result success';
+        result.innerHTML = `
+          ✅ <strong>${data.message}</strong><br>
+          New questions added: <strong>${data.synced}</strong> &nbsp;|&nbsp;
+          Skipped (already exist): <strong>${data.skipped}</strong> &nbsp;|&nbsp;
+          Total in DB: <strong>${data.total}</strong>
+          ${data.errors.length ? '<br><br>⚠️ Some subjects had errors: ' + data.errors.map(e => e.subject + ' (' + e.type + '): ' + e.error).join('; ') : ''}
+        `;
+        loadStatus();
+      } else if (res.status === 401) {
+        result.className = 'sync-result error';
+        result.innerHTML = `
+          ❌ <strong>${data.error}</strong><br><br>
+          <strong>To activate your token:</strong><br>
+          ${(data.steps || []).map(s => s + '<br>').join('')}
+        `;
+      } else {
+        result.className = 'sync-result error';
+        result.textContent = '❌ ' + (data.error || 'Sync failed');
+      }
+    } catch (e) {
+      result.style.display = 'block';
+      result.className = 'sync-result error';
+      result.textContent = '❌ Network error: ' + e.message;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '🔄 Sync Questions';
+    }
+  }
+
+  async function loadStatus() {
+    try {
+      const res  = await fetch('/api/sync-status');
+      const data = await res.json();
+      const grid = document.getElementById('statusGrid');
+      document.getElementById('totalCount').textContent =
+        `Total questions in database: ${data.total}`;
+      grid.innerHTML = Object.entries(data.bySubject).map(([sub, counts]) => `
+        <div class="status-item">
+          <div class="status-subject">${sub}</div>
+          <div class="status-counts">Local: ${counts.local} | ALOC: ${counts.aloc}</div>
+        </div>
+      `).join('');
+    } catch (e) {
+      document.getElementById('statusGrid').innerHTML =
+        '<p style="color:var(--muted);font-size:.875rem;">Could not load status.</p>';
+    }
+  }
+
+  // Load status on page load
+  loadStatus();
+</script>
+</body>
+</html>

@@ -63,7 +63,8 @@
     return;
   }
 
-  questions = fetchedQuestions;
+  // Shuffle and pick 20 random questions — different every time
+  questions = shuffleArray(fetchedQuestions).slice(0, 20);
   loadingEl.classList.add('hidden');
   quizUI.classList.remove('hidden');
 
@@ -92,7 +93,11 @@
 
     // Build options
     optionsListEl.innerHTML = '';
-    const options = Array.isArray(q.options) ? q.options : [q.optionA, q.optionB, q.optionC, q.optionD];
+    const options = Array.isArray(q.options)
+      ? q.options
+      : (q.options && typeof q.options === 'object')
+        ? ['A','B','C','D'].map(k => q.options[k])
+        : [q.optionA, q.optionB, q.optionC, q.optionD];
     options.forEach((opt, i) => {
       const btn = document.createElement('button');
       btn.className = 'option-btn';

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Track your exam preparation progress on ExamReady Nigeria — history, best scores and improvement over time." />
+  <title>My Progress — ExamReady Nigeria</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0052cc" />
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <style>
+    .progress-layout { max-width: 900px; margin: 0 auto; padding: 32px 20px 60px; }
+
+    /* Summary cards row */
+    .prog-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 640px) { .prog-summary { grid-template-columns: repeat(2, 1fr); } }
+
+    .prog-stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .prog-stat-num {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .prog-stat-label {
+      font-size: .78rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    /* Section title */
+    .prog-section-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Subject best scores grid */
+    .best-scores-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 540px) { .best-scores-grid { grid-template-columns: 1fr; } }
+
+    .best-score-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .best-score-emoji { font-size: 1.75rem; flex-shrink: 0; }
+    .best-score-info { flex: 1; min-width: 0; }
+    .best-score-subject { font-weight: 700; font-size: .9rem; margin-bottom: 2px; }
+    .best-score-bar-wrap { height: 6px; background: var(--border); border-radius: 100px; overflow: hidden; margin-top: 6px; }
+    .best-score-bar { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--blue), var(--green)); transition: width .6s ease; }
+    .best-score-pct { font-size: .8rem; font-weight: 700; color: var(--muted); flex-shrink: 0; }
+    .best-score-card.no-data { opacity: .55; }
+
+    /* Session history table */
+    .history-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+    .history-card-header {
+      background: var(--text);
+      color: var(--white);
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: .9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .history-table { width: 100%; border-collapse: collapse; }
+    .history-table th {
+      background: var(--bg);
+      padding: 10px 16px;
+      text-align: left;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      border-bottom: 1px solid var(--border);
+    }
+    .history-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: .875rem;
+      vertical-align: middle;
+    }
+    .history-table tr:last-child td { border-bottom: none; }
+    .history-table tbody tr:hover { background: var(--bg); }
+    .mode-badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 100px;
+      font-size: .72rem;
+      font-weight: 700;
+    }
+    .mode-badge.practice { background: var(--blue-light); color: var(--blue); }
+    .mode-badge.mock     { background: var(--green-light); color: var(--green-dark); }
+
+    /* Empty state */
+    .prog-empty {
+      text-align: center;
+      padding: 52px 20px;
+      color: var(--muted);
+    }
+    .prog-empty-icon { font-size: 3rem; margin-bottom: 12px; display: block; }
+    .prog-empty h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .prog-empty p { font-size: .9rem; margin-bottom: 20px; }
+
+    /* Clear button */
+    .clear-btn {
+      background: none;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: .75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .clear-btn:hover { background: var(--red-light); color: var(--red); border-color: var(--red); }
+  </style>
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <a href="index.html" class="nav-logo" aria-label="ExamReady Nigeria Home">
+      <div class="logo-icon" aria-hidden="true">📚</div>
+      <span><span class="logo-name">ExamReady</span> <span class="logo-accent">Nigeria</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="subjects.html">Subjects</a>
+      <a href="subjects.html">Practice</a>
+      <a href="exam.html">Mock Exam</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="notes.html">Study Notes</a>
+      <a href="progress.html" class="active">My Progress</a>
+      <a href="premium.html" style="color:var(--gold);font-weight:800;">⭐ Premium</a>
+    </div>
+    <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <a href="subjects.html">Subjects</a>
+  <a href="subjects.html">Practice</a>
+  <a href="exam.html">Mock Exam</a>
+  <a href="leaderboard.html">Leaderboard</a>
+  <a href="notes.html">Study Notes</a>
+  <a href="progress.html" class="active">My Progress</a>
+</div>
+
+<main>
+  <header class="page-header">
+    <h1>📊 My Progress</h1>
+    <p>Track your improvement across all subjects</p>
+  </header>
+
+  <div class="progress-layout" id="progressLayout">
+    <!-- Rendered by progress.js -->
+  </div>
+</main>
+
+<footer class="footer">
+  <strong>ExamReady Nigeria</strong> &copy; 2024 &mdash;
+  Free exam prep for every Nigerian student 🇳🇬
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/premium-gate.js"></script>
+<script src="js/progress.js"></script>
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer  = document.getElementById('navDrawer');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    navDrawer.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    navDrawer.setAttribute('aria-hidden', !open);
+  });
+  navDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navDrawer.classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>

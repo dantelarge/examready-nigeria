@@ -93,3 +93,54 @@ function shuffleArray(arr) {
 function optionLetter(index) {
   return ['A', 'B', 'C', 'D'][index] || String(index + 1);
 }
+
+/* ── 10. Dark Mode ────────────────────────────────────────── */
+(function initDarkMode() {
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+
+function applyDarkToggle(btn) {
+  if (!btn) return;
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  btn.textContent = isDark ? '☀️' : '🌙';
+  btn.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+}
+
+function setupDarkToggle() {
+  const btn = document.getElementById('darkToggle');
+  if (!btn) return;
+  applyDarkToggle(btn);
+  btn.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const next = isDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    applyDarkToggle(btn);
+  });
+}
+
+/* ── 11. Navbar scroll effect ────────────────────────────── */
+(function initNavbarScroll() {
+  const navbar = document.querySelector('.navbar');
+  if (!navbar) return;
+  const update = () => navbar.classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* ── 12. PWA Service Worker ───────────────────────────────── */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
+
+// Run setup when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setupDarkToggle);
+} else {
+  setupDarkToggle();
+}

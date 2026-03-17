@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="80" fill="#0052cc"/>
+  <rect x="80" y="120" width="352" height="272" rx="24" fill="white" opacity="0.15"/>
+  <!-- Book pages -->
+  <rect x="110" y="140" width="160" height="232" rx="12" fill="white"/>
+  <rect x="242" y="140" width="160" height="232" rx="12" fill="#e6f0ff"/>
+  <!-- Spine -->
+  <rect x="236" y="140" width="12" height="232" rx="4" fill="#0052cc"/>
+  <!-- Lines on left page -->
+  <rect x="130" y="180" width="120" height="8" rx="4" fill="#0052cc" opacity="0.4"/>
+  <rect x="130" y="200" width="100" height="8" rx="4" fill="#0052cc" opacity="0.4"/>
+  <rect x="130" y="220" width="110" height="8" rx="4" fill="#0052cc" opacity="0.4"/>
+  <rect x="130" y="240" width="90" height="8" rx="4" fill="#0052cc" opacity="0.4"/>
+  <rect x="130" y="260" width="115" height="8" rx="4" fill="#0052cc" opacity="0.4"/>
+  <rect x="130" y="280" width="80" height="8" rx="4" fill="#0052cc" opacity="0.4"/>
+  <!-- Checkmark on right page -->
+  <circle cx="322" cy="256" r="52" fill="#00875a"/>
+  <polyline points="300,256 318,274 348,238" fill="none" stroke="white" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Nigeria flag colours at bottom -->
+  <rect x="110" y="348" width="52" height="24" rx="4" fill="#008751"/>
+  <rect x="162" y="348" width="56" height="24" rx="4" fill="white"/>
+  <rect x="218" y="348" width="52" height="24" rx="4" fill="#008751"/>
+</svg>

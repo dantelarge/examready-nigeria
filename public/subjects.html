@@ -6,6 +6,11 @@
   <meta name="description" content="Choose a JAMB or WAEC subject to start practising on ExamReady Nigeria." />
   <title>Subjects — ExamReady Nigeria</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0052cc" />
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
 </head>
 <body>
 
@@ -21,7 +26,11 @@
       <a href="subjects.html">Practice</a>
       <a href="exam.html">Mock Exam</a>
       <a href="leaderboard.html">Leaderboard</a>
+      <a href="notes.html">Study Notes</a>
+      <a href="progress.html">My Progress</a>
+      <a href="premium.html" style="color:var(--gold);font-weight:800;">⭐ Premium</a>
     </div>
+    <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
     <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -32,6 +41,9 @@
   <a href="subjects.html">Practice</a>
   <a href="exam.html">Mock Exam</a>
   <a href="leaderboard.html">Leaderboard</a>
+  <a href="notes.html">Study Notes</a>
+  <a href="progress.html">My Progress</a>
+  <a href="premium.html" style="color:var(--gold);font-weight:800;">⭐ Premium</a>
 </div>
 
 <main>
@@ -59,6 +71,7 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/premium-gate.js"></script>
 <script>
   // ── Hamburger ──
   const hamburger = document.getElementById('hamburger');
@@ -86,12 +99,13 @@
 
     grid.innerHTML = list.map(s => {
       const encoded = encodeURIComponent(s.name);
+      const dataSubject = s.name.toLowerCase().split(/\s+/)[0].replace(/[^a-z]/g, '');
       return `
-        <div class="subject-card-full">
+        <div class="subject-card-full" data-subject="${dataSubject}">
           <span class="subject-emoji" aria-hidden="true">${s.emoji}</span>
           <div class="subj-info">
             <div class="subject-name">${s.name}</div>
-            <span class="subject-badge">10 Questions</span>
+            <span class="subject-badge">40 Questions</span>
             <div class="card-actions">
               <a href="quiz.html?subject=${encoded}" class="btn btn-primary btn-sm">Practice</a>
               <a href="exam.html?subject=${encoded}"  class="btn btn-outline btn-sm">Mock Exam</a>
