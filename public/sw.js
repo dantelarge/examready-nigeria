@@ -3,7 +3,7 @@
    Cache-first strategy for offline support + installability
    ============================================================ */
 
-const CACHE = 'examready-v1';
+const CACHE = 'examready-v3';
 
 const STATIC_ASSETS = [
   '/',
