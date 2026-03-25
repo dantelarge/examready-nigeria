@@ -259,4 +259,17 @@ app.listen(PORT, () => {
     console.log(`      https://questions.aloc.com.ng`);
     console.log(`      Then add ALOC_TOKEN=ALOC-yourtoken to your .env file\n`);
   }
+
+  // Keep-alive: ping self every 14 min to prevent Render free-tier sleep
+  const appUrl = process.env.RENDER_EXTERNAL_URL;
+  if (appUrl) {
+    setInterval(() => {
+      https.get(appUrl + '/api/subjects', res => {
+        console.log(`[keep-alive] ping OK (${res.statusCode})`);
+      }).on('error', err => {
+        console.error('[keep-alive] ping failed:', err.message);
+      });
+    }, 14 * 60 * 1000);
+    console.log(`   🔄 Keep-alive enabled → pinging every 14 min\n`);
+  }
 });
