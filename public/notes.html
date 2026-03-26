@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Study notes for JAMB and WAEC subjects on ExamReady Nigeria. Quick revision summaries for every subject." />
+  <meta name="description" content="WAEC &amp; JAMB study notes for all 10 subjects — SS1, SS2, SS3 revision summaries on ExamReady Nigeria." />
   <title>Study Notes — ExamReady Nigeria</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="manifest" href="/manifest.json" />
@@ -12,136 +12,53 @@
     (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
   </script>
   <style>
-    .notes-layout { max-width: 900px; margin: 0 auto; padding: 32px 20px 60px; }
+    .notes-layout { max-width: 960px; margin: 0 auto; padding: 32px 20px 60px; }
 
-    /* Subject selector tabs */
-    .notes-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 28px;
-    }
+    .notes-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
     .notes-tab {
-      padding: 8px 16px;
-      border: 2px solid var(--border);
-      border-radius: 100px;
-      font-size: .8125rem;
-      font-weight: 600;
-      cursor: pointer;
-      background: var(--white);
-      color: var(--muted);
-      transition: all var(--transition);
+      padding: 8px 16px; border: 2px solid var(--border); border-radius: 100px;
+      font-size: .8125rem; font-weight: 600; cursor: pointer;
+      background: var(--white); color: var(--muted); transition: all var(--transition);
     }
     .notes-tab:hover { border-color: var(--blue); color: var(--blue); }
     .notes-tab.active { background: var(--blue); border-color: var(--blue); color: #fff; }
 
-    /* Notes panel */
     .notes-panel { display: none; }
     .notes-panel.active { display: block; }
 
-    .notes-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 24px;
-    }
+    .notes-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
     .notes-header-emoji { font-size: 2.25rem; }
     .notes-header h2 { font-size: 1.5rem; font-weight: 800; }
     .notes-header p { color: var(--muted); font-size: .875rem; margin-top: 2px; }
 
-    /* Topic cards */
-    .topics-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
+    .topics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     @media (max-width: 640px) { .topics-grid { grid-template-columns: 1fr; } }
 
     .topic-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      padding: 20px 18px;
-      box-shadow: var(--shadow-sm);
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-card); padding: 20px 18px; box-shadow: var(--shadow-sm);
     }
     .topic-title {
-      font-size: .9rem;
-      font-weight: 700;
-      color: var(--blue);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-size: .9rem; font-weight: 700; color: var(--blue);
+      margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
     }
     .topic-title::before {
-      content: '';
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--blue);
-      flex-shrink: 0;
+      content: ''; display: inline-block; width: 8px; height: 8px;
+      border-radius: 50%; background: var(--blue); flex-shrink: 0;
     }
-    .topic-points {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
+    .topic-points { list-style: none; display: flex; flex-direction: column; gap: 5px; }
     .topic-points li {
-      font-size: .8375rem;
-      color: var(--text);
-      line-height: 1.55;
-      padding-left: 14px;
-      position: relative;
+      font-size: .8375rem; color: var(--text); line-height: 1.55;
+      padding-left: 14px; position: relative;
     }
-    .topic-points li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--muted);
-      font-size: .75rem;
-    }
+    .topic-points li::before { content: '→'; position: absolute; left: 0; color: var(--muted); font-size: .75rem; }
 
-    .notes-cta {
-      margin-top: 28px;
-      padding: 20px 24px;
-      background: var(--blue-light);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .notes-cta p { font-weight: 600; color: var(--blue); font-size: .9375rem; }
-    .notes-cta .cta-btns { display: flex; gap: 10px; flex-wrap: wrap; }
-
-    /* SS Level filter bar */
-    .notes-filter {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .notes-filter-label {
-      font-size: .78rem;
-      font-weight: 700;
-      color: var(--muted);
-      margin-right: 2px;
-    }
+    .notes-filter { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .notes-filter-label { font-size: .78rem; font-weight: 700; color: var(--muted); }
     .level-btn {
-      padding: 5px 14px;
-      border: 2px solid var(--border);
-      border-radius: 100px;
-      font-size: .75rem;
-      font-weight: 700;
-      cursor: pointer;
-      background: var(--white);
-      color: var(--muted);
-      transition: all var(--transition);
+      padding: 5px 14px; border: 2px solid var(--border); border-radius: 100px;
+      font-size: .75rem; font-weight: 700; cursor: pointer;
+      background: var(--white); color: var(--muted); transition: all var(--transition);
     }
     .level-btn:hover { border-color: var(--blue); color: var(--blue); }
     .level-btn.active[data-level="all"],
@@ -149,28 +66,28 @@
     .level-btn.active[data-level="SS2"] { background: var(--green); border-color: var(--green); color: #fff; }
     .level-btn.active[data-level="SS3"] { background: var(--gold); border-color: var(--gold); color: #fff; }
 
-    /* Level badge inside each card */
     .topic-level {
-      margin-left: auto;
-      font-size: .65rem;
-      font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 100px;
-      text-transform: uppercase;
-      letter-spacing: .3px;
-      flex-shrink: 0;
+      margin-left: auto; font-size: .65rem; font-weight: 800;
+      padding: 2px 7px; border-radius: 100px;
+      text-transform: uppercase; letter-spacing: .3px; flex-shrink: 0;
     }
     .topic-level.ss1 { background: var(--blue-light); color: var(--blue); }
     .topic-level.ss2 { background: var(--green-light); color: var(--green-dark); }
     .topic-level.ss3 { background: #fef3c7; color: #92400e; }
-
-    /* Hidden by level filter */
     .topic-card.level-hidden { display: none; }
+
+    .notes-cta {
+      margin-top: 28px; padding: 20px 24px; background: var(--blue-light);
+      border: 1px solid var(--border); border-radius: var(--radius-card);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .notes-cta p { font-weight: 600; color: var(--blue); font-size: .9375rem; }
+    .cta-btns { display: flex; gap: 10px; flex-wrap: wrap; }
   </style>
 </head>
 <body>
 
-<!-- ── Navbar ──────────────────────────────────────────────── -->
 <nav class="navbar" role="navigation" aria-label="Main navigation">
   <div class="container">
     <a href="index.html" class="nav-logo" aria-label="ExamReady Nigeria Home">
@@ -199,21 +116,1290 @@
   <a href="leaderboard.html">Leaderboard</a>
   <a href="notes.html" class="active">Study Notes</a>
   <a href="progress.html">My Progress</a>
+  <a href="premium.html" style="color:var(--gold);font-weight:800;">⭐ Premium</a>
 </div>
 
 <main>
   <header class="page-header">
     <h1>📒 Study Notes</h1>
-    <p>Key revision points for every subject — read before you practice</p>
+    <p>WAEC &amp; JAMB key revision points — SS1, SS2 &amp; SS3 for all 10 subjects</p>
   </header>
 
   <div class="notes-layout">
 
-    <!-- ── Subject tabs ── -->
-    <div class="notes-tabs" id="notesTabs" role="tablist" aria-label="Subject notes"></div>
+    <div class="notes-tabs" id="notesTabs" role="tablist" aria-label="Subject notes">
+    <button type="button" class="notes-tab active" data-panel="notes-mathematics" role="tab" aria-controls="notes-mathematics" aria-selected="true">🔢 Mathematics</button>
+    <button type="button" class="notes-tab" data-panel="notes-english-language" role="tab" aria-controls="notes-english-language" aria-selected="false">📝 English Language</button>
+    <button type="button" class="notes-tab" data-panel="notes-physics" role="tab" aria-controls="notes-physics" aria-selected="false">⚡ Physics</button>
+    <button type="button" class="notes-tab" data-panel="notes-chemistry" role="tab" aria-controls="notes-chemistry" aria-selected="false">🧪 Chemistry</button>
+    <button type="button" class="notes-tab" data-panel="notes-biology" role="tab" aria-controls="notes-biology" aria-selected="false">🌿 Biology</button>
+    <button type="button" class="notes-tab" data-panel="notes-government" role="tab" aria-controls="notes-government" aria-selected="false">🏛️ Government</button>
+    <button type="button" class="notes-tab" data-panel="notes-economics" role="tab" aria-controls="notes-economics" aria-selected="false">💹 Economics</button>
+    <button type="button" class="notes-tab" data-panel="notes-literature-in-english" role="tab" aria-controls="notes-literature-in-english" aria-selected="false">📖 Literature in English</button>
+    <button type="button" class="notes-tab" data-panel="notes-geography" role="tab" aria-controls="notes-geography" aria-selected="false">🌍 Geography</button>
+    <button type="button" class="notes-tab" data-panel="notes-commerce" role="tab" aria-controls="notes-commerce" aria-selected="false">🏪 Commerce</button>
+    </div>
 
-    <!-- ── Notes panels ── -->
-    <div id="notesPanels"></div>
+    <div id="notesPanels">
+    <div class="notes-panel active" id="notes-mathematics" role="tabpanel">
+      <div class="notes-header"><span class="notes-header-emoji" aria-hidden="true">🔢</span><div><h2>Mathematics</h2><p>WAEC Mathematics — Number theory, algebra, geometry and calculus</p></div></div>
+      <div class="notes-filter">
+        <span class="notes-filter-label">Filter:</span>
+        <button class="level-btn active" data-level="all">All</button>
+        <button class="level-btn" data-level="SS1">SS1</button>
+        <button class="level-btn" data-level="SS2">SS2</button>
+        <button class="level-btn" data-level="SS3">SS3</button>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Number Systems &amp; Number Bases<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Integers include positive, negative numbers and zero; Natural numbers are positive integers</li>
+            <li>Number bases: Base 2 (binary), Base 8 (octal), Base 10 (denary), Base 16 (hexadecimal)</li>
+            <li>Convert base 10 to base n: repeatedly divide by n and read remainders upward</li>
+            <li>Convert base n to base 10: multiply each digit by n raised to its position value</li>
+            <li>LCM: smallest number divisible by both; HCF: largest number that divides both</li>
+            <li>Fractions: add/subtract with common denominator; multiply numerators and denominators; divide by inverting and multiplying</li>
+            <li>Percentages: x% of y = (x/100) × y; percentage change = (change ÷ original) × 100</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Algebraic Expressions &amp; Linear Equations<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Expansion: a(b + c) = ab + ac; (a + b)² = a² + 2ab + b²; (a − b)² = a² − 2ab + b²</li>
+            <li>Factorisation: take out common factor first; difference of two squares: a² − b² = (a+b)(a−b)</li>
+            <li>Linear equation: collect like terms and isolate the unknown — e.g. 3x − 5 = 10 → x = 5</li>
+            <li>Simultaneous equations (elimination): make coefficients equal, then add or subtract equations</li>
+            <li>Simultaneous equations (substitution): express one variable in terms of the other</li>
+            <li>Word problems: define variables clearly, form equations from the information, solve</li>
+            <li>Ratio and proportion: if a:b = c:d then ad = bc (cross-multiplication)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Plane Geometry &amp; Basic Statistics<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Angles on a straight line = 180°; angles at a point = 360°; vertically opposite angles are equal</li>
+            <li>Triangle: angles sum to 180°; isosceles has two equal sides and angles; equilateral has all equal</li>
+            <li>Sum of interior angles of polygon = (n − 2) × 180°; each exterior angle of regular polygon = 360°/n</li>
+            <li>Frequency table: tally marks → frequency; relative frequency = frequency ÷ total</li>
+            <li>Bar chart: bars of equal width; height represents frequency</li>
+            <li>Pie chart: angle for each sector = (frequency ÷ total) × 360°</li>
+            <li>Mean = Σfx ÷ Σf; Median = middle value; Mode = most frequent value</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Indices, Surds &amp; Logarithms<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Laws of indices: aᵐ × aⁿ = aᵐ⁺ⁿ; aᵐ ÷ aⁿ = aᵐ⁻ⁿ; (aᵐ)ⁿ = aᵐⁿ; a⁰ = 1; a⁻ⁿ = 1/aⁿ</li>
+            <li>Fractional index: a^(m/n) = (nth root of a)^m</li>
+            <li>Surds: irrational square roots; √a × √b = √(ab); √a/√b = √(a/b)</li>
+            <li>Rationalise denominator: multiply by conjugate — 1/(a + √b) × (a − √b)/(a − √b)</li>
+            <li>Logarithm definition: log_a(x) = n ⟺ aⁿ = x</li>
+            <li>Log laws: log(AB) = log A + log B; log(A/B) = log A − log B; log(Aⁿ) = n log A</li>
+            <li>Change of base: log_a(x) = log(x) / log(a); use base 10 (common log) or base e (natural log)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Quadratic Equations &amp; Inequalities<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Quadratic: ax² + bx + c = 0; solve by factorisation, completing the square or formula</li>
+            <li>Quadratic formula: x = [−b ± √(b² − 4ac)] / 2a</li>
+            <li>Discriminant b² − 4ac: &gt; 0 two real roots; = 0 equal roots; &lt; 0 no real roots</li>
+            <li>Completing the square: x² + bx = (x + b/2)² − (b/2)²</li>
+            <li>Sum of roots = −b/a; product of roots = c/a (to form equation from given roots)</li>
+            <li>Linear inequality: solve like an equation but flip sign when multiplying/dividing by negative</li>
+            <li>Quadratic inequality: solve quadratic = 0 first, then test intervals on number line</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Coordinate Geometry &amp; Trigonometry<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Gradient: m = (y₂ − y₁)/(x₂ − x₁); positive slopes upward left to right</li>
+            <li>Equation of line: y − y₁ = m(x − x₁); y = mx + c (gradient-intercept form)</li>
+            <li>Perpendicular lines: m₁ × m₂ = −1; parallel lines have equal gradients</li>
+            <li>Trigonometric ratios: sin θ = opp/hyp; cos θ = adj/hyp; tan θ = opp/adj (SOH-CAH-TOA)</li>
+            <li>Special angles: sin 30° = 0.5; cos 60° = 0.5; sin 45° = cos 45° = 1/√2; tan 45° = 1</li>
+            <li>Sine rule: a/sin A = b/sin B = c/sin C (use when angle-side pairs are known)</li>
+            <li>Cosine rule: a² = b² + c² − 2bc cos A (use when three sides or two sides and included angle)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Sequences, Series &amp; Financial Mathematics<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Arithmetic Progression (AP): T_n = a + (n−1)d; S_n = n/2 × [2a + (n−1)d]</li>
+            <li>Geometric Progression (GP): T_n = ar^(n−1); S_n = a(1 − rⁿ)/(1 − r) for r ≠ 1</li>
+            <li>Sum to infinity of GP (|r| &lt; 1): S∞ = a/(1 − r)</li>
+            <li>Simple Interest: SI = PRT/100; Amount A = P + SI</li>
+            <li>Compound Interest: A = P(1 + r/100)ⁿ; effective rate &gt; nominal rate</li>
+            <li>Depreciation: A = P(1 − r/100)ⁿ (same structure as compound interest)</li>
+            <li>Amortisation: equal periodic payments to pay off a loan; uses GP sum formula</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Permutation, Combination &amp; Probability<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Permutation (order matters): ⁿPr = n! / (n − r)!; arrangements of n distinct objects = n!</li>
+            <li>Combination (order does not matter): ⁿCr = n! / [r!(n − r)!]</li>
+            <li>Arrangements with repeated objects: n! / (p! × q! × ...) for groups of identical items</li>
+            <li>Probability: P(E) = favourable outcomes / total outcomes; 0 ≤ P ≤ 1</li>
+            <li>P(A or B) = P(A) + P(B) − P(A and B); for mutually exclusive: P(A or B) = P(A) + P(B)</li>
+            <li>P(A and B) = P(A) × P(B) for independent events; P(A|B) = P(A and B)/P(B) for conditional</li>
+            <li>Binomial expansion: (a + b)ⁿ; general term = ⁿCr × a^(n−r) × bʳ</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Vectors, Matrices &amp; Calculus<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Vector: magnitude and direction; position vector of (x, y) = xi + yj; |v| = √(x² + y²)</li>
+            <li>Matrix addition: add corresponding elements; scalar multiplication: multiply every element</li>
+            <li>Matrix multiplication: (m×n) × (n×p) → (m×p); row of first × column of second</li>
+            <li>Determinant 2×2: |A| = ad − bc for [[a,b],[c,d]]; inverse = (1/det) × [[d,−b],[−c,a]]</li>
+            <li>Differentiation: d/dx(xⁿ) = nxⁿ⁻¹; d/dx(constant) = 0; product, quotient and chain rules</li>
+            <li>Integration: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C (n ≠ −1); integration is antidifferentiation</li>
+            <li>Maxima/minima: set dy/dx = 0; if d²y/dx² &gt; 0 → minimum; &lt; 0 → maximum</li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes-cta">
+        <p>📚 Ready to test your knowledge on Mathematics?</p>
+        <div class="cta-btns">
+          <a href="subjects.html?subject=Mathematics" class="btn btn-primary btn-sm">Practice Now</a>
+          <a href="exam.html?subject=Mathematics" class="btn btn-outline btn-sm">Mock Exam</a>
+        </div>
+      </div>
+    </div>
+    <div class="notes-panel" id="notes-english-language" role="tabpanel">
+      <div class="notes-header"><span class="notes-header-emoji" aria-hidden="true">📝</span><div><h2>English Language</h2><p>WAEC English — Grammar, comprehension, oral English and essay writing</p></div></div>
+      <div class="notes-filter">
+        <span class="notes-filter-label">Filter:</span>
+        <button class="level-btn active" data-level="all">All</button>
+        <button class="level-btn" data-level="SS1">SS1</button>
+        <button class="level-btn" data-level="SS2">SS2</button>
+        <button class="level-btn" data-level="SS3">SS3</button>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Parts of Speech &amp; Sentence Structure<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Noun: name of person, place, thing or idea (proper, common, abstract, collective)</li>
+            <li>Pronoun: replaces a noun (personal: I/he/she; possessive: my/his; relative: who/which)</li>
+            <li>Adjective: describes a noun; Adverb: modifies verb, adjective or another adverb</li>
+            <li>Preposition: shows relationship — in, on, at, by, under, between, through</li>
+            <li>Conjunction: coordinating (FANBOYS: for, and, nor, but, or, yet, so); subordinating (because, although, since)</li>
+            <li>Phrase: group of words without subject + verb; Clause: has subject + verb</li>
+            <li>Sentence types: simple (one independent clause); compound (two joined by conjunction); complex (independent + dependent)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Tenses &amp; Subject-Verb Agreement<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Simple tenses: present (He runs), past (He ran), future (He will run)</li>
+            <li>Continuous tenses: present (is running), past (was running), future (will be running)</li>
+            <li>Perfect tenses: present (has run), past (had run), future (will have run)</li>
+            <li>Singular subject → singular verb; plural subject → plural verb</li>
+            <li>Collective nouns (team, committee, jury): singular verb when acting as one unit</li>
+            <li>Indefinite pronouns (everyone, each, nobody): always take singular verb</li>
+            <li>Either/or and neither/nor: verb agrees with the nearer subject</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Narrative &amp; Descriptive Writing<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Narrative essay: tells a story with a clear beginning, middle and end</li>
+            <li>Use vivid, specific details rather than vague descriptions</li>
+            <li>Chronological order: events in the order they happened; use time connectives (first, then, finally)</li>
+            <li>Descriptive essay: paints a picture; engage all five senses (sight, sound, smell, taste, touch)</li>
+            <li>Use figurative language: simile, metaphor, personification to bring descriptions to life</li>
+            <li>Show, don't tell: &quot;Her hands trembled&quot; is stronger than &quot;She was nervous&quot;</li>
+            <li>Paragraph structure: topic sentence → development → concluding link</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Figures of Speech<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Simile: comparison using &quot;like&quot; or &quot;as&quot; — &quot;the soldier fought like a lion&quot;</li>
+            <li>Metaphor: direct comparison without &quot;like/as&quot; — &quot;life is a battlefield&quot;</li>
+            <li>Personification: human qualities to non-human — &quot;the sun smiled down on us&quot;</li>
+            <li>Hyperbole: deliberate exaggeration — &quot;I have a mountain of work to do&quot;</li>
+            <li>Irony: saying the opposite of what you mean — &quot;What lovely weather!&quot; (during heavy rain)</li>
+            <li>Oxymoron: contradictory terms — &quot;deafening silence&quot;; &quot;bitter sweet&quot;; &quot;living death&quot;</li>
+            <li>Alliteration: same consonant repeated — &quot;Peter Piper picked&quot;; Onomatopoeia: buzz, hiss, bang</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Direct &amp; Indirect Speech and Letter Writing<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Direct speech: exact words in quotation marks — She said, &quot;I am tired.&quot;</li>
+            <li>Indirect speech: reported without quotes; tense shifts back one step — She said she was tired.</li>
+            <li>Time and place adverbs change: now → then; here → there; today → that day; tomorrow → the next day</li>
+            <li>Formal letter: sender's address, date, recipient's address, salutation (Dear Sir/Madam), body, closing (Yours faithfully)</li>
+            <li>Informal letter: date, salutation (Dear [Name]), friendly body, closing (Yours sincerely / Your friend)</li>
+            <li>Register: formal language avoids contractions and slang; informal may use both</li>
+            <li>Always match the register to the purpose and audience of your writing</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Comprehension &amp; Vocabulary<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Read the passage twice: first for overall meaning, second for detail</li>
+            <li>Identify the main idea — usually stated in the opening or closing paragraph</li>
+            <li>Answer in your own words (paraphrase); do not copy directly unless asked to quote</li>
+            <li>Inferential questions: the answer is implied — read between the lines</li>
+            <li>Vocabulary in context: use surrounding sentences to determine the meaning of an unfamiliar word</li>
+            <li>Synonym: same meaning (benevolent = charitable); Antonym: opposite (verbose ≠ concise)</li>
+            <li>Common roots, prefixes and suffixes: un- (not), re- (again), -tion (noun), -ous (adjective)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Argumentative &amp; Expository Essays<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Argumentative essay: take a clear position and defend it with evidence, logic and examples</li>
+            <li>Structure: introduction (state position) → body (3+ paragraphs each with one point) → conclusion (restate and call to action)</li>
+            <li>Counter-argument: acknowledge opposing view then refute it — strengthens your essay</li>
+            <li>Expository essay: explains or informs objectively; no personal bias</li>
+            <li>Topic sentence: opens each paragraph and states the main point of that paragraph</li>
+            <li>Transitions: furthermore, however, in contrast, as a result, in conclusion</li>
+            <li>Conclusion: summarise key points; do not introduce new ideas; end with a strong closing statement</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Oral English &amp; Phonetics<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Short vowels: /ɪ/ (sit), /e/ (bed), /æ/ (cat), /ɒ/ (hot), /ʊ/ (book), /ʌ/ (cup)</li>
+            <li>Long vowels: /iː/ (feet), /ɑː/ (car), /ɔː/ (door), /uː/ (food), /ɜː/ (bird)</li>
+            <li>Diphthongs (gliding vowels): /eɪ/ (late), /aɪ/ (light), /ɔɪ/ (boy), /əʊ/ (go)</li>
+            <li>Voiced consonants: /b/, /d/, /g/, /v/, /z/, /ʒ/, /m/, /n/; Voiceless: /p/, /t/, /k/, /f/, /s/</li>
+            <li>Word stress: nouns often stressed on first syllable (REcord); verbs on second (reCORD)</li>
+            <li>Sentence stress: content words (nouns, main verbs, adjectives) stressed; function words (articles, prepositions) unstressed</li>
+            <li>Intonation: rising (↗) for yes/no questions; falling (↘) for statements and wh- questions</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Summary Writing &amp; Report Writing<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Summary: reduce a passage to its essential points without personal comment</li>
+            <li>Identify main points first; list them; then write in continuous prose</li>
+            <li>Use your own words; do not copy sentences — paraphrase throughout</li>
+            <li>Count words if the question sets a limit; stay within 5 words of the specified number</li>
+            <li>Report structure: title, date, to/from, introduction, findings (numbered/bullet), conclusion, recommendations</li>
+            <li>Reports use impersonal, formal language and passive voice — &quot;It was found that...&quot;</li>
+            <li>Article/feature writing: headline, introduction (5 Ws), body, conclusion — for newspaper or magazine</li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes-cta">
+        <p>📚 Ready to test your knowledge on English Language?</p>
+        <div class="cta-btns">
+          <a href="subjects.html?subject=English%20Language" class="btn btn-primary btn-sm">Practice Now</a>
+          <a href="exam.html?subject=English%20Language" class="btn btn-outline btn-sm">Mock Exam</a>
+        </div>
+      </div>
+    </div>
+    <div class="notes-panel" id="notes-physics" role="tabpanel">
+      <div class="notes-header"><span class="notes-header-emoji" aria-hidden="true">⚡</span><div><h2>Physics</h2><p>WAEC Physics — Mechanics, waves, electricity, heat and modern physics</p></div></div>
+      <div class="notes-filter">
+        <span class="notes-filter-label">Filter:</span>
+        <button class="level-btn active" data-level="all">All</button>
+        <button class="level-btn" data-level="SS1">SS1</button>
+        <button class="level-btn" data-level="SS2">SS2</button>
+        <button class="level-btn" data-level="SS3">SS3</button>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Measurement, Scalars &amp; Vectors<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>SI base units: metre (m), kilogram (kg), second (s), Ampere (A), Kelvin (K), mole (mol), candela (cd)</li>
+            <li>Scalar: magnitude only (speed, mass, temperature, energy)</li>
+            <li>Vector: magnitude and direction (velocity, force, displacement, acceleration)</li>
+            <li>Vector addition: use triangle/parallelogram law or resolve into horizontal and vertical components</li>
+            <li>Resultant of perpendicular vectors: R = √(x² + y²); direction θ = arctan(y/x)</li>
+            <li>Significant figures: rules for recording measurements with correct precision</li>
+            <li>Errors: systematic (consistent offset) vs random (vary unpredictably)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Kinematics &amp; Dynamics (Newton's Laws)<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Distance: total path length (scalar); Displacement: shortest distance from start to end (vector)</li>
+            <li>Speed = distance/time; Velocity = displacement/time; both in m/s</li>
+            <li>Equations of motion: v = u + at; s = ut + ½at²; v² = u² + 2as; s = (u + v)t/2</li>
+            <li>Free fall: acceleration = g ≈ 10 m/s² downward (ignore air resistance)</li>
+            <li>Newton's 1st law: inertia — body stays at rest or constant velocity unless net force acts</li>
+            <li>Newton's 2nd law: F = ma (net force = mass × acceleration)</li>
+            <li>Newton's 3rd law: action and reaction are equal in magnitude, opposite in direction</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Work, Energy, Power &amp; Heat<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Work = F × d × cos θ (Joules, J); work done against gravity = mgh</li>
+            <li>Kinetic energy = ½mv²; Gravitational PE = mgh; conservation: total mechanical energy constant</li>
+            <li>Power = Work/Time = Energy/Time (Watts, W = J/s)</li>
+            <li>Efficiency = (useful output / total input) × 100%</li>
+            <li>Temperature: degree of hotness; measured in Celsius (°C) or Kelvin (K); K = °C + 273</li>
+            <li>Thermometers: liquid-in-glass, thermocouple, resistance thermometer; fixed points: 0°C (ice point), 100°C (steam point)</li>
+            <li>Linear expansivity α: ΔL = L₀αΔT; materials expand on heating (exceptions: water 0–4°C)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Waves &amp; Sound<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Wave: energy transfer without matter transfer; wave equation v = fλ</li>
+            <li>Transverse: vibration perpendicular to wave direction (light, water); Longitudinal: parallel (sound)</li>
+            <li>Sound: mechanical longitudinal wave; needs a medium; speed ≈ 340 m/s in air at 20°C</li>
+            <li>Speed of sound: faster in denser media — solids &gt; liquids &gt; gases</li>
+            <li>Frequency determines pitch (Hz); amplitude determines loudness (dB)</li>
+            <li>Resonance: object vibrates at maximum amplitude when driven at its natural frequency</li>
+            <li>Echoes: reflected sound; time delay t = 2d/v; used in SONAR, ultrasound imaging</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Light &amp; Optics<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Reflection: angle of incidence = angle of reflection (both from the normal)</li>
+            <li>Plane mirror: image is virtual, upright, same size, same distance behind mirror as object in front</li>
+            <li>Concave (converging) mirror: used in headlights, torches, shaving mirrors; can form real images</li>
+            <li>Convex (diverging) mirror: always forms virtual, upright, diminished image; used in rear-view mirrors</li>
+            <li>Refraction: light bends toward normal entering denser medium; Snell's law: n₁sinθ₁ = n₂sinθ₂</li>
+            <li>Total internal reflection: occurs when angle &gt; critical angle; sin C = 1/n; used in optical fibres</li>
+            <li>Lens formula: 1/f = 1/v − 1/u; magnification m = v/u; converging lens (f +); diverging lens (f −)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Electricity &amp; Magnetism<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Ohm's law: V = IR; resistance measured in Ohms (Ω)</li>
+            <li>Series: same current; total R = R₁ + R₂ + ...; voltages add up</li>
+            <li>Parallel: same voltage; 1/R_total = 1/R₁ + 1/R₂ + ...; currents add up</li>
+            <li>Power: P = IV = I²R = V²/R; energy = Pt = VIt (Joules or kWh)</li>
+            <li>Domestic wiring: live (brown/red), neutral (blue/black), earth (green-yellow); fuse protects live wire</li>
+            <li>Magnetic field: like poles repel, unlike poles attract; field lines from N to S</li>
+            <li>Electromagnetic induction (Faraday): changing magnetic flux induces an EMF; generator principle</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Heat Capacity &amp; Gas Laws<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Specific heat capacity c: Q = mcΔT; unit J/(kg·K); water has very high c (4200 J/kg·K)</li>
+            <li>Latent heat of fusion: heat absorbed/released melting/freezing at constant temperature</li>
+            <li>Latent heat of vaporisation: heat absorbed/released boiling/condensing at constant temperature</li>
+            <li>Boyle's law: P₁V₁ = P₂V₂ (temperature constant)</li>
+            <li>Charles' law: V₁/T₁ = V₂/T₂ (pressure constant; T in Kelvin)</li>
+            <li>Combined gas law: P₁V₁/T₁ = P₂V₂/T₂</li>
+            <li>Heat transfer: conduction (solid lattice vibration), convection (fluid bulk movement), radiation (EM waves, no medium)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Modern Physics &amp; Radioactivity<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Photoelectric effect: light above threshold frequency ejects electrons from metal surface</li>
+            <li>Einstein: E = hf (energy of photon); h = Planck's constant = 6.63 × 10⁻³⁴ J·s</li>
+            <li>Bohr's model: electrons occupy fixed energy levels; emit photons when jumping to lower level</li>
+            <li>Alpha (α): helium nucleus (2p, 2n); stopped by paper; highly ionising</li>
+            <li>Beta (β): high-speed electron; stopped by thin aluminium; moderately ionising</li>
+            <li>Gamma (γ): high-energy electromagnetic radiation; stopped by thick lead; penetrating</li>
+            <li>Half-life: time for half the radioactive atoms in a sample to decay; each isotope has a fixed value</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Electronics &amp; Energy Sources<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Semiconductors: conductivity between conductor and insulator; silicon and germanium common</li>
+            <li>p-n junction diode: allows current in one direction only; used in rectification (AC → DC)</li>
+            <li>Transistor: amplifies or switches signals; NPN and PNP types</li>
+            <li>Logic gates: AND, OR, NOT, NAND, NOR, XOR; truth tables show output for every input combination</li>
+            <li>Nuclear fission: heavy nucleus (U-235) splits releasing large energy; basis of nuclear reactor</li>
+            <li>Nuclear fusion: light nuclei (H isotopes) fuse releasing even more energy; powers the sun</li>
+            <li>Renewable energy: solar (photovoltaic), wind turbines, hydroelectric; no greenhouse gas emissions</li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes-cta">
+        <p>📚 Ready to test your knowledge on Physics?</p>
+        <div class="cta-btns">
+          <a href="subjects.html?subject=Physics" class="btn btn-primary btn-sm">Practice Now</a>
+          <a href="exam.html?subject=Physics" class="btn btn-outline btn-sm">Mock Exam</a>
+        </div>
+      </div>
+    </div>
+    <div class="notes-panel" id="notes-chemistry" role="tabpanel">
+      <div class="notes-header"><span class="notes-header-emoji" aria-hidden="true">🧪</span><div><h2>Chemistry</h2><p>WAEC Chemistry — Atomic structure, bonding, reactions, organic and industrial chemistry</p></div></div>
+      <div class="notes-filter">
+        <span class="notes-filter-label">Filter:</span>
+        <button class="level-btn active" data-level="all">All</button>
+        <button class="level-btn" data-level="SS1">SS1</button>
+        <button class="level-btn" data-level="SS2">SS2</button>
+        <button class="level-btn" data-level="SS3">SS3</button>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Atomic Structure &amp; Periodic Table<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Atom: nucleus (protons + neutrons) + electrons in shells; shells fill as 2, 8, 8, 18...</li>
+            <li>Atomic number = protons (= electrons in neutral atom); Mass number = protons + neutrons</li>
+            <li>Isotopes: same element, same atomic number, different mass number (e.g. C-12 and C-14)</li>
+            <li>Electron configuration: Na is 2,8,1 (11 protons); determines group and period position</li>
+            <li>Periodic law: properties of elements repeat periodically when arranged by atomic number</li>
+            <li>Group = number of valence electrons; Period = number of occupied energy shells</li>
+            <li>Trends across a period: atomic radius decreases; ionisation energy and electronegativity increase</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Chemical Bonding<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Ionic (electrovalent) bond: metal transfers electrons to non-metal; forms crystal lattice (NaCl)</li>
+            <li>Covalent bond: non-metals share electron pairs (H₂O has 2 shared pairs + 2 lone pairs)</li>
+            <li>Dative (coordinate) bond: one atom donates both electrons of the shared pair (NH₄⁺, H₃O⁺)</li>
+            <li>Metallic bond: delocalised &quot;sea of electrons&quot; around positive metal ions; explains conductivity</li>
+            <li>Hydrogen bond: weak O−H...O, N−H...N attractions; explains water's anomalously high boiling point</li>
+            <li>VSEPR theory: electron pairs repel → determine molecule geometry (tetrahedral, trigonal planar, linear)</li>
+            <li>Electrovalency = electrons gained/lost; Covalency = number of electron pairs shared</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Acids, Bases &amp; Salts<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Arrhenius acid: produces H⁺ in water; base: produces OH⁻ in water</li>
+            <li>Bronsted-Lowry acid: proton (H⁺) donor; base: proton acceptor</li>
+            <li>pH scale: 0–6 acidic, 7 neutral, 8–14 alkaline; pH = −log[H⁺]</li>
+            <li>Indicators: litmus (acid = red, base = blue); phenolphthalein (acid = colourless, base = pink)</li>
+            <li>Neutralisation: acid + base → salt + water; H⁺ + OH⁻ → H₂O (exothermic)</li>
+            <li>Salts: formed when metal replaces hydrogen of an acid; common salts: NaCl, CaCO₃, CuSO₄</li>
+            <li>Preparation of salts: direct combination, displacement, neutralisation, double decomposition</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Mole Concept &amp; Stoichiometry<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>One mole = 6.02 × 10²³ particles (Avogadro's constant)</li>
+            <li>Molar mass: mass of one mole in grams = relative atomic/molecular mass</li>
+            <li>Moles = mass / molar mass; moles = volume (L) / 22.4 (for gases at STP)</li>
+            <li>Molar concentration = moles / volume (in dm³); unit: mol/dm³ or M</li>
+            <li>Balanced equation: coefficients show molar ratios of reactants and products</li>
+            <li>Limiting reagent: reactant that is completely consumed first; determines yield</li>
+            <li>Percentage yield = (actual yield / theoretical yield) × 100%</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Electrochemistry &amp; Equilibrium<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Electrolysis: passage of direct current through an ionic compound (molten or in solution)</li>
+            <li>Cathode (−): reduction; anode (+): oxidation — &quot;Red Cat and An Ox&quot;</li>
+            <li>Electrolysis of brine: H₂ at cathode, Cl₂ at anode, NaOH formed in solution</li>
+            <li>Faraday's 1st law: mass deposited ∝ charge passed (Q = It)</li>
+            <li>Dynamic equilibrium: forward and reverse reactions occur at equal rates</li>
+            <li>Le Chatelier's Principle: system shifts to oppose any imposed change</li>
+            <li>Haber Process: N₂ + 3H₂ ⇌ 2NH₃; 450°C, 200 atm, Fe catalyst; compromise of rate and yield</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Chemical Kinetics &amp; Thermochemistry<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Rate of reaction: how quickly reactants are consumed or products are formed</li>
+            <li>Factors: temperature (↑ temp → ↑ rate); concentration (↑ conc → ↑ rate); surface area; catalyst; pressure (gases)</li>
+            <li>Activation energy: minimum energy particles need to react; catalyst provides alternative lower-energy path</li>
+            <li>Exothermic reaction: releases heat; ΔH is negative (e.g. combustion, neutralisation)</li>
+            <li>Endothermic reaction: absorbs heat; ΔH is positive (e.g. photosynthesis, dissolving NH₄Cl)</li>
+            <li>Enthalpy change ΔH: measured in kJ/mol; standard conditions 25°C, 1 atm</li>
+            <li>Hess's law: enthalpy change is independent of route taken between reactants and products</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Organic Chemistry<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Organic compounds contain carbon; carbon forms 4 bonds; chains can be straight, branched or ring</li>
+            <li>Alkanes: CₙH₂ₙ₊₂; saturated; undergo substitution with halogens in UV light</li>
+            <li>Alkenes: CₙH₂ₙ; one C=C double bond; undergo addition reactions (Br₂ water, H₂, H₂O, HX)</li>
+            <li>Test for alkene: decolourises bromine water (orange → colourless)</li>
+            <li>Alcohols: contain −OH; ethanol (C₂H₅OH) fermented from glucose; primary/secondary/tertiary</li>
+            <li>Carboxylic acids: contain −COOH; weak acids; react with alcohols to form esters (esterification)</li>
+            <li>Polymers: long chain molecules from repeated monomer units; addition (polyethylene) or condensation (nylon)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Metals, Extraction &amp; Industrial Chemistry<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Reactivity series: K &gt; Na &gt; Ca &gt; Mg &gt; Al &gt; Zn &gt; Fe &gt; Pb &gt; H &gt; Cu &gt; Ag &gt; Au</li>
+            <li>Metals above H displace hydrogen from dilute acids; metals higher displace lower ones from solution</li>
+            <li>Blast furnace (iron): iron ore + coke + limestone; coke reduces Fe₂O₃ to Fe; limestone removes impurities as slag</li>
+            <li>Aluminium: extracted by electrolysis of molten alumite (bauxite/cryolite); cannot be smelted (too reactive)</li>
+            <li>Contact Process (H₂SO₄): SO₂ → SO₃ (V₂O₅ catalyst, 450°C) → dissolved in H₂SO₄ → oleum → diluted</li>
+            <li>Rusting: requires both oxygen and water; prevented by painting, galvanising (zinc coating), cathodic protection</li>
+            <li>Alloys: mixtures of metals; steel (Fe + C), brass (Cu + Zn), bronze (Cu + Sn) — improved properties</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Environmental &amp; Separation Chemistry<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Air pollution: CO (incomplete combustion), SO₂ (acid rain), NOₓ (photochemical smog), CFCs (ozone depletion)</li>
+            <li>Water treatment: screening → sedimentation → coagulation (alum) → filtration → chlorination</li>
+            <li>Sewage treatment: primary (screening/settlement) → secondary (biological oxidation) → tertiary (final polishing)</li>
+            <li>Separation techniques: filtration (solid from liquid); evaporation (dissolve solid from solution); distillation (miscible liquids by boiling point); chromatography (mixture by affinity)</li>
+            <li>Rf value in chromatography: distance moved by spot / distance moved by solvent front</li>
+            <li>Greenhouse effect: CO₂, CH₄, H₂O trap infrared → global warming → climate change</li>
+            <li>Sustainable chemistry: reducing waste, using renewable feedstocks, energy efficiency — &quot;green chemistry&quot;</li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes-cta">
+        <p>📚 Ready to test your knowledge on Chemistry?</p>
+        <div class="cta-btns">
+          <a href="subjects.html?subject=Chemistry" class="btn btn-primary btn-sm">Practice Now</a>
+          <a href="exam.html?subject=Chemistry" class="btn btn-outline btn-sm">Mock Exam</a>
+        </div>
+      </div>
+    </div>
+    <div class="notes-panel" id="notes-biology" role="tabpanel">
+      <div class="notes-header"><span class="notes-header-emoji" aria-hidden="true">🌿</span><div><h2>Biology</h2><p>WAEC Biology — Cell biology, physiology, genetics, ecology and applied biology</p></div></div>
+      <div class="notes-filter">
+        <span class="notes-filter-label">Filter:</span>
+        <button class="level-btn active" data-level="all">All</button>
+        <button class="level-btn" data-level="SS1">SS1</button>
+        <button class="level-btn" data-level="SS2">SS2</button>
+        <button class="level-btn" data-level="SS3">SS3</button>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Cell Structure &amp; Organisation<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Cell: basic structural and functional unit of life (Robert Hooke, 1665)</li>
+            <li>Plant cell extras (vs animal): cellulose cell wall, chloroplast, large permanent central vacuole</li>
+            <li>Animal cell extras (vs plant): centrioles (for cell division)</li>
+            <li>Organelles: nucleus (DNA/control), mitochondria (ATP/respiration), ribosome (protein synthesis), ER (transport), Golgi (packaging/secretion)</li>
+            <li>Levels of organisation: cell → tissue → organ → organ system → organism</li>
+            <li>Unicellular organisms: Amoeba, Paramecium, Euglena; Multicellular: all complex plants and animals</li>
+            <li>Cell division: mitosis (growth/repair → 2 identical cells); meiosis (reproduction → 4 genetically unique cells)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Nutrition in Plants &amp; Animals<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Autotrophs: make own food; plants use photosynthesis: 6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂</li>
+            <li>Factors affecting rate of photosynthesis: light intensity, CO₂ concentration, temperature, water</li>
+            <li>Minerals needed by plants: nitrogen (protein), phosphorus (DNA/ATP), potassium (enzyme activation)</li>
+            <li>Heterotrophs: obtain energy by consuming other organisms</li>
+            <li>Human digestive system: mouth → oesophagus → stomach → small intestine → large intestine</li>
+            <li>Enzymes: amylase (starch→maltose), pepsin (proteins, in stomach acid), lipase (fats), trypsin (proteins, in small intestine)</li>
+            <li>Malnutrition: kwashiorkor (protein deficiency), marasmus (calorie deficiency), scurvy (vitamin C), rickets (vitamin D)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Transport &amp; Respiration<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Xylem: transports water and minerals upward (dead cells, lignified walls; one-way flow)</li>
+            <li>Phloem: transports sucrose (photosynthesis products) both up and down (translocation)</li>
+            <li>Transpiration: evaporation of water from stomata; creates transpiration pull drawing water up xylem</li>
+            <li>Blood components: red cells (haemoglobin, O₂ transport), white cells (immunity), platelets (clotting), plasma (dissolved substances)</li>
+            <li>Double circulation: pulmonary (heart ↔ lungs) and systemic (heart ↔ body)</li>
+            <li>Aerobic respiration: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 38 ATP</li>
+            <li>Anaerobic in muscles: glucose → lactic acid + small ATP; causes muscle fatigue</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Excretion &amp; Support<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Excretion: removal of metabolic waste products (CO₂, urea, excess salts, water)</li>
+            <li>Kidneys: filter blood; nephron = functional unit; glomerulus (filtration) → tubules (reabsorption)</li>
+            <li>Urea: produced in liver from excess amino acids (deamination); removed by kidneys</li>
+            <li>Skin: excretes salts and water as sweat; also regulates body temperature</li>
+            <li>Skeleton: axial (skull, vertebral column, ribcage); appendicular (limb bones)</li>
+            <li>Joints: ball-and-socket (shoulder, hip — full rotation); hinge (knee, elbow — one plane)</li>
+            <li>Muscle pairs (antagonistic): bicep/tricep at elbow; when one contracts, the other relaxes</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Reproduction &amp; Growth<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Asexual reproduction: one parent; offspring genetically identical (budding, binary fission, spores, vegetative)</li>
+            <li>Sexual reproduction: involves gametes (sperm + egg); offspring show variation</li>
+            <li>Pollination: transfer of pollen from anther to stigma; self-pollination vs cross-pollination</li>
+            <li>Human male: testes produce sperm and testosterone; sperm travel through vas deferens</li>
+            <li>Human female: ovaries release eggs (ovulation, day 14); uterus nurtures foetus</li>
+            <li>Menstrual cycle: 28 days; controlled by FSH, LH, oestrogen and progesterone</li>
+            <li>Growth: mitosis increases cell number; differentiation creates specialised cell types; growth curves (sigmoid/J-shaped)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Genetics &amp; Evolution<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>DNA: double helix; base pairs A-T and G-C; carries genetic code in sequences of 3 bases (codons)</li>
+            <li>Mendel's 1st law (segregation): alleles separate during gamete formation</li>
+            <li>Mendel's 2nd law (independent assortment): genes on different chromosomes sort independently</li>
+            <li>Monohybrid cross: one trait; ratio 3 dominant : 1 recessive in F2 generation</li>
+            <li>Co-dominance: both alleles expressed (blood group AB = both A and B antigens)</li>
+            <li>Sex determination: XX = female; XY = male; sex-linked traits on X chromosome (colour blindness, haemophilia)</li>
+            <li>Natural selection (Darwin): variation → competition → survival of fittest → inherited traits become common</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Ecology &amp; Classification<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Ecology: study of organisms and their interactions with each other and the environment</li>
+            <li>Food chain: producer → primary consumer → secondary consumer → tertiary consumer</li>
+            <li>Only ~10% of energy transfers between trophic levels; rest lost as heat</li>
+            <li>Nitrogen cycle: fixation (Rhizobium) → nitrification → assimilation → denitrification</li>
+            <li>Five kingdoms: Monera (bacteria), Protista (Amoeba), Fungi, Plantae, Animalia</li>
+            <li>Binomial nomenclature: two-part scientific name — genus (capital) + species (lowercase), e.g. Homo sapiens</li>
+            <li>Vertebrate classes: fish (cold-blooded, gills), amphibia, reptilia, aves (birds), mammalia</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Microorganisms &amp; Disease<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Bacteria: prokaryotes (no membrane-bound nucleus); some cause disease; antibiotics kill bacteria</li>
+            <li>Viruses: not cells; protein coat + nucleic acid; replicate inside host cells; cannot be treated with antibiotics</li>
+            <li>Malaria: caused by Plasmodium (protozoan); vector = female Anopheles mosquito; prevention: mosquito nets, insecticides</li>
+            <li>HIV/AIDS: retrovirus; destroys CD4 T-cells (immune system); spread through blood, sex, breast milk</li>
+            <li>Cholera: bacterial (Vibrio cholerae); spread through contaminated water; symptom: severe watery diarrhoea</li>
+            <li>Tuberculosis (TB): bacterial (Mycobacterium tuberculosis); airborne; affects lungs; BCG vaccine available</li>
+            <li>Immunisation: introduces antigen → body makes antibodies → memory cells provide future protection</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Biotechnology &amp; Applied Biology<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Fermentation: microorganisms break down sugars without oxygen; yeast produces ethanol + CO₂</li>
+            <li>Biogas: anaerobic digestion of organic waste produces methane (CH₄) — renewable fuel</li>
+            <li>Genetic engineering: cut desired gene with restriction enzymes → insert into host DNA using ligase</li>
+            <li>Recombinant DNA technology: produces insulin (from bacteria), vaccines, disease-resistant crops (GMOs)</li>
+            <li>Tissue culture (micropropagation): grow plant cells on nutrient medium → many identical plants</li>
+            <li>Antibiotic resistance: misuse of antibiotics selects for resistant bacteria — serious global health threat</li>
+            <li>Conservation: protect biodiversity through national parks, game reserves, seed banks and legislation</li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes-cta">
+        <p>📚 Ready to test your knowledge on Biology?</p>
+        <div class="cta-btns">
+          <a href="subjects.html?subject=Biology" class="btn btn-primary btn-sm">Practice Now</a>
+          <a href="exam.html?subject=Biology" class="btn btn-outline btn-sm">Mock Exam</a>
+        </div>
+      </div>
+    </div>
+    <div class="notes-panel" id="notes-government" role="tabpanel">
+      <div class="notes-header"><span class="notes-header-emoji" aria-hidden="true">🏛️</span><div><h2>Government</h2><p>WAEC Government — Political theory, Nigerian history, democracy and international relations</p></div></div>
+      <div class="notes-filter">
+        <span class="notes-filter-label">Filter:</span>
+        <button class="level-btn active" data-level="all">All</button>
+        <button class="level-btn" data-level="SS1">SS1</button>
+        <button class="level-btn" data-level="SS2">SS2</button>
+        <button class="level-btn" data-level="SS3">SS3</button>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Introduction to Government &amp; the State<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Government: the institution through which the state exerts its authority and manages public affairs</li>
+            <li>Functions of government: law-making, execution/implementation, interpretation, maintaining order, providing welfare</li>
+            <li>The State: permanent political community; features — population, territory, government, sovereignty</li>
+            <li>Sovereignty: supreme legal authority; internal (over citizens) and external (independence from other states)</li>
+            <li>Legitimacy: people's acceptance of the right of government to rule; may come from elections, tradition or charisma</li>
+            <li>Types of government: democracy, monarchy, aristocracy, oligarchy, autocracy, theocracy</li>
+            <li>Politically active citizen: informed about laws, votes, pays taxes, respects others' rights</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Constitution &amp; Organs of Government<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Constitution: fundamental law of a state; defines structure of government and rights of citizens</li>
+            <li>Written (codified): single document — Nigeria 1999, USA; Unwritten: conventions and statutes — UK</li>
+            <li>Rigid: difficult to amend (special procedure, supermajority) — Nigeria; Flexible: easy to amend — UK</li>
+            <li>Legislature (Parliament/National Assembly): makes laws; may be unicameral or bicameral</li>
+            <li>Executive: implements laws; in presidential system, president is both head of state and government</li>
+            <li>Judiciary: interprets laws; must be independent to protect rights and check other arms</li>
+            <li>Separation of powers (Montesquieu): prevents abuse by keeping three arms distinct and independent</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Democracy, Rule of Law &amp; Political Concepts<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Democracy: government of the people, by the people, for the people (Lincoln)</li>
+            <li>Direct democracy: citizens vote directly on every issue (ancient Athens, Swiss referenda)</li>
+            <li>Representative (indirect) democracy: citizens elect representatives to decide on their behalf</li>
+            <li>Rule of law (A.V. Dicey): supremacy of law; equality before the law; rights protected by courts</li>
+            <li>Constitutionalism: government must act within the limits set by the constitution</li>
+            <li>Checks and balances: each arm of government limits the power of the others</li>
+            <li>Political socialisation: process by which people learn political values (family, school, media)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Nigeria Under Colonial Rule &amp; Independence<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>British colonial policy: Indirect Rule (using traditional rulers as intermediaries) — introduced by Lugard</li>
+            <li>Amalgamation 1914: Northern and Southern Nigeria joined by Lord Lugard to form Nigeria</li>
+            <li>Nationalist movements: NCNC (Azikiwe, 1944), AG (Awolowo, 1951), NPC (Sardauna, 1951)</li>
+            <li>Constitutional conferences: Richards Constitution (1946), Macpherson (1951), Lyttleton (1954 — federalism)</li>
+            <li>Independence: 1 October 1960; Republic: 1 October 1963 (Nnamdi Azikiwe as first President)</li>
+            <li>1966 military coup: General Aguiyi-Ironsi; counter-coup 1966; Yakubu Gowon took power</li>
+            <li>Civil War (Biafra) 1967–1970: 12 states created by Gowon; ended with &quot;No victor, no vanquished&quot;</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Nigerian Political Parties &amp; Electoral System<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Political party: organisation seeking to gain power through elections; formulates policies and manifestos</li>
+            <li>Functions: recruit leaders, provide candidates, educate voters, form government, provide opposition</li>
+            <li>One-party system: only one legal party (authoritarian); Two-party: two major parties dominate</li>
+            <li>Multi-party system: many parties; usually leads to coalition governments</li>
+            <li>INEC (Independent National Electoral Commission): conducts federal elections; registers voters and parties</li>
+            <li>Electoral systems: First Past the Post (FPTP) used in Nigeria — highest votes wins, regardless of majority</li>
+            <li>Franchise (right to vote): universal adult suffrage in Nigeria — citizens 18 years and above</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Federalism &amp; Public Administration<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Federalism: powers constitutionally divided between central and regional/state governments</li>
+            <li>Features: written constitution, bicameral legislature, independent judiciary, revenue sharing</li>
+            <li>Nigeria: 36 states + FCT; Exclusive list (federal only), Concurrent list (both), Residual (states)</li>
+            <li>Revenue allocation: derived principle, equality of states, population, need; shared from Federation Account</li>
+            <li>Civil service: permanent, professional, impartial bureaucracy that executes government policy</li>
+            <li>Public corporations: government-owned enterprises (NNPC, PHCN, NPA); created by statute</li>
+            <li>Military government: unconstitutional; suspends constitution; rules by decree; no separation of powers</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Local Government &amp; Citizenship<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Local government: third tier of government; 774 LGAs in Nigeria</li>
+            <li>1976 Reform (Murtala/Obasanjo): uniform structure — elected chairman + councillors established</li>
+            <li>LGA functions: primary education, primary health care, markets, refuse, community development</li>
+            <li>Revenue: statutory allocation from Federation Account + internally generated revenue (rates, fees)</li>
+            <li>Citizenship: by birth (jus soli/jus sanguinis), registration, or naturalisation</li>
+            <li>Fundamental Human Rights (Chapter IV, 1999 Constitution): life, dignity, liberty, fair hearing, expression, movement</li>
+            <li>Civic duties: obey laws, pay taxes, vote, defend the nation, respect others' rights</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">International Organisations &amp; Foreign Policy<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>United Nations (1945): 193 members; General Assembly, Security Council (5 permanent with veto), ICJ, Secretariat</li>
+            <li>UN objectives: maintain peace and security, promote human rights and development</li>
+            <li>African Union (AU, 2002): succeeds OAU (1963); promotes African unity and development; HQ Addis Ababa</li>
+            <li>ECOWAS (1975 Lagos Treaty): promotes West African economic integration; peacekeeping (ECOMOG)</li>
+            <li>OPEC (1960): controls oil output to stabilise prices; Nigeria joined 1971</li>
+            <li>Nigeria's foreign policy: Africa as centrepiece, non-alignment, promotion of African unity, respect for sovereignty</li>
+            <li>Diplomacy: peaceful relations between states; ambassadors represent country abroad; embassies and high commissions</li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes-cta">
+        <p>📚 Ready to test your knowledge on Government?</p>
+        <div class="cta-btns">
+          <a href="subjects.html?subject=Government" class="btn btn-primary btn-sm">Practice Now</a>
+          <a href="exam.html?subject=Government" class="btn btn-outline btn-sm">Mock Exam</a>
+        </div>
+      </div>
+    </div>
+    <div class="notes-panel" id="notes-economics" role="tabpanel">
+      <div class="notes-header"><span class="notes-header-emoji" aria-hidden="true">💹</span><div><h2>Economics</h2><p>WAEC Economics — Microeconomics, macroeconomics, money and Nigerian economy</p></div></div>
+      <div class="notes-filter">
+        <span class="notes-filter-label">Filter:</span>
+        <button class="level-btn active" data-level="all">All</button>
+        <button class="level-btn" data-level="SS1">SS1</button>
+        <button class="level-btn" data-level="SS2">SS2</button>
+        <button class="level-btn" data-level="SS3">SS3</button>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Basic Economic Concepts<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Economics: study of how scarce resources are allocated to satisfy unlimited wants</li>
+            <li>Scarcity: resources (land, labour, capital) are limited; wants are unlimited → choices must be made</li>
+            <li>Opportunity cost: value of the next best alternative foregone when a choice is made</li>
+            <li>Scale of preference: ranking of wants in order of urgency</li>
+            <li>Production possibility curve (PPC): shows maximum combinations of two goods an economy can produce</li>
+            <li>Economic systems: capitalism (private ownership, market), socialism (state ownership), mixed (both)</li>
+            <li>Factors of production: Land (rent), Labour (wages), Capital (interest), Entrepreneur (profit)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Demand Theory<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Law of Demand: ceteris paribus, as price rises, quantity demanded falls (inverse relationship)</li>
+            <li>Demand schedule: table of price-quantity pairs; demand curve slopes downward left to right</li>
+            <li>Determinants of demand (shift factors): income, price of substitutes/complements, tastes, expectations, population</li>
+            <li>Price Elasticity of Demand (PED) = % change in Qd / % change in price</li>
+            <li>Elastic demand (|PED| &gt; 1): luxury goods; Inelastic (|PED| &lt; 1): necessities, addictive goods</li>
+            <li>Income elasticity: positive = normal good; negative = inferior good; &gt;1 = luxury</li>
+            <li>Consumer surplus: difference between what consumer is willing to pay and what they actually pay</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Supply Theory &amp; Market Price<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Law of Supply: as price rises, quantity supplied rises (positive/direct relationship)</li>
+            <li>Determinants of supply: cost of production, technology, number of sellers, prices of related goods, taxes/subsidies</li>
+            <li>Price Elasticity of Supply (PES) = % change in Qs / % change in price</li>
+            <li>Equilibrium: price where quantity demanded = quantity supplied; market clears</li>
+            <li>Excess demand (shortage): price below equilibrium; price rises to restore balance</li>
+            <li>Excess supply (surplus): price above equilibrium; price falls to restore balance</li>
+            <li>Price controls: price ceiling (maximum price — below equilibrium) causes shortage; price floor (minimum — above equilibrium) causes surplus</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">National Income &amp; Economic Indicators<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>GDP: total market value of all final goods and services produced in a country in one year</li>
+            <li>Expenditure method: GDP = C + I + G + (X − M) where X = exports, M = imports</li>
+            <li>GNP = GDP + net income from abroad (citizens' incomes wherever earned)</li>
+            <li>NNP = GNP − depreciation (capital consumption allowance)</li>
+            <li>Per capita income = national income ÷ population; measures average living standard</li>
+            <li>Inflation: sustained rise in general price level; measured by Consumer Price Index (CPI)</li>
+            <li>Types of unemployment: frictional (between jobs), structural (skills mismatch), cyclical (low demand), seasonal</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Money, Banking &amp; Monetary Policy<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Functions of money: medium of exchange; store of value; unit of account; standard of deferred payment</li>
+            <li>CBN (Central Bank, est. 1958): issues naira, banker to government, lender of last resort, regulates banks</li>
+            <li>Commercial banks: accept deposits, give loans, create credit through fractional reserve banking</li>
+            <li>Monetary Policy Rate (MPR): CBN's benchmark interest rate; raising it reduces money supply</li>
+            <li>Cash Reserve Ratio (CRR): proportion of deposits banks must keep with CBN</li>
+            <li>Open Market Operations: CBN buys (injects money) or sells (withdraws money) government securities</li>
+            <li>Quantitative easing: creating money to buy assets; last resort stimulus measure</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Production, Market Structures &amp; Business<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Law of Diminishing Returns: adding more of one variable factor (while others fixed) → eventually falling marginal product</li>
+            <li>Economies of scale: falling average cost as output rises (bulk buying, specialisation, automation)</li>
+            <li>Perfect competition: many sellers, identical product, free entry, price takers (agricultural markets)</li>
+            <li>Monopoly: one seller, unique product, high entry barriers, price maker; can earn supernormal profit</li>
+            <li>Oligopoly: few dominant firms; interdependence; kinked demand curve; common in Nigeria (telecoms)</li>
+            <li>Monopolistic competition: many sellers, differentiated products, some market power (restaurants, salons)</li>
+            <li>Business organisations: sole proprietorship, partnership, private limited company, public limited company</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">International Trade &amp; Balance of Payments<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Comparative advantage: produce what you are relatively most efficient at; basis for international trade</li>
+            <li>Absolute advantage: produce more of a good than another country with same resources</li>
+            <li>Advantages of trade: specialisation, access to goods not produced domestically, economies of scale</li>
+            <li>Barriers to trade: tariffs (import taxes), quotas (quantity limits), embargoes, voluntary export restraints</li>
+            <li>Balance of trade: value of visible exports minus value of visible imports</li>
+            <li>Balance of payments: total record of all transactions between a country and the rest of the world</li>
+            <li>Foreign exchange rate: price of one currency in terms of another; fixed vs floating exchange rates</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Nigerian Economy &amp; Development<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Nigeria: Africa's largest economy by GDP; oil accounts for ~90% export earnings</li>
+            <li>Oil dependency (Dutch Disease): large oil revenues can crowd out other sectors</li>
+            <li>Agriculture: ~25% of GDP; employs ~70% of workforce; cash crops — cocoa (SW), groundnut (N), palm oil (SE)</li>
+            <li>Economic problems: inflation, unemployment, corruption, poor infrastructure, oil price volatility</li>
+            <li>Economic development vs growth: growth = increase in GDP; development = improvement in living standards</li>
+            <li>Human Development Index (HDI): combines income per capita, life expectancy and education level</li>
+            <li>Vision 2050 / Nigeria Agenda: long-term plans to diversify economy and reduce poverty</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Fiscal Policy &amp; Labour Market<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Fiscal policy: government use of taxation and spending to influence economic activity</li>
+            <li>Expansionary fiscal policy: increase spending or cut taxes → stimulate growth; risks: inflation, debt</li>
+            <li>Contractionary fiscal policy: cut spending or raise taxes → reduce inflation; risk: recession</li>
+            <li>Tax types: direct (income tax, company tax — progressive); indirect (VAT 7.5%, customs duty)</li>
+            <li>Budget deficit: government spends more than revenue; surplus: revenue exceeds spending</li>
+            <li>Trade unions: workers' organisations that negotiate wages and conditions (NLC in Nigeria)</li>
+            <li>Minimum wage: legally set floor on wages; Nigeria national minimum wage = ₦70,000 (2024)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes-cta">
+        <p>📚 Ready to test your knowledge on Economics?</p>
+        <div class="cta-btns">
+          <a href="subjects.html?subject=Economics" class="btn btn-primary btn-sm">Practice Now</a>
+          <a href="exam.html?subject=Economics" class="btn btn-outline btn-sm">Mock Exam</a>
+        </div>
+      </div>
+    </div>
+    <div class="notes-panel" id="notes-literature-in-english" role="tabpanel">
+      <div class="notes-header"><span class="notes-header-emoji" aria-hidden="true">📖</span><div><h2>Literature in English</h2><p>WAEC Literature — Poetry, prose, drama, African literature and exam techniques</p></div></div>
+      <div class="notes-filter">
+        <span class="notes-filter-label">Filter:</span>
+        <button class="level-btn active" data-level="all">All</button>
+        <button class="level-btn" data-level="SS1">SS1</button>
+        <button class="level-btn" data-level="SS2">SS2</button>
+        <button class="level-btn" data-level="SS3">SS3</button>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Introduction to Literature &amp; Prose<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Literature: creative writing that explores human experience through language</li>
+            <li>Three main genres: prose (ordinary language), poetry (rhythmic, condensed), drama (for performance)</li>
+            <li>Purpose of literature: entertain, educate, provoke thought, preserve culture, challenge society</li>
+            <li>Prose elements: plot, character, setting, theme, point of view, style, tone</li>
+            <li>Plot: sequence of events; structure — exposition → rising action → climax → falling action → resolution</li>
+            <li>Characterisation: direct (author tells us) vs indirect (character revealed through actions/dialogue)</li>
+            <li>Point of view: first person (&quot;I&quot;) — subjective; third person omniscient — all-knowing narrator</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Introduction to Poetry<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Poetry: uses language intensely and economically; every word is carefully chosen</li>
+            <li>Lyric poetry: expresses personal emotion (love song, elegy, ode)</li>
+            <li>Narrative poetry: tells a story (ballad, epic)</li>
+            <li>Dramatic poetry: speech in character (dramatic monologue)</li>
+            <li>Rhyme scheme: pattern of rhymes at line ends — ABAB, AABB (couplet), ABBA</li>
+            <li>Rhythm and metre: pattern of stressed (/) and unstressed (x) syllables</li>
+            <li>Tone: the poet's attitude (melancholic, joyful, ironic, angry, reflective)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Introduction to Drama<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Drama: written for performance; read differently from prose — focus on dialogue and action</li>
+            <li>Structure: acts (major divisions) → scenes (smaller units); stage directions guide performance</li>
+            <li>Dramatic conflict: the struggle that drives the plot (man vs man, society, nature, self)</li>
+            <li>Tragedy: protagonist with hamartia (fatal flaw) falls from greatness to suffering or death</li>
+            <li>Comedy: characters overcome obstacles; usually ends happily (marriage, reunion, reconciliation)</li>
+            <li>Tragicomedy: blends serious and comic elements (common in modern drama)</li>
+            <li>Setting in drama: time, place and social context; crucial for understanding characters' behaviour</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Figures of Speech &amp; Literary Devices<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Simile: comparison using &quot;like&quot; or &quot;as&quot; — &quot;she moves like a graceful swan&quot;</li>
+            <li>Metaphor: implied comparison without &quot;like/as&quot; — &quot;the classroom was a marketplace&quot;</li>
+            <li>Personification: human qualities to non-human — &quot;the sun kissed the earth&quot;</li>
+            <li>Symbolism: object represents abstract idea — dove = peace; darkness = evil/ignorance</li>
+            <li>Irony: verbal (say opposite of meaning); dramatic (audience knows more than character); situational (outcome opposite of expected)</li>
+            <li>Paradox: contradictory statement that contains truth — &quot;I must be cruel, only to be kind&quot;</li>
+            <li>Allusion: indirect reference to a historical event, text or person</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Poetic Devices &amp; Verse Forms<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Alliteration: same consonant at start of successive words — &quot;the wild winds weep&quot;</li>
+            <li>Assonance: repetition of vowel sounds — &quot;the rain in Spain stays mainly in the plain&quot;</li>
+            <li>Onomatopoeia: words that mimic sounds — buzz, crack, hiss, murmur, thunder</li>
+            <li>Enjambment: sentence runs over a line break without pause; creates flowing, breathless effect</li>
+            <li>Caesura: deliberate pause within a line, often marked by punctuation</li>
+            <li>Sonnet: 14 lines; Shakespearean = 3 quatrains (ABAB) + couplet (GG); Petrarchan = octave + sestet</li>
+            <li>Free verse: no fixed rhyme or metre; relies on rhythm of speech and imagery (much modern poetry)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">African &amp; Nigerian Literature<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Chinua Achebe: Things Fall Apart (1958) — colonialism destroys Okonkwo's Igbo world; Arrow of God; No Longer at Ease</li>
+            <li>Wole Soyinka: first African Nobel Laureate in Literature (1986); Death and the King's Horseman; The Lion and the Jewel; The Trials of Brother Jero</li>
+            <li>J.P. Clark: Song of a Goat; The Raft; Ozidi — Niger Delta tragedy and myth</li>
+            <li>Buchi Emecheta: The Joys of Motherhood; Second Class Citizen — feminism and diaspora</li>
+            <li>Cyprian Ekwensi: Jagua Nana; People of the City — urban Nigerian life</li>
+            <li>Ngugi wa Thiong'o (Kenya): Weep Not Child; A Grain of Wheat — colonialism in East Africa</li>
+            <li>Ben Okri: The Famished Road (1991 Booker Prize) — spirit world and abiku in Nigerian life</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Drama Analysis &amp; Stagecraft<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Dramatic irony: audience knows something that one or more characters do not know</li>
+            <li>Soliloquy: character speaks thoughts aloud alone on stage — reveals inner conflict and motivation</li>
+            <li>Aside: character speaks briefly to audience, unheard by other characters on stage</li>
+            <li>Catharsis (Aristotle): emotional purging of pity and fear felt by audience at end of tragedy</li>
+            <li>Deus ex machina: contrived resolution by an unexpected external force — seen as poor plotting</li>
+            <li>Soyinka fuses Yoruba ritual, masquerade and mythology with Western dramatic conventions</li>
+            <li>Epic theatre (Brecht): alienation effect — audience should think critically, not be emotionally swept away</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">WAEC Exam Techniques<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Read the question carefully — distinguish between &quot;discuss&quot;, &quot;analyse&quot;, &quot;compare&quot; and &quot;comment on&quot;</li>
+            <li>Always quote from the text to support your points; integrate quotations smoothly into sentences</li>
+            <li>For character questions: describe the character, support with evidence, link to theme</li>
+            <li>For theme questions: define the theme, show how it is developed, use examples from text</li>
+            <li>For poetry: comment on form, tone, imagery, language and effect on the reader</li>
+            <li>For drama: consider stage action, dialogue, dramatic tension and audience impact</li>
+            <li>Write a clear introduction (name text and author), developed body paragraphs and a conclusion</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Oral Literature &amp; Revision<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Oral literature: passed down verbally — proverbs, folktales, myths, legends, riddles, praise poetry</li>
+            <li>Proverbs: short wise sayings expressing truth — &quot;When the music changes, so does the dance&quot;</li>
+            <li>Folktale: short story with animals or humans that teaches a moral lesson</li>
+            <li>Praise poetry (oriki): celebrates individuals, families or towns; important in Yoruba culture</li>
+            <li>Myth: story explaining origins of the world, natural phenomena or cultural practices</li>
+            <li>Riddle: question with a clever or unexpected answer; tests observation and intelligence</li>
+            <li>WAEC prescribed texts change regularly — always confirm the current list before exams</li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes-cta">
+        <p>📚 Ready to test your knowledge on Literature in English?</p>
+        <div class="cta-btns">
+          <a href="subjects.html?subject=Literature%20in%20English" class="btn btn-primary btn-sm">Practice Now</a>
+          <a href="exam.html?subject=Literature%20in%20English" class="btn btn-outline btn-sm">Mock Exam</a>
+        </div>
+      </div>
+    </div>
+    <div class="notes-panel" id="notes-geography" role="tabpanel">
+      <div class="notes-header"><span class="notes-header-emoji" aria-hidden="true">🌍</span><div><h2>Geography</h2><p>WAEC Geography — Maps, climate, physical geography, Nigeria and economic geography</p></div></div>
+      <div class="notes-filter">
+        <span class="notes-filter-label">Filter:</span>
+        <button class="level-btn active" data-level="all">All</button>
+        <button class="level-btn" data-level="SS1">SS1</button>
+        <button class="level-btn" data-level="SS2">SS2</button>
+        <button class="level-btn" data-level="SS3">SS3</button>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Map Reading &amp; Cartography<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Map: flat representation of all or part of the earth's surface</li>
+            <li>Scale types: representative fraction (1:50,000), linear/graphic scale, statement scale</li>
+            <li>Grid reference: six-figure — easting (x) before northing (y); &quot;along the corridor, then up the stairs&quot;</li>
+            <li>Bearing: direction measured clockwise from north in degrees (north = 000°; east = 090°; south = 180°)</li>
+            <li>Contour lines: join points of equal altitude; closely spaced = steep slope; widely spaced = gentle slope</li>
+            <li>Relief features: hill (concentric ovals), valley (V pointing upstream), cliff (contours touch), ridge, spur</li>
+            <li>Types of maps: topographic (physical features), political, thematic (choropleth, isoline, dot, proportional symbol)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Weather, Climate &amp; Atmosphere<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Weather: short-term atmospheric conditions at a specific place and time</li>
+            <li>Climate: average atmospheric conditions of a place over at least 30 years</li>
+            <li>Elements of weather: temperature, rainfall (precipitation), humidity, wind direction and speed, cloud cover</li>
+            <li>Climate controls: latitude, altitude, distance from sea, ocean currents, prevailing winds, vegetation</li>
+            <li>Weather instruments: thermometer (temperature), barometer (pressure), rain gauge (rainfall), hygrometer (humidity), anemometer (wind speed)</li>
+            <li>ITCZ (Inter-Tropical Convergence Zone): where NE and SE trade winds meet → heavy rainfall; moves seasonally</li>
+            <li>Rainfall types: convectional (heated air rises), relief/orographic (air forced up mountains), frontal (cold/warm front)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Rocks, Weathering &amp; Soil Formation<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Igneous rocks: from cooled magma; intrusive (granite, slow cooling) or extrusive (basalt, fast cooling)</li>
+            <li>Sedimentary rocks: from compressed sediments; contain fossils; limestone, sandstone, shale</li>
+            <li>Metamorphic rocks: changed by heat and pressure; marble (from limestone), slate (from shale)</li>
+            <li>Physical weathering: freeze-thaw, exfoliation (onion peeling), pressure release — breaks rock without chemical change</li>
+            <li>Chemical weathering: solution (acid rain on limestone), hydration, oxidation (iron rust)</li>
+            <li>Biological weathering: roots break rock; burrowing animals; organic acids from decomposition</li>
+            <li>Soil profile: O horizon (organic humus) → A horizon (topsoil) → B horizon (subsoil) → C (weathered rock) → R (bedrock)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Population &amp; Migration<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Population distribution: uneven; influenced by climate, water supply, fertile land, resources, political stability</li>
+            <li>Population density = number of people per km²; Nigeria's most dense areas: Lagos, Anambra</li>
+            <li>Population growth = birth rate − death rate + net migration</li>
+            <li>Demographic transition model: 4 stages from high birth/death rate to low birth/death rate</li>
+            <li>Push factors (to leave): poverty, drought, conflict, poor services, unemployment</li>
+            <li>Pull factors (to attract): jobs, education, healthcare, infrastructure, safety</li>
+            <li>Rural-urban migration: causes rapid urbanisation; Lagos has ~15 million people (West Africa's largest)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Agriculture &amp; Natural Resources<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Subsistence farming: for own consumption; common in rural Nigeria; low technology</li>
+            <li>Commercial farming: for profit and market; large-scale; uses technology and capital</li>
+            <li>Nigeria's agricultural zones: forest zone (cocoa, rubber, palm oil) → guinea savanna (yam, maize) → sudan savanna (groundnut, cotton) → sahel (millet, sorghum)</li>
+            <li>Problems of Nigerian agriculture: poor roads, lack of storage, inadequate capital, pests and disease, land tenure issues</li>
+            <li>Nigeria's minerals: crude oil and natural gas (Niger Delta), coal (Enugu), tin (Jos Plateau), limestone, gold</li>
+            <li>Renewable resources: forests, soil, water, fish stocks — can be replenished if managed sustainably</li>
+            <li>Non-renewable: coal, oil, natural gas, minerals — finite; once used, cannot be replaced</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Mining, Industry &amp; Transport<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Types of mining: shaft/underground (deep deposits), opencast/surface (near surface), alluvial (river deposits), quarrying (building materials)</li>
+            <li>Factors of industrial location: raw materials, power, labour, transport, capital, market, government policy</li>
+            <li>Primary industry: extracts raw materials (farming, fishing, mining)</li>
+            <li>Secondary industry: manufactures goods (factories, processing plants)</li>
+            <li>Tertiary industry: provides services (banking, education, retail, transport)</li>
+            <li>Transport modes: road (flexible, door-to-door), rail (heavy goods, no congestion), air (fast, expensive), water (bulky goods, cheap)</li>
+            <li>Nigeria's transport challenges: poor road maintenance, inadequate rail network, congested ports</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Settlement &amp; Urbanisation<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Rural settlements: dispersed (scattered homesteads), nucleated (grouped around feature), linear (along road/river)</li>
+            <li>Urban settlements: larger, more complex, specialised functions; higher population density</li>
+            <li>Factors of town location: defence (hilltop), trade route junction, river crossing, resource availability</li>
+            <li>Urbanisation: increasing proportion of population living in urban areas</li>
+            <li>Problems of rapid urbanisation: housing shortage (slums), traffic congestion, pollution, inadequate services</li>
+            <li>Conurbation: merger of adjacent cities into one continuous built-up area (Lagos-Badagry corridor)</li>
+            <li>Primate city: dominant city far larger than second city; Lagos (Nigeria), Cairo (Egypt)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Nigerian &amp; West African Geography<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Nigeria: 923,768 km²; bordered by Benin (W), Niger (N), Chad (NE), Cameroon (E); coastline on Gulf of Guinea</li>
+            <li>Six geopolitical zones: NW, NE, NC (Middle Belt), SW, SE, SS (South-South)</li>
+            <li>River Niger: 4,100 km total; enters Nigeria from NW via Kebbi; forms massive delta (9th largest in world)</li>
+            <li>Major Nigerian cities: Lagos (commercial), Abuja (federal capital), Kano (northern commerce), Port Harcourt (oil)</li>
+            <li>West African countries: Nigeria, Ghana, Senegal, Côte d'Ivoire, Mali, Guinea, Sierra Leone, Liberia, Togo, Benin, Burkina Faso, Gambia, Guinea-Bissau, Mauritania, Cape Verde</li>
+            <li>ECOWAS: promotes free movement of persons, goods and services in West Africa</li>
+            <li>West Africa's economy: dominated by agriculture; oil (Nigeria, Ghana); gold and cocoa (Ghana); groundnuts (Senegal)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">World Geography &amp; Environmental Issues<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>World's continents: Africa (largest by population density), Asia (largest by area and population), Europe, North America, South America, Australia/Oceania, Antarctica</li>
+            <li>Major ocean currents: warm currents (Gulf Stream — warms NW Europe); cold currents (Benguela — cools SW Africa)</li>
+            <li>Desertification: expansion of desert; caused by overgrazing, deforestation, drought, poor land use</li>
+            <li>Deforestation: removal of forest cover → soil erosion, flooding, loss of biodiversity, CO₂ release</li>
+            <li>Greenhouse effect: CO₂, CH₄, N₂O trap heat → global warming → sea level rise, extreme weather</li>
+            <li>Acid rain: SO₂ and NOₓ dissolve in rainwater → sulfuric and nitric acids → damages ecosystems</li>
+            <li>Sustainable development: meeting present needs without compromising future generations' ability to meet theirs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes-cta">
+        <p>📚 Ready to test your knowledge on Geography?</p>
+        <div class="cta-btns">
+          <a href="subjects.html?subject=Geography" class="btn btn-primary btn-sm">Practice Now</a>
+          <a href="exam.html?subject=Geography" class="btn btn-outline btn-sm">Mock Exam</a>
+        </div>
+      </div>
+    </div>
+    <div class="notes-panel" id="notes-commerce" role="tabpanel">
+      <div class="notes-header"><span class="notes-header-emoji" aria-hidden="true">🏪</span><div><h2>Commerce</h2><p>WAEC Commerce — Trade, banking, insurance, business organisations and consumer protection</p></div></div>
+      <div class="notes-filter">
+        <span class="notes-filter-label">Filter:</span>
+        <button class="level-btn active" data-level="all">All</button>
+        <button class="level-btn" data-level="SS1">SS1</button>
+        <button class="level-btn" data-level="SS2">SS2</button>
+        <button class="level-btn" data-level="SS3">SS3</button>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Introduction to Commerce &amp; Trade<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Commerce: all activities that facilitate the exchange of goods and services</li>
+            <li>Branches of commerce: trade (home and foreign) + aids to trade (transport, banking, insurance, warehousing, communication, advertising)</li>
+            <li>Home trade: buying and selling within a country; Foreign/International trade: between countries</li>
+            <li>Visible trade: physical goods (merchandise); Invisible trade: services (tourism, shipping, insurance)</li>
+            <li>Balance of trade: value of visible exports minus value of visible imports</li>
+            <li>Surplus: exports &gt; imports (favourable); Deficit: imports &gt; exports (unfavourable)</li>
+            <li>Balance of payments: complete record of all economic transactions with the rest of the world</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Retail Trade<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Retailer: last link in distribution; sells directly to final consumers in small quantities</li>
+            <li>Types of small retailers: itinerant traders, market traders, general stores, convenience stores, speciality shops</li>
+            <li>Large-scale retailers: supermarkets (self-service, wide range), department stores (many departments), chain stores (many branches)</li>
+            <li>Mail order: customers order from catalogue; goods delivered by post/courier</li>
+            <li>E-commerce: buying and selling via the internet; growing rapidly in Nigeria (Jumia, Konga)</li>
+            <li>Advantages of large-scale retailing: economies of scale, lower prices, wide variety, convenience</li>
+            <li>Disadvantages: destroys small businesses, less personal service, creates unemployment in small trade</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS1">
+          <div class="topic-title">Wholesale Trade &amp; Distribution<span class="topic-level ss1">SS1</span></div>
+          <ul class="topic-points">
+            <li>Wholesaler: middle person between producer and retailer; buys in large quantities (bulk buying)</li>
+            <li>Wholesaler functions: breaking bulk, storage, risk-bearing, credit provision, market information</li>
+            <li>Direct channel: Producer → Consumer (farm gate sales, factory outlet)</li>
+            <li>Short channel: Producer → Retailer → Consumer (common for perishables)</li>
+            <li>Long channel: Producer → Wholesaler → Retailer → Consumer (most manufactured goods)</li>
+            <li>Factors affecting channel choice: product type (perishable, technical), market size, producer resources</li>
+            <li>Decline of wholesaler: supermarkets buy directly from producers, bypassing wholesalers</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Business Organisations<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Sole proprietorship: one owner; unlimited liability; unlimited working hours; easy to set up</li>
+            <li>Partnership: 2–20 members; governed by Partnership Deed; joint and several liability</li>
+            <li>Private limited company (Ltd): 2–50 shareholders; limited liability; shares NOT publicly traded</li>
+            <li>Public limited company (Plc): minimum 7 shareholders; shares traded on NGX (Nigerian Exchange Group)</li>
+            <li>Cooperative society: owned and controlled by members; democratic (one member, one vote); surplus shared as dividends</li>
+            <li>Public corporation: wholly government-owned (NNPC, NIMASA, NPA); created by statute; policy-driven not profit-driven</li>
+            <li>Sources of finance: owners' capital, retained profits, bank loans, debentures, share issues, trade credit</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Banking &amp; Insurance<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>CBN (Central Bank): issues currency, regulates commercial banks, implements monetary policy</li>
+            <li>Commercial bank services: current account, savings account, fixed deposits, loans, overdraft, foreign exchange</li>
+            <li>Cheques: open (can be cashed), crossed (must be paid into account), marked (&quot;account payee only&quot;)</li>
+            <li>Principles of insurance: insurable interest, utmost good faith, indemnity, subrogation, contribution</li>
+            <li>Life assurance: pays out on death or maturity; premiums invested; no indemnity (life is priceless)</li>
+            <li>Fire insurance: covers damage to property by fire; insured must prove loss</li>
+            <li>Motor vehicle: Third-party only (compulsory, covers other parties); Comprehensive (covers own vehicle too)</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS2">
+          <div class="topic-title">Aids to Trade<span class="topic-level ss2">SS2</span></div>
+          <ul class="topic-points">
+            <li>Transport: creates place utility — moves goods from where produced to where needed</li>
+            <li>Warehousing: creates time utility — stores goods until needed; types: private, public, bonded</li>
+            <li>Advertising: informs consumers; creates demand; media: TV, radio, newspapers, billboards, social media</li>
+            <li>Communication: telephone, email, post, internet — enables trade transactions across distances</li>
+            <li>Tourism: export of services; foreign visitors spending = invisible export; earns foreign exchange</li>
+            <li>Standards: SON (Standards Organisation of Nigeria) sets product quality standards to protect consumers</li>
+            <li>NAFDAC: regulates food, drugs, cosmetics — ensures safety and quality of products in Nigeria</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">International Trade &amp; Documents<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Advantages of international trade: comparative advantage, specialisation, access to scarce goods, economies of scale</li>
+            <li>Barriers: tariffs (tax on imports), quotas (quantity limits), embargoes (total ban), exchange controls</li>
+            <li>Common trade documents: bill of lading (sea), airway bill (air), invoice, certificate of origin, bill of exchange</li>
+            <li>Letter of credit: bank guarantees payment to exporter; safest method for international payment</li>
+            <li>Terms of trade: ratio of export price index to import price index; improvement means more imports per unit export</li>
+            <li>Free trade zones: areas with relaxed regulations to attract foreign investment (Lekki Free Zone, Lagos)</li>
+            <li>WTO (World Trade Organisation): promotes free trade globally; settles trade disputes</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Capital Market &amp; Entrepreneurship<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Capital market: provides long-term finance (5+ years); instruments: ordinary shares, preference shares, debentures, bonds</li>
+            <li>Nigerian Exchange Group (NGX): stock exchange where shares of listed companies are bought and sold</li>
+            <li>Primary market: new securities issued for the first time (IPO); Secondary market: existing securities traded</li>
+            <li>Stockbroker: licensed intermediary who buys and sells shares on behalf of investors</li>
+            <li>Entrepreneurship: identifying business opportunities and taking risks to create value</li>
+            <li>Characteristics of an entrepreneur: risk-taking, innovative, self-motivated, organised, goal-oriented</li>
+            <li>Problems of Nigerian entrepreneurs: inadequate capital, poor infrastructure, policy instability, high interest rates</li>
+          </ul>
+        </div>
+        <div class="topic-card" data-level="SS3">
+          <div class="topic-title">Consumer Protection &amp; Business Ethics<span class="topic-level ss3">SS3</span></div>
+          <ul class="topic-points">
+            <li>Consumer rights (UN): right to safety, to be informed, to choose, to be heard, to redress</li>
+            <li>Consumer Protection Council (CPC): investigates complaints; bans unsafe products; mediates disputes</li>
+            <li>FCCPC (Federal Competition &amp; Consumer Protection Commission): enforces competition and consumer protection law</li>
+            <li>Hire purchase: buyer takes goods and pays in instalments; ownership transfers only on final payment</li>
+            <li>Counterfeit goods: fake products that violate intellectual property rights; illegal and dangerous</li>
+            <li>Corporate social responsibility (CSR): businesses contributing positively to society beyond profit</li>
+            <li>Business ethics: honesty, fairness, transparency, environmental responsibility in all business dealings</li>
+          </ul>
+        </div>
+      </div>
+      <div class="notes-cta">
+        <p>📚 Ready to test your knowledge on Commerce?</p>
+        <div class="cta-btns">
+          <a href="subjects.html?subject=Commerce" class="btn btn-primary btn-sm">Practice Now</a>
+          <a href="exam.html?subject=Commerce" class="btn btn-outline btn-sm">Mock Exam</a>
+        </div>
+      </div>
+    </div>
+    </div>
 
   </div>
 </main>
@@ -225,7 +1411,6 @@
 
 <script src="js/main.js"></script>
 <script src="js/premium-gate.js"></script>
-<script src="js/pdf-download.js"></script>
 <script src="js/notes.js"></script>
 <script>
   const hamburger = document.getElementById('hamburger');
