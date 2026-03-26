@@ -117,6 +117,55 @@
     }
     .notes-cta p { font-weight: 600; color: var(--blue); font-size: .9375rem; }
     .notes-cta .cta-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* SS Level filter bar */
+    .notes-filter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .notes-filter-label {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-right: 2px;
+    }
+    .level-btn {
+      padding: 5px 14px;
+      border: 2px solid var(--border);
+      border-radius: 100px;
+      font-size: .75rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--white);
+      color: var(--muted);
+      transition: all var(--transition);
+    }
+    .level-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .level-btn.active[data-level="all"],
+    .level-btn.active[data-level="SS1"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .level-btn.active[data-level="SS2"] { background: var(--green); border-color: var(--green); color: #fff; }
+    .level-btn.active[data-level="SS3"] { background: var(--gold); border-color: var(--gold); color: #fff; }
+
+    /* Level badge inside each card */
+    .topic-level {
+      margin-left: auto;
+      font-size: .65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      flex-shrink: 0;
+    }
+    .topic-level.ss1 { background: var(--blue-light); color: var(--blue); }
+    .topic-level.ss2 { background: var(--green-light); color: var(--green-dark); }
+    .topic-level.ss3 { background: #fef3c7; color: #92400e; }
+
+    /* Hidden by level filter */
+    .topic-card.level-hidden { display: none; }
   </style>
 </head>
 <body>

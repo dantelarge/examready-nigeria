@@ -1,961 +1,1274 @@
 /* ============================================================
    ExamReady Nigeria — notes.js
-   Study notes data + render engine
+   WAEC syllabus study notes (SS1 / SS2 / SS3) for all 10 subjects
    ============================================================ */
 
 'use strict';
 
 const NOTES_DATA = {
+
+  /* ═══════════════════════════════════════════════════════════
+     MATHEMATICS
+  ═══════════════════════════════════════════════════════════ */
   'Mathematics': {
     emoji: '🔢',
-    desc: 'Algebra, geometry, statistics, calculus and number theory',
+    desc: 'WAEC Mathematics — Number theory, algebra, geometry and calculus',
     topics: [
       {
-        title: 'Algebra & Equations',
+        level: 'SS1',
+        title: 'Number Systems & Number Bases',
         points: [
-          'Linear equation: isolate x — e.g. 2x + 3 = 11 → x = 4',
-          'Quadratic formula: x = (−b ± √(b²−4ac)) / 2a',
-          'Factorisation: x² + 5x + 6 = (x+2)(x+3) — find two numbers that add to 5 and multiply to 6',
+          'Integers include positive, negative numbers and zero; Natural numbers are positive integers',
+          'Number bases: Base 2 (binary), Base 8 (octal), Base 10 (denary), Base 16 (hexadecimal)',
+          'Convert base 10 to base n: repeatedly divide by n and read remainders upward',
+          'Convert base n to base 10: multiply each digit by n raised to its position value',
+          'LCM: smallest number divisible by both; HCF: largest number that divides both',
+          'Fractions: add/subtract with common denominator; multiply numerators and denominators; divide by inverting and multiplying',
+          'Percentages: x% of y = (x/100) × y; percentage change = (change ÷ original) × 100',
+        ]
+      },
+      {
+        level: 'SS1',
+        title: 'Algebraic Expressions & Linear Equations',
+        points: [
+          'Expansion: a(b + c) = ab + ac; (a + b)² = a² + 2ab + b²; (a − b)² = a² − 2ab + b²',
+          'Factorisation: take out common factor first; difference of two squares: a² − b² = (a+b)(a−b)',
+          'Linear equation: collect like terms and isolate the unknown — e.g. 3x − 5 = 10 → x = 5',
+          'Simultaneous equations (elimination): make coefficients equal, then add or subtract equations',
+          'Simultaneous equations (substitution): express one variable in terms of the other',
+          'Word problems: define variables clearly, form equations from the information, solve',
+          'Ratio and proportion: if a:b = c:d then ad = bc (cross-multiplication)',
+        ]
+      },
+      {
+        level: 'SS1',
+        title: 'Plane Geometry & Basic Statistics',
+        points: [
+          'Angles on a straight line = 180°; angles at a point = 360°; vertically opposite angles are equal',
+          'Triangle: angles sum to 180°; isosceles has two equal sides and angles; equilateral has all equal',
+          'Sum of interior angles of polygon = (n − 2) × 180°; each exterior angle of regular polygon = 360°/n',
+          'Frequency table: tally marks → frequency; relative frequency = frequency ÷ total',
+          'Bar chart: bars of equal width; height represents frequency',
+          'Pie chart: angle for each sector = (frequency ÷ total) × 360°',
+          'Mean = Σfx ÷ Σf; Median = middle value; Mode = most frequent value',
+        ]
+      },
+      {
+        level: 'SS2',
+        title: 'Indices, Surds & Logarithms',
+        points: [
+          'Laws of indices: aᵐ × aⁿ = aᵐ⁺ⁿ; aᵐ ÷ aⁿ = aᵐ⁻ⁿ; (aᵐ)ⁿ = aᵐⁿ; a⁰ = 1; a⁻ⁿ = 1/aⁿ',
+          'Fractional index: a^(m/n) = (nth root of a)^m',
+          'Surds: irrational square roots; √a × √b = √(ab); √a/√b = √(a/b)',
+          'Rationalise denominator: multiply by conjugate — 1/(a + √b) × (a − √b)/(a − √b)',
+          'Logarithm definition: log_a(x) = n ⟺ aⁿ = x',
+          'Log laws: log(AB) = log A + log B; log(A/B) = log A − log B; log(Aⁿ) = n log A',
+          'Change of base: log_a(x) = log(x) / log(a); use base 10 (common log) or base e (natural log)',
+        ]
+      },
+      {
+        level: 'SS2',
+        title: 'Quadratic Equations & Inequalities',
+        points: [
+          'Quadratic: ax² + bx + c = 0; solve by factorisation, completing the square or formula',
+          'Quadratic formula: x = [−b ± √(b² − 4ac)] / 2a',
+          'Discriminant b² − 4ac: > 0 two real roots; = 0 equal roots; < 0 no real roots',
           'Completing the square: x² + bx = (x + b/2)² − (b/2)²',
-          'Simultaneous equations: use elimination or substitution method',
-          'Inequalities: flip the inequality sign when dividing by a negative number',
-          'Nature of roots: b²−4ac > 0 (two real roots), = 0 (equal roots), < 0 (no real roots)',
+          'Sum of roots = −b/a; product of roots = c/a (to form equation from given roots)',
+          'Linear inequality: solve like an equation but flip sign when multiplying/dividing by negative',
+          'Quadratic inequality: solve quadratic = 0 first, then test intervals on number line',
         ]
       },
       {
-        title: 'Numbers & Indices',
+        level: 'SS2',
+        title: 'Coordinate Geometry & Trigonometry',
         points: [
-          'LCM: lowest common multiple (use prime factorisation)',
-          'HCF: highest common factor',
-          'Laws of indices: a^m × a^n = a^(m+n); a^m ÷ a^n = a^(m−n); (a^m)^n = a^(mn)',
-          'Special indices: a^0 = 1; a^(−n) = 1/a^n; a^(1/n) = nth root of a',
-          'Logarithm: log_a(x) = n means a^n = x; log(AB) = logA + logB; log(A^n) = n logA',
-          'Surds: √a × √b = √(ab); rationalise denominator by multiplying by conjugate',
-          'Standard form: write as A × 10^n where 1 ≤ A < 10',
+          'Gradient: m = (y₂ − y₁)/(x₂ − x₁); positive slopes upward left to right',
+          'Equation of line: y − y₁ = m(x − x₁); y = mx + c (gradient-intercept form)',
+          'Perpendicular lines: m₁ × m₂ = −1; parallel lines have equal gradients',
+          'Trigonometric ratios: sin θ = opp/hyp; cos θ = adj/hyp; tan θ = opp/adj (SOH-CAH-TOA)',
+          'Special angles: sin 30° = 0.5; cos 60° = 0.5; sin 45° = cos 45° = 1/√2; tan 45° = 1',
+          'Sine rule: a/sin A = b/sin B = c/sin C (use when angle-side pairs are known)',
+          'Cosine rule: a² = b² + c² − 2bc cos A (use when three sides or two sides and included angle)',
         ]
       },
       {
-        title: 'Geometry & Mensuration',
+        level: 'SS3',
+        title: 'Sequences, Series & Financial Mathematics',
         points: [
-          'Area of circle = πr²; circumference = 2πr (use π = 22/7 or 3.142)',
-          'Pythagoras theorem: c² = a² + b² (for right-angled triangles only)',
-          'Volume: cylinder = πr²h; cone = (1/3)πr²h; sphere = (4/3)πr³',
-          'Sum of interior angles of a polygon = (n−2) × 180°; exterior angles sum = 360°',
-          'Trigonometry: SOH-CAH-TOA; sin30°=0.5, cos60°=0.5, tan45°=1, sin90°=1',
-          'Sector area = (θ/360°) × πr²; Arc length = (θ/360°) × 2πr',
-          'Similar shapes: area ratio = (length ratio)²; volume ratio = (length ratio)³',
+          'Arithmetic Progression (AP): T_n = a + (n−1)d; S_n = n/2 × [2a + (n−1)d]',
+          'Geometric Progression (GP): T_n = ar^(n−1); S_n = a(1 − rⁿ)/(1 − r) for r ≠ 1',
+          'Sum to infinity of GP (|r| < 1): S∞ = a/(1 − r)',
+          'Simple Interest: SI = PRT/100; Amount A = P + SI',
+          'Compound Interest: A = P(1 + r/100)ⁿ; effective rate > nominal rate',
+          'Depreciation: A = P(1 − r/100)ⁿ (same structure as compound interest)',
+          'Amortisation: equal periodic payments to pay off a loan; uses GP sum formula',
         ]
       },
       {
-        title: 'Statistics & Probability',
+        level: 'SS3',
+        title: 'Permutation, Combination & Probability',
         points: [
-          'Mean = sum of all values ÷ number of values',
-          'Median = middle value when arranged in order (average middle two if even count)',
-          'Mode = most frequently occurring value',
-          'Range = highest value − lowest value',
-          'Probability = favourable outcomes ÷ total possible outcomes (always 0 to 1)',
+          'Permutation (order matters): ⁿPr = n! / (n − r)!; arrangements of n distinct objects = n!',
+          'Combination (order does not matter): ⁿCr = n! / [r!(n − r)!]',
+          'Arrangements with repeated objects: n! / (p! × q! × ...) for groups of identical items',
+          'Probability: P(E) = favourable outcomes / total outcomes; 0 ≤ P ≤ 1',
           'P(A or B) = P(A) + P(B) − P(A and B); for mutually exclusive: P(A or B) = P(A) + P(B)',
-          'P(A and B) = P(A) × P(B) for independent events',
+          'P(A and B) = P(A) × P(B) for independent events; P(A|B) = P(A and B)/P(B) for conditional',
+          'Binomial expansion: (a + b)ⁿ; general term = ⁿCr × a^(n−r) × bʳ',
         ]
       },
       {
-        title: 'Sequences & Series',
+        level: 'SS3',
+        title: 'Vectors, Matrices & Calculus',
         points: [
-          'Arithmetic Progression (AP): nth term = a + (n−1)d; Sum = n/2 × [2a + (n−1)d]',
-          'Geometric Progression (GP): nth term = ar^(n−1); Sum = a(1−r^n)/(1−r) for r ≠ 1',
-          'Sum to infinity of GP (|r| < 1): S∞ = a/(1−r)',
-          'a = first term, d = common difference, r = common ratio',
-          'Simple Interest: SI = PRT/100; Amount = P + SI',
-          'Compound Interest: A = P(1 + r/100)^n',
-          'Depreciation: A = P(1 − r/100)^n',
-        ]
-      },
-      {
-        title: 'Sets & Coordinate Geometry',
-        points: [
-          'Venn diagram: n(A ∪ B) = n(A) + n(B) − n(A ∩ B)',
-          'Gradient of a line: m = (y₂ − y₁) / (x₂ − x₁)',
-          'Equation of a line: y = mx + c (slope-intercept form)',
-          'Midpoint: ((x₁ + x₂)/2, (y₁ + y₂)/2)',
-          'Distance between two points: d = √[(x₂−x₁)² + (y₂−y₁)²]',
-          'Perpendicular lines: product of gradients = −1 (m₁ × m₂ = −1)',
-          'Equation of circle with centre (a, b) and radius r: (x−a)² + (y−b)² = r²',
-        ]
-      },
-      {
-        title: 'Permutation & Combination',
-        points: [
-          'Permutation (order matters): nPr = n! / (n−r)!',
-          'Combination (order does not matter): nCr = n! / [r!(n−r)!]',
-          'n! = n × (n−1) × ... × 2 × 1; by definition 0! = 1',
-          'Arrangements with repetitions: n! / (p! × q! × ...) for p, q identical objects',
-          'Binomial expansion: (a+b)^n — coefficients from Pascal\'s triangle or nCr formula',
-          'Fundamental counting principle: if event A can occur m ways and B can occur n ways, both = m × n',
-        ]
-      },
-      {
-        title: 'Vectors & Matrices',
-        points: [
-          'Vector has magnitude and direction; scalar has magnitude only',
-          'Position vector of (x, y): xi + yj; magnitude |v| = √(x² + y²)',
-          'Adding vectors: add corresponding components',
-          'Matrix multiplication: (m×n) × (n×p) gives (m×p) — inner dimensions must match',
-          'Determinant of 2×2: det [[a,b],[c,d]] = ad − bc',
-          'Inverse of 2×2: (1/det) × [[d,−b],[−c,a]]',
-          'Identity matrix I has 1s on diagonal, 0s elsewhere; A × I = A',
+          'Vector: magnitude and direction; position vector of (x, y) = xi + yj; |v| = √(x² + y²)',
+          'Matrix addition: add corresponding elements; scalar multiplication: multiply every element',
+          'Matrix multiplication: (m×n) × (n×p) → (m×p); row of first × column of second',
+          'Determinant 2×2: |A| = ad − bc for [[a,b],[c,d]]; inverse = (1/det) × [[d,−b],[−c,a]]',
+          'Differentiation: d/dx(xⁿ) = nxⁿ⁻¹; d/dx(constant) = 0; product, quotient and chain rules',
+          'Integration: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C (n ≠ −1); integration is antidifferentiation',
+          'Maxima/minima: set dy/dx = 0; if d²y/dx² > 0 → minimum; < 0 → maximum',
         ]
       },
     ]
   },
 
+  /* ═══════════════════════════════════════════════════════════
+     ENGLISH LANGUAGE
+  ═══════════════════════════════════════════════════════════ */
   'English Language': {
     emoji: '📝',
-    desc: 'Grammar, vocabulary, comprehension, oral English and essay writing',
+    desc: 'WAEC English — Grammar, comprehension, oral English and essay writing',
     topics: [
       {
-        title: 'Parts of Speech',
+        level: 'SS1',
+        title: 'Parts of Speech & Sentence Structure',
         points: [
-          'Noun: name of a person, place, thing or idea (proper, common, abstract, collective)',
-          'Pronoun: replaces a noun — I, he, she, they, it, we, you, who, which',
-          'Adjective: describes a noun — tall, beautiful, three, many, this',
-          'Verb: action or state — run, think, is, become, seem',
-          'Adverb: modifies verb/adjective/adverb — quickly, very, always, never',
-          'Preposition: shows relationship — in, on, at, by, under, through, between',
-          'Conjunction: joins clauses — and, but, because, although, since, unless',
-          'Interjection: exclamation — oh!, wow!, alas!, indeed!',
+          'Noun: name of person, place, thing or idea (proper, common, abstract, collective)',
+          'Pronoun: replaces a noun (personal: I/he/she; possessive: my/his; relative: who/which)',
+          'Adjective: describes a noun; Adverb: modifies verb, adjective or another adverb',
+          'Preposition: shows relationship — in, on, at, by, under, between, through',
+          'Conjunction: coordinating (FANBOYS: for, and, nor, but, or, yet, so); subordinating (because, although, since)',
+          'Phrase: group of words without subject + verb; Clause: has subject + verb',
+          'Sentence types: simple (one independent clause); compound (two joined by conjunction); complex (independent + dependent)',
         ]
       },
       {
-        title: 'Tenses & Grammar',
+        level: 'SS1',
+        title: 'Tenses & Subject-Verb Agreement',
         points: [
-          'Simple present: He runs. Simple past: He ran. Simple future: He will run.',
-          'Present continuous: He is running. Past continuous: He was running.',
-          'Present perfect: He has run. Past perfect: He had run.',
-          'Conditional: If I study hard, I will pass (Type 1 — real); If I studied, I would pass (Type 2 — unreal)',
-          'Subject-verb agreement: singular subject takes singular verb (The team IS ready)',
-          'Passive voice: subject receives action — "The book was read by her"',
-          'Reported speech: tenses shift back; pronouns and time references change',
+          'Simple tenses: present (He runs), past (He ran), future (He will run)',
+          'Continuous tenses: present (is running), past (was running), future (will be running)',
+          'Perfect tenses: present (has run), past (had run), future (will have run)',
+          'Singular subject → singular verb; plural subject → plural verb',
+          'Collective nouns (team, committee, jury): singular verb when acting as one unit',
+          'Indefinite pronouns (everyone, each, nobody): always take singular verb',
+          'Either/or and neither/nor: verb agrees with the nearer subject',
         ]
       },
       {
+        level: 'SS1',
+        title: 'Narrative & Descriptive Writing',
+        points: [
+          'Narrative essay: tells a story with a clear beginning, middle and end',
+          'Use vivid, specific details rather than vague descriptions',
+          'Chronological order: events in the order they happened; use time connectives (first, then, finally)',
+          'Descriptive essay: paints a picture; engage all five senses (sight, sound, smell, taste, touch)',
+          'Use figurative language: simile, metaphor, personification to bring descriptions to life',
+          'Show, don\'t tell: "Her hands trembled" is stronger than "She was nervous"',
+          'Paragraph structure: topic sentence → development → concluding link',
+        ]
+      },
+      {
+        level: 'SS2',
         title: 'Figures of Speech',
         points: [
-          'Simile: comparison using "like" or "as" — "brave as a lion"',
-          'Metaphor: direct comparison without "like/as" — "life is a journey"',
-          'Personification: human qualities given to non-human things — "the wind howled"',
-          'Hyperbole: deliberate exaggeration for emphasis — "a mountain of work"',
-          'Irony: saying the opposite of what is meant',
-          'Oxymoron: contradictory terms combined — "deafening silence", "living death"',
-          'Alliteration: repetition of consonant sounds — "Peter Piper picked"',
-          'Onomatopoeia: words that sound like their meaning — buzz, hiss, bang, murmur',
+          'Simile: comparison using "like" or "as" — "the soldier fought like a lion"',
+          'Metaphor: direct comparison without "like/as" — "life is a battlefield"',
+          'Personification: human qualities to non-human — "the sun smiled down on us"',
+          'Hyperbole: deliberate exaggeration — "I have a mountain of work to do"',
+          'Irony: saying the opposite of what you mean — "What lovely weather!" (during heavy rain)',
+          'Oxymoron: contradictory terms — "deafening silence"; "bitter sweet"; "living death"',
+          'Alliteration: same consonant repeated — "Peter Piper picked"; Onomatopoeia: buzz, hiss, bang',
         ]
       },
       {
-        title: 'Vocabulary',
+        level: 'SS2',
+        title: 'Direct & Indirect Speech and Letter Writing',
         points: [
-          'Synonym: word with similar meaning (benevolent = generous, kind)',
-          'Antonym: word with opposite meaning (verbose ≠ concise)',
-          'Homophone: same sound, different spelling/meaning — their/there/they\'re',
-          'Homonym: same spelling, different meaning — bat (animal/cricket)',
-          'Commonly confused: affect (verb) / effect (noun); principal (head) / principle (rule)',
-          'Prefixes: un- (not), re- (again), mis- (wrong), pre- (before), dis- (opposite)',
-          'Suffixes: -tion/-sion (noun), -ous/-ful (adjective), -ly (adverb), -ness (noun)',
+          'Direct speech: exact words in quotation marks — She said, "I am tired."',
+          'Indirect speech: reported without quotes; tense shifts back one step — She said she was tired.',
+          'Time and place adverbs change: now → then; here → there; today → that day; tomorrow → the next day',
+          'Formal letter: sender\'s address, date, recipient\'s address, salutation (Dear Sir/Madam), body, closing (Yours faithfully)',
+          'Informal letter: date, salutation (Dear [Name]), friendly body, closing (Yours sincerely / Your friend)',
+          'Register: formal language avoids contractions and slang; informal may use both',
+          'Always match the register to the purpose and audience of your writing',
         ]
       },
       {
-        title: 'Comprehension Skills',
+        level: 'SS2',
+        title: 'Comprehension & Vocabulary',
         points: [
-          'Read the passage at least twice before answering questions',
-          'Identify the main idea — usually in the opening or closing paragraph',
-          'Paraphrase answers — do not copy verbatim from the passage',
-          'Inferential questions: read between the lines; the answer is implied, not stated',
-          'Vocabulary in context: use surrounding sentences to determine word meaning',
-          'Summary writing: include only points asked for; no padding or personal opinions',
-          'Tone: identify whether the writer is critical, supportive, ironic, humorous, etc.',
+          'Read the passage twice: first for overall meaning, second for detail',
+          'Identify the main idea — usually stated in the opening or closing paragraph',
+          'Answer in your own words (paraphrase); do not copy directly unless asked to quote',
+          'Inferential questions: the answer is implied — read between the lines',
+          'Vocabulary in context: use surrounding sentences to determine the meaning of an unfamiliar word',
+          'Synonym: same meaning (benevolent = charitable); Antonym: opposite (verbose ≠ concise)',
+          'Common roots, prefixes and suffixes: un- (not), re- (again), -tion (noun), -ous (adjective)',
         ]
       },
       {
+        level: 'SS3',
+        title: 'Argumentative & Expository Essays',
+        points: [
+          'Argumentative essay: take a clear position and defend it with evidence, logic and examples',
+          'Structure: introduction (state position) → body (3+ paragraphs each with one point) → conclusion (restate and call to action)',
+          'Counter-argument: acknowledge opposing view then refute it — strengthens your essay',
+          'Expository essay: explains or informs objectively; no personal bias',
+          'Topic sentence: opens each paragraph and states the main point of that paragraph',
+          'Transitions: furthermore, however, in contrast, as a result, in conclusion',
+          'Conclusion: summarise key points; do not introduce new ideas; end with a strong closing statement',
+        ]
+      },
+      {
+        level: 'SS3',
         title: 'Oral English & Phonetics',
         points: [
           'Short vowels: /ɪ/ (sit), /e/ (bed), /æ/ (cat), /ɒ/ (hot), /ʊ/ (book), /ʌ/ (cup)',
           'Long vowels: /iː/ (feet), /ɑː/ (car), /ɔː/ (door), /uː/ (food), /ɜː/ (bird)',
-          'Consonants: voiced (/b/, /d/, /g/, /v/) vs voiceless (/p/, /t/, /k/, /f/)',
-          'Word stress: con-TENT (noun) vs CON-tent (adjective); re-CORD vs REC-ord',
-          'Intonation: rises for yes/no questions; falls for statements and wh- questions',
-          'Rhyme: words ending with the same sound — feet/beat, rain/train, show/go',
+          'Diphthongs (gliding vowels): /eɪ/ (late), /aɪ/ (light), /ɔɪ/ (boy), /əʊ/ (go)',
+          'Voiced consonants: /b/, /d/, /g/, /v/, /z/, /ʒ/, /m/, /n/; Voiceless: /p/, /t/, /k/, /f/, /s/',
+          'Word stress: nouns often stressed on first syllable (REcord); verbs on second (reCORD)',
+          'Sentence stress: content words (nouns, main verbs, adjectives) stressed; function words (articles, prepositions) unstressed',
+          'Intonation: rising (↗) for yes/no questions; falling (↘) for statements and wh- questions',
         ]
       },
       {
-        title: 'Essay & Letter Writing',
+        level: 'SS3',
+        title: 'Summary Writing & Report Writing',
         points: [
-          'Formal letter format: sender\'s address → date → recipient\'s address → Dear Sir/Madam → body → Yours faithfully',
-          'Informal letter: date → Dear [Name] → body → Yours sincerely / Your friend',
-          'Expository essay: explains a topic clearly using facts and examples',
-          'Argumentative essay: takes a clear position and defends it with evidence',
-          'Narrative essay: tells a story with vivid language; use chronological order',
-          'Descriptive essay: paints a picture using all five senses and figurative language',
-          'Always write a clear introduction, developed body paragraphs and a conclusion',
+          'Summary: reduce a passage to its essential points without personal comment',
+          'Identify main points first; list them; then write in continuous prose',
+          'Use your own words; do not copy sentences — paraphrase throughout',
+          'Count words if the question sets a limit; stay within 5 words of the specified number',
+          'Report structure: title, date, to/from, introduction, findings (numbered/bullet), conclusion, recommendations',
+          'Reports use impersonal, formal language and passive voice — "It was found that..."',
+          'Article/feature writing: headline, introduction (5 Ws), body, conclusion — for newspaper or magazine',
         ]
       },
     ]
   },
 
+  /* ═══════════════════════════════════════════════════════════
+     PHYSICS
+  ═══════════════════════════════════════════════════════════ */
   'Physics': {
     emoji: '⚡',
-    desc: 'Mechanics, waves, optics, electricity, thermodynamics and modern physics',
+    desc: 'WAEC Physics — Mechanics, waves, electricity, heat and modern physics',
     topics: [
       {
-        title: 'Mechanics & Motion',
+        level: 'SS1',
+        title: 'Measurement, Scalars & Vectors',
         points: [
-          'Newton\'s 1st law: object stays at rest or uniform motion unless net force acts on it',
+          'SI base units: metre (m), kilogram (kg), second (s), Ampere (A), Kelvin (K), mole (mol), candela (cd)',
+          'Scalar: magnitude only (speed, mass, temperature, energy)',
+          'Vector: magnitude and direction (velocity, force, displacement, acceleration)',
+          'Vector addition: use triangle/parallelogram law or resolve into horizontal and vertical components',
+          'Resultant of perpendicular vectors: R = √(x² + y²); direction θ = arctan(y/x)',
+          'Significant figures: rules for recording measurements with correct precision',
+          'Errors: systematic (consistent offset) vs random (vary unpredictably)',
+        ]
+      },
+      {
+        level: 'SS1',
+        title: 'Kinematics & Dynamics (Newton\'s Laws)',
+        points: [
+          'Distance: total path length (scalar); Displacement: shortest distance from start to end (vector)',
+          'Speed = distance/time; Velocity = displacement/time; both in m/s',
+          'Equations of motion: v = u + at; s = ut + ½at²; v² = u² + 2as; s = (u + v)t/2',
+          'Free fall: acceleration = g ≈ 10 m/s² downward (ignore air resistance)',
+          'Newton\'s 1st law: inertia — body stays at rest or constant velocity unless net force acts',
           'Newton\'s 2nd law: F = ma (net force = mass × acceleration)',
-          'Newton\'s 3rd law: every action has an equal and opposite reaction',
-          'Equations of motion (uniform acceleration): v = u + at; s = ut + ½at²; v² = u² + 2as',
-          'Projectile: horizontal velocity constant; vertical acceleration = g (9.8 m/s²)',
-          'Momentum = mv; Conservation of momentum: total momentum before = total after',
-          'Impulse = F × t = change in momentum',
+          'Newton\'s 3rd law: action and reaction are equal in magnitude, opposite in direction',
         ]
       },
       {
-        title: 'Energy, Work & Power',
+        level: 'SS1',
+        title: 'Work, Energy, Power & Heat',
         points: [
-          'Work done = F × d × cos θ (unit: Joule, J)',
-          'Kinetic energy (KE) = ½mv²; Gravitational potential energy (GPE) = mgh',
-          'Conservation of energy: total energy stays constant; KE + GPE = constant',
-          'Power = Work / Time (unit: Watt, W = J/s)',
-          'Efficiency = (useful output energy / total input energy) × 100%',
-          'Machine: Mechanical Advantage = Load/Effort; Velocity Ratio = distance effort/distance load',
-          'Renewable energy: solar, wind, hydroelectric, biomass; Non-renewable: fossil fuels',
+          'Work = F × d × cos θ (Joules, J); work done against gravity = mgh',
+          'Kinetic energy = ½mv²; Gravitational PE = mgh; conservation: total mechanical energy constant',
+          'Power = Work/Time = Energy/Time (Watts, W = J/s)',
+          'Efficiency = (useful output / total input) × 100%',
+          'Temperature: degree of hotness; measured in Celsius (°C) or Kelvin (K); K = °C + 273',
+          'Thermometers: liquid-in-glass, thermocouple, resistance thermometer; fixed points: 0°C (ice point), 100°C (steam point)',
+          'Linear expansivity α: ΔL = L₀αΔT; materials expand on heating (exceptions: water 0–4°C)',
         ]
       },
       {
+        level: 'SS2',
         title: 'Waves & Sound',
         points: [
-          'Wave equation: v = fλ (speed = frequency × wavelength)',
-          'Period T = 1/f; frequency is measured in Hertz (Hz)',
-          'Transverse waves: vibration perpendicular to wave direction (light, water ripples)',
-          'Longitudinal waves: vibration parallel to wave direction (sound, compression waves)',
-          'Speed of sound in air ≈ 340 m/s; faster in solids and liquids than gases',
-          'Resonance: forced oscillation at natural frequency produces maximum amplitude',
-          'Echoes: reflected sound; sonar and ultrasound use echo principles',
+          'Wave: energy transfer without matter transfer; wave equation v = fλ',
+          'Transverse: vibration perpendicular to wave direction (light, water); Longitudinal: parallel (sound)',
+          'Sound: mechanical longitudinal wave; needs a medium; speed ≈ 340 m/s in air at 20°C',
+          'Speed of sound: faster in denser media — solids > liquids > gases',
+          'Frequency determines pitch (Hz); amplitude determines loudness (dB)',
+          'Resonance: object vibrates at maximum amplitude when driven at its natural frequency',
+          'Echoes: reflected sound; time delay t = 2d/v; used in SONAR, ultrasound imaging',
         ]
       },
       {
+        level: 'SS2',
         title: 'Light & Optics',
         points: [
-          'Reflection: angle of incidence = angle of reflection (both measured from normal)',
-          'Refraction: light bends when entering denser medium; Snell\'s law: n₁sinθ₁ = n₂sinθ₂',
-          'Refractive index n = speed of light in vacuum / speed in medium',
-          'Total internal reflection occurs when angle exceeds critical angle (sin C = 1/n)',
-          'Concave (converging) mirror: used in torches, telescopes, makeup mirrors',
-          'Convex (diverging) mirror: wider field of view, used in rear-view mirrors and road junctions',
-          'Lens formula: 1/f = 1/v − 1/u; magnification m = image distance / object distance',
+          'Reflection: angle of incidence = angle of reflection (both from the normal)',
+          'Plane mirror: image is virtual, upright, same size, same distance behind mirror as object in front',
+          'Concave (converging) mirror: used in headlights, torches, shaving mirrors; can form real images',
+          'Convex (diverging) mirror: always forms virtual, upright, diminished image; used in rear-view mirrors',
+          'Refraction: light bends toward normal entering denser medium; Snell\'s law: n₁sinθ₁ = n₂sinθ₂',
+          'Total internal reflection: occurs when angle > critical angle; sin C = 1/n; used in optical fibres',
+          'Lens formula: 1/f = 1/v − 1/u; magnification m = v/u; converging lens (f +); diverging lens (f −)',
         ]
       },
       {
+        level: 'SS2',
         title: 'Electricity & Magnetism',
         points: [
-          'Ohm\'s law: V = IR (Voltage = Current × Resistance)',
-          'Series circuit: same current; total resistance R = R₁ + R₂ + ...',
-          'Parallel circuit: same voltage; 1/R_total = 1/R₁ + 1/R₂ + ...',
-          'Electrical power: P = IV = I²R = V²/R',
-          'Charge Q = It; Energy E = VIt = Pt (unit: Joule or kWh)',
-          'Like poles repel; unlike poles attract; magnetic field lines N → S',
-          'Electromagnetic induction (Faraday): moving magnet in coil induces EMF',
-          'Fleming\'s left-hand rule: motor effect (force, field, current direction)',
+          'Ohm\'s law: V = IR; resistance measured in Ohms (Ω)',
+          'Series: same current; total R = R₁ + R₂ + ...; voltages add up',
+          'Parallel: same voltage; 1/R_total = 1/R₁ + 1/R₂ + ...; currents add up',
+          'Power: P = IV = I²R = V²/R; energy = Pt = VIt (Joules or kWh)',
+          'Domestic wiring: live (brown/red), neutral (blue/black), earth (green-yellow); fuse protects live wire',
+          'Magnetic field: like poles repel, unlike poles attract; field lines from N to S',
+          'Electromagnetic induction (Faraday): changing magnetic flux induces an EMF; generator principle',
         ]
       },
       {
-        title: 'Heat & Thermodynamics',
+        level: 'SS3',
+        title: 'Heat Capacity & Gas Laws',
         points: [
-          'Specific heat capacity (c): Q = mcΔT — different materials need different heat per degree',
-          'Latent heat of fusion: heat to melt solid at constant temperature',
-          'Latent heat of vaporisation: heat to boil liquid at constant temperature',
-          'Boyle\'s Law: P₁V₁ = P₂V₂ (constant temperature)',
-          'Charles\' Law: V₁/T₁ = V₂/T₂ (constant pressure; T must be in Kelvin)',
-          'Kelvin and Celsius: K = °C + 273; Absolute zero = 0 K = −273°C',
-          'Heat transfer: conduction (solids — slow), convection (fluids), radiation (no medium needed)',
+          'Specific heat capacity c: Q = mcΔT; unit J/(kg·K); water has very high c (4200 J/kg·K)',
+          'Latent heat of fusion: heat absorbed/released melting/freezing at constant temperature',
+          'Latent heat of vaporisation: heat absorbed/released boiling/condensing at constant temperature',
+          'Boyle\'s law: P₁V₁ = P₂V₂ (temperature constant)',
+          'Charles\' law: V₁/T₁ = V₂/T₂ (pressure constant; T in Kelvin)',
+          'Combined gas law: P₁V₁/T₁ = P₂V₂/T₂',
+          'Heat transfer: conduction (solid lattice vibration), convection (fluid bulk movement), radiation (EM waves, no medium)',
         ]
       },
       {
-        title: 'Pressure & Fluids',
-        points: [
-          'Pressure = Force / Area (unit: Pascal, Pa = N/m²)',
-          'Pressure in a fluid: P = hρg (depth × density × gravitational field strength)',
-          'Archimedes\' principle: upthrust (buoyant force) = weight of fluid displaced',
-          'Object floats if density < fluid density; sinks if density > fluid density',
-          'Atmospheric pressure at sea level ≈ 101,325 Pa = 760 mmHg = 1 atm',
-          'Hydraulic press: uses Pascal\'s principle — pressure applied = pressure transmitted',
-        ]
-      },
-      {
+        level: 'SS3',
         title: 'Modern Physics & Radioactivity',
         points: [
-          'Alpha (α): helium nucleus (2p + 2n); stopped by paper; highly ionising',
-          'Beta (β): fast electron; stopped by thin aluminium; moderately ionising',
-          'Gamma (γ): electromagnetic radiation; stopped by thick lead; least ionising',
-          'Half-life: time for half the radioactive nuclei to decay (constant for each element)',
-          'Nuclear fission: heavy nucleus splits → energy (nuclear reactor, atomic bomb)',
-          'Nuclear fusion: light nuclei fuse → energy (the sun, hydrogen bomb)',
-          'Photoelectric effect: light ejects electrons from metal if frequency > threshold',
+          'Photoelectric effect: light above threshold frequency ejects electrons from metal surface',
+          'Einstein: E = hf (energy of photon); h = Planck\'s constant = 6.63 × 10⁻³⁴ J·s',
+          'Bohr\'s model: electrons occupy fixed energy levels; emit photons when jumping to lower level',
+          'Alpha (α): helium nucleus (2p, 2n); stopped by paper; highly ionising',
+          'Beta (β): high-speed electron; stopped by thin aluminium; moderately ionising',
+          'Gamma (γ): high-energy electromagnetic radiation; stopped by thick lead; penetrating',
+          'Half-life: time for half the radioactive atoms in a sample to decay; each isotope has a fixed value',
+        ]
+      },
+      {
+        level: 'SS3',
+        title: 'Electronics & Energy Sources',
+        points: [
+          'Semiconductors: conductivity between conductor and insulator; silicon and germanium common',
+          'p-n junction diode: allows current in one direction only; used in rectification (AC → DC)',
+          'Transistor: amplifies or switches signals; NPN and PNP types',
+          'Logic gates: AND, OR, NOT, NAND, NOR, XOR; truth tables show output for every input combination',
+          'Nuclear fission: heavy nucleus (U-235) splits releasing large energy; basis of nuclear reactor',
+          'Nuclear fusion: light nuclei (H isotopes) fuse releasing even more energy; powers the sun',
+          'Renewable energy: solar (photovoltaic), wind turbines, hydroelectric; no greenhouse gas emissions',
         ]
       },
     ]
   },
 
+  /* ═══════════════════════════════════════════════════════════
+     CHEMISTRY
+  ═══════════════════════════════════════════════════════════ */
   'Chemistry': {
     emoji: '🧪',
-    desc: 'Atomic structure, bonding, reactions, equilibrium and organic chemistry',
+    desc: 'WAEC Chemistry — Atomic structure, bonding, reactions, organic and industrial chemistry',
     topics: [
       {
+        level: 'SS1',
         title: 'Atomic Structure & Periodic Table',
         points: [
-          'Atom: nucleus (protons + neutrons) surrounded by electrons in shells (2, 8, 8, 18...)',
-          'Atomic number = number of protons; Mass number = protons + neutrons',
-          'Isotopes: same atomic number, different mass numbers (C-12 and C-14)',
-          'Period (horizontal row): same number of electron shells',
-          'Group (vertical column): same number of valence electrons → similar properties',
-          'Metallic character: increases down a group and from right to left across a period',
-          'Electronegativity: increases across a period (left to right) and up a group',
+          'Atom: nucleus (protons + neutrons) + electrons in shells; shells fill as 2, 8, 8, 18...',
+          'Atomic number = protons (= electrons in neutral atom); Mass number = protons + neutrons',
+          'Isotopes: same element, same atomic number, different mass number (e.g. C-12 and C-14)',
+          'Electron configuration: Na is 2,8,1 (11 protons); determines group and period position',
+          'Periodic law: properties of elements repeat periodically when arranged by atomic number',
+          'Group = number of valence electrons; Period = number of occupied energy shells',
+          'Trends across a period: atomic radius decreases; ionisation energy and electronegativity increase',
         ]
       },
       {
+        level: 'SS1',
         title: 'Chemical Bonding',
         points: [
-          'Ionic bond: electron transfer from metal to non-metal; forms crystal lattice (NaCl)',
-          'Covalent bond: sharing of electron pairs between non-metals (H₂O, CO₂, NH₃)',
-          'Dative (coordinate) covalent bond: one atom provides both electrons in the pair (NH₄⁺)',
-          'Metallic bond: free (delocalised) electrons in a lattice of positive ions',
-          'Hydrogen bond: weak attraction between H and electronegative atom (N, O, F) — explains water surface tension',
-          'van der Waals forces: very weak temporary dipoles between all atoms',
-          'VSEPR theory: electron pairs repel → determines molecule geometry',
+          'Ionic (electrovalent) bond: metal transfers electrons to non-metal; forms crystal lattice (NaCl)',
+          'Covalent bond: non-metals share electron pairs (H₂O has 2 shared pairs + 2 lone pairs)',
+          'Dative (coordinate) bond: one atom donates both electrons of the shared pair (NH₄⁺, H₃O⁺)',
+          'Metallic bond: delocalised "sea of electrons" around positive metal ions; explains conductivity',
+          'Hydrogen bond: weak O−H...O, N−H...N attractions; explains water\'s anomalously high boiling point',
+          'VSEPR theory: electron pairs repel → determine molecule geometry (tetrahedral, trigonal planar, linear)',
+          'Electrovalency = electrons gained/lost; Covalency = number of electron pairs shared',
         ]
       },
       {
-        title: 'Chemical Reactions',
+        level: 'SS1',
+        title: 'Acids, Bases & Salts',
         points: [
-          'OIL RIG: Oxidation Is Loss (of electrons); Reduction Is Gain (of electrons)',
-          'Acid: proton (H⁺) donor; Base: proton acceptor (Bronsted-Lowry definition)',
-          'pH: 0–6 acidic, 7 neutral, 8–14 alkaline; pH = −log[H⁺]',
-          'Neutralisation: acid + base → salt + water (exothermic)',
-          'Rate of reaction increases with: higher temperature, greater concentration, smaller particle size, catalyst, higher pressure (gases only)',
-          'Activation energy: minimum energy needed for reaction to occur',
-          'Catalyst: lowers activation energy; speeds up reaction without being used up',
+          'Arrhenius acid: produces H⁺ in water; base: produces OH⁻ in water',
+          'Bronsted-Lowry acid: proton (H⁺) donor; base: proton acceptor',
+          'pH scale: 0–6 acidic, 7 neutral, 8–14 alkaline; pH = −log[H⁺]',
+          'Indicators: litmus (acid = red, base = blue); phenolphthalein (acid = colourless, base = pink)',
+          'Neutralisation: acid + base → salt + water; H⁺ + OH⁻ → H₂O (exothermic)',
+          'Salts: formed when metal replaces hydrogen of an acid; common salts: NaCl, CaCO₃, CuSO₄',
+          'Preparation of salts: direct combination, displacement, neutralisation, double decomposition',
         ]
       },
       {
-        title: 'Chemical Equilibrium',
+        level: 'SS2',
+        title: 'Mole Concept & Stoichiometry',
         points: [
-          'Dynamic equilibrium: forward and reverse reaction rates are equal',
-          'Le Chatelier\'s Principle: equilibrium shifts to oppose any change applied to it',
-          'Increasing reactant concentration → equilibrium shifts forward (more products formed)',
-          'Increasing temperature → equilibrium shifts in endothermic direction',
-          'Increasing pressure → equilibrium shifts to side with fewer moles of gas',
-          'Catalyst does NOT change equilibrium position; only speeds up reaching equilibrium',
-          'Kc = [products]^coefficients / [reactants]^coefficients (at constant temperature)',
+          'One mole = 6.02 × 10²³ particles (Avogadro\'s constant)',
+          'Molar mass: mass of one mole in grams = relative atomic/molecular mass',
+          'Moles = mass / molar mass; moles = volume (L) / 22.4 (for gases at STP)',
+          'Molar concentration = moles / volume (in dm³); unit: mol/dm³ or M',
+          'Balanced equation: coefficients show molar ratios of reactants and products',
+          'Limiting reagent: reactant that is completely consumed first; determines yield',
+          'Percentage yield = (actual yield / theoretical yield) × 100%',
         ]
       },
       {
+        level: 'SS2',
+        title: 'Electrochemistry & Equilibrium',
+        points: [
+          'Electrolysis: passage of direct current through an ionic compound (molten or in solution)',
+          'Cathode (−): reduction; anode (+): oxidation — "Red Cat and An Ox"',
+          'Electrolysis of brine: H₂ at cathode, Cl₂ at anode, NaOH formed in solution',
+          'Faraday\'s 1st law: mass deposited ∝ charge passed (Q = It)',
+          'Dynamic equilibrium: forward and reverse reactions occur at equal rates',
+          'Le Chatelier\'s Principle: system shifts to oppose any imposed change',
+          'Haber Process: N₂ + 3H₂ ⇌ 2NH₃; 450°C, 200 atm, Fe catalyst; compromise of rate and yield',
+        ]
+      },
+      {
+        level: 'SS2',
+        title: 'Chemical Kinetics & Thermochemistry',
+        points: [
+          'Rate of reaction: how quickly reactants are consumed or products are formed',
+          'Factors: temperature (↑ temp → ↑ rate); concentration (↑ conc → ↑ rate); surface area; catalyst; pressure (gases)',
+          'Activation energy: minimum energy particles need to react; catalyst provides alternative lower-energy path',
+          'Exothermic reaction: releases heat; ΔH is negative (e.g. combustion, neutralisation)',
+          'Endothermic reaction: absorbs heat; ΔH is positive (e.g. photosynthesis, dissolving NH₄Cl)',
+          'Enthalpy change ΔH: measured in kJ/mol; standard conditions 25°C, 1 atm',
+          'Hess\'s law: enthalpy change is independent of route taken between reactants and products',
+        ]
+      },
+      {
+        level: 'SS3',
         title: 'Organic Chemistry',
         points: [
-          'Alkanes: CₙH₂ₙ₊₂ (saturated, single bonds only) — methane, ethane, propane, butane',
-          'Alkenes: CₙH₂ₙ (one C=C double bond) — ethene, propene; more reactive than alkanes',
-          'Alkynes: CₙH₂ₙ₋₂ (one C≡C triple bond) — ethyne (acetylene)',
-          'Functional groups: -OH (alcohol), -COOH (carboxylic acid), -CHO (aldehyde), -CO- (ketone)',
-          'Test for unsaturation (alkene): decolourises bromine water (orange → colourless)',
-          'Isomers: same molecular formula but different structural arrangements',
-          'Petroleum refining: fractional distillation separates by boiling point — refinery gas, petrol, kerosene, diesel, fuel oil, bitumen',
+          'Organic compounds contain carbon; carbon forms 4 bonds; chains can be straight, branched or ring',
+          'Alkanes: CₙH₂ₙ₊₂; saturated; undergo substitution with halogens in UV light',
+          'Alkenes: CₙH₂ₙ; one C=C double bond; undergo addition reactions (Br₂ water, H₂, H₂O, HX)',
+          'Test for alkene: decolourises bromine water (orange → colourless)',
+          'Alcohols: contain −OH; ethanol (C₂H₅OH) fermented from glucose; primary/secondary/tertiary',
+          'Carboxylic acids: contain −COOH; weak acids; react with alcohols to form esters (esterification)',
+          'Polymers: long chain molecules from repeated monomer units; addition (polyethylene) or condensation (nylon)',
         ]
       },
       {
-        title: 'Electrochemistry',
+        level: 'SS3',
+        title: 'Metals, Extraction & Industrial Chemistry',
         points: [
-          'Electrolysis: decomposition of an ionic compound using direct electric current',
-          'Cathode (−): cations move here → gain electrons → reduction occurs',
-          'Anode (+): anions move here → lose electrons → oxidation occurs',
-          'Electrolysis of brine (NaCl solution): H₂ at cathode; Cl₂ at anode; NaOH remains',
-          'Electroplating: deposit thin metal layer; object = cathode; plating metal = anode',
-          'Daniell cell: Zn/ZnSO₄ || CuSO₄/Cu; EMF ≈ 1.1 V',
-          'Faraday\'s first law: mass deposited is proportional to charge passed',
+          'Reactivity series: K > Na > Ca > Mg > Al > Zn > Fe > Pb > H > Cu > Ag > Au',
+          'Metals above H displace hydrogen from dilute acids; metals higher displace lower ones from solution',
+          'Blast furnace (iron): iron ore + coke + limestone; coke reduces Fe₂O₃ to Fe; limestone removes impurities as slag',
+          'Aluminium: extracted by electrolysis of molten alumite (bauxite/cryolite); cannot be smelted (too reactive)',
+          'Contact Process (H₂SO₄): SO₂ → SO₃ (V₂O₅ catalyst, 450°C) → dissolved in H₂SO₄ → oleum → diluted',
+          'Rusting: requires both oxygen and water; prevented by painting, galvanising (zinc coating), cathodic protection',
+          'Alloys: mixtures of metals; steel (Fe + C), brass (Cu + Zn), bronze (Cu + Sn) — improved properties',
         ]
       },
       {
-        title: 'Industrial & Applied Chemistry',
+        level: 'SS3',
+        title: 'Environmental & Separation Chemistry',
         points: [
-          'Reactivity series (highest to lowest): K, Na, Ca, Mg, Al, Zn, Fe, Pb, H, Cu, Ag, Au',
-          'Metals above H in reactivity series displace hydrogen from dilute acids',
-          'Haber Process: N₂ + 3H₂ ⇌ 2NH₃ — conditions: 450°C, 200 atm, iron catalyst',
-          'Contact Process: SO₂ oxidised to SO₃ then dissolved to make H₂SO₄; V₂O₅ catalyst',
-          'Blast furnace: iron ore + coke + limestone → pig iron (crude iron)',
-          'Aluminium extracted by electrolysis of molten alumite (Hall-Héroult process)',
-          'Chlor-alkali industry: electrolysis of brine gives Cl₂, H₂ and NaOH',
+          'Air pollution: CO (incomplete combustion), SO₂ (acid rain), NOₓ (photochemical smog), CFCs (ozone depletion)',
+          'Water treatment: screening → sedimentation → coagulation (alum) → filtration → chlorination',
+          'Sewage treatment: primary (screening/settlement) → secondary (biological oxidation) → tertiary (final polishing)',
+          'Separation techniques: filtration (solid from liquid); evaporation (dissolve solid from solution); distillation (miscible liquids by boiling point); chromatography (mixture by affinity)',
+          'Rf value in chromatography: distance moved by spot / distance moved by solvent front',
+          'Greenhouse effect: CO₂, CH₄, H₂O trap infrared → global warming → climate change',
+          'Sustainable chemistry: reducing waste, using renewable feedstocks, energy efficiency — "green chemistry"',
         ]
       },
     ]
   },
 
+  /* ═══════════════════════════════════════════════════════════
+     BIOLOGY
+  ═══════════════════════════════════════════════════════════ */
   'Biology': {
     emoji: '🌿',
-    desc: 'Cell biology, genetics, ecology, physiology, nutrition and reproduction',
+    desc: 'WAEC Biology — Cell biology, physiology, genetics, ecology and applied biology',
     topics: [
       {
-        title: 'Cell Biology',
+        level: 'SS1',
+        title: 'Cell Structure & Organisation',
         points: [
-          'Plant cell extras (not in animal cells): cellulose cell wall, chloroplast, large central vacuole',
-          'Mitochondria: site of aerobic respiration → produces ATP (the cell\'s energy currency)',
-          'Nucleus: control centre; contains DNA wound around histones as chromosomes',
-          'Ribosomes: site of protein synthesis; found on rough endoplasmic reticulum',
-          'Cell membrane: selectively permeable; controls what enters and leaves',
-          'Diffusion: movement from high to low concentration gradient (passive — no energy needed)',
-          'Osmosis: movement of water through semi-permeable membrane from high water potential (low solute) to low water potential (high solute)',
-          'Active transport: movement against concentration gradient; requires ATP energy',
+          'Cell: basic structural and functional unit of life (Robert Hooke, 1665)',
+          'Plant cell extras (vs animal): cellulose cell wall, chloroplast, large permanent central vacuole',
+          'Animal cell extras (vs plant): centrioles (for cell division)',
+          'Organelles: nucleus (DNA/control), mitochondria (ATP/respiration), ribosome (protein synthesis), ER (transport), Golgi (packaging/secretion)',
+          'Levels of organisation: cell → tissue → organ → organ system → organism',
+          'Unicellular organisms: Amoeba, Paramecium, Euglena; Multicellular: all complex plants and animals',
+          'Cell division: mitosis (growth/repair → 2 identical cells); meiosis (reproduction → 4 genetically unique cells)',
         ]
       },
       {
-        title: 'Genetics & Heredity',
+        level: 'SS1',
+        title: 'Nutrition in Plants & Animals',
         points: [
+          'Autotrophs: make own food; plants use photosynthesis: 6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂',
+          'Factors affecting rate of photosynthesis: light intensity, CO₂ concentration, temperature, water',
+          'Minerals needed by plants: nitrogen (protein), phosphorus (DNA/ATP), potassium (enzyme activation)',
+          'Heterotrophs: obtain energy by consuming other organisms',
+          'Human digestive system: mouth → oesophagus → stomach → small intestine → large intestine',
+          'Enzymes: amylase (starch→maltose), pepsin (proteins, in stomach acid), lipase (fats), trypsin (proteins, in small intestine)',
+          'Malnutrition: kwashiorkor (protein deficiency), marasmus (calorie deficiency), scurvy (vitamin C), rickets (vitamin D)',
+        ]
+      },
+      {
+        level: 'SS1',
+        title: 'Transport & Respiration',
+        points: [
+          'Xylem: transports water and minerals upward (dead cells, lignified walls; one-way flow)',
+          'Phloem: transports sucrose (photosynthesis products) both up and down (translocation)',
+          'Transpiration: evaporation of water from stomata; creates transpiration pull drawing water up xylem',
+          'Blood components: red cells (haemoglobin, O₂ transport), white cells (immunity), platelets (clotting), plasma (dissolved substances)',
+          'Double circulation: pulmonary (heart ↔ lungs) and systemic (heart ↔ body)',
+          'Aerobic respiration: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 38 ATP',
+          'Anaerobic in muscles: glucose → lactic acid + small ATP; causes muscle fatigue',
+        ]
+      },
+      {
+        level: 'SS2',
+        title: 'Excretion & Support',
+        points: [
+          'Excretion: removal of metabolic waste products (CO₂, urea, excess salts, water)',
+          'Kidneys: filter blood; nephron = functional unit; glomerulus (filtration) → tubules (reabsorption)',
+          'Urea: produced in liver from excess amino acids (deamination); removed by kidneys',
+          'Skin: excretes salts and water as sweat; also regulates body temperature',
+          'Skeleton: axial (skull, vertebral column, ribcage); appendicular (limb bones)',
+          'Joints: ball-and-socket (shoulder, hip — full rotation); hinge (knee, elbow — one plane)',
+          'Muscle pairs (antagonistic): bicep/tricep at elbow; when one contracts, the other relaxes',
+        ]
+      },
+      {
+        level: 'SS2',
+        title: 'Reproduction & Growth',
+        points: [
+          'Asexual reproduction: one parent; offspring genetically identical (budding, binary fission, spores, vegetative)',
+          'Sexual reproduction: involves gametes (sperm + egg); offspring show variation',
+          'Pollination: transfer of pollen from anther to stigma; self-pollination vs cross-pollination',
+          'Human male: testes produce sperm and testosterone; sperm travel through vas deferens',
+          'Human female: ovaries release eggs (ovulation, day 14); uterus nurtures foetus',
+          'Menstrual cycle: 28 days; controlled by FSH, LH, oestrogen and progesterone',
+          'Growth: mitosis increases cell number; differentiation creates specialised cell types; growth curves (sigmoid/J-shaped)',
+        ]
+      },
+      {
+        level: 'SS2',
+        title: 'Genetics & Evolution',
+        points: [
+          'DNA: double helix; base pairs A-T and G-C; carries genetic code in sequences of 3 bases (codons)',
           'Mendel\'s 1st law (segregation): alleles separate during gamete formation',
           'Mendel\'s 2nd law (independent assortment): genes on different chromosomes sort independently',
-          'Dominant allele (capital letter) masks the recessive allele (lowercase) in Aa individuals',
-          'Genotype: the genetic makeup (AA, Aa, aa); Phenotype: the physical expression',
-          'Co-dominance: both alleles expressed equally (e.g. blood group AB = IA IB)',
-          'Sex-linked inheritance: gene on X chromosome — more common in males (e.g. colour blindness)',
-          'Mitosis: two identical daughter cells for growth and repair (PMAT phases)',
-          'Meiosis: four haploid cells for sexual reproduction; creates genetic variation',
+          'Monohybrid cross: one trait; ratio 3 dominant : 1 recessive in F2 generation',
+          'Co-dominance: both alleles expressed (blood group AB = both A and B antigens)',
+          'Sex determination: XX = female; XY = male; sex-linked traits on X chromosome (colour blindness, haemophilia)',
+          'Natural selection (Darwin): variation → competition → survival of fittest → inherited traits become common',
         ]
       },
       {
-        title: 'Human Physiology',
+        level: 'SS3',
+        title: 'Ecology & Classification',
         points: [
-          'Digestion: mouth (amylase) → stomach (pepsin, HCl) → small intestine (lipase, trypsin)',
-          'Absorption: villi in small intestine increase surface area; glucose and amino acids → blood; fats → lymph',
-          'Insulin (from pancreas) lowers blood glucose; glucagon raises it',
-          'Kidney (nephron): filtration of blood → selective reabsorption → urine production',
-          'Breathing: diaphragm contracts → volume increases → pressure falls → air enters (inspiration)',
-          'Heart: right side pumps deoxygenated blood to lungs; left side pumps oxygenated blood to body',
-          'Blood groups: A, B, AB (universal recipient), O (universal donor)',
-          'Nervous system: CNS (brain + spinal cord) + PNS; reflex arc bypasses the brain',
-        ]
-      },
-      {
-        title: 'Transport in Plants & Animals',
-        points: [
-          'Xylem: transports water and mineral salts upward from root to leaf (dead cells, one-way)',
-          'Phloem: transports dissolved sugars (sucrose) up and down the plant (translocation)',
-          'Transpiration: water evaporates from stomata; creates pull (transpiration stream) that draws water up xylem',
-          'Factors increasing transpiration: higher temperature, lower humidity, higher wind speed, more light',
-          'Stomata open in light (guard cells take up K⁺ → water enters → cells swell)',
-          'Arteries: carry blood away from heart (thick walls, high pressure)',
-          'Veins: carry blood to heart (have valves to prevent backflow)',
-          'Haemoglobin in red blood cells loads O₂ in lungs; releases it in tissues',
-        ]
-      },
-      {
-        title: 'Nutrition & Feeding',
-        points: [
-          'Autotrophs (producers): make own food by photosynthesis — all green plants and algae',
-          'Heterotrophs: cannot make own food; must consume other organisms',
-          'Holozoic nutrition: ingestion → digestion → absorption → assimilation → egestion',
-          'Saprophytes: digest and absorb dead organic matter externally (fungi and bacteria)',
-          'Food nutrients: carbohydrates (energy), proteins (growth/repair), fats (energy store/insulation)',
-          'Vitamin A: vision and immunity; B group: metabolism; C: collagen and immunity; D: calcium absorption',
-          'Deficiency diseases: kwashiorkor (protein), scurvy (Vit C), rickets (Vit D), anaemia (iron)',
-        ]
-      },
-      {
-        title: 'Ecology & Environment',
-        points: [
+          'Ecology: study of organisms and their interactions with each other and the environment',
           'Food chain: producer → primary consumer → secondary consumer → tertiary consumer',
-          'Only about 10% of energy transfers between trophic levels (energy lost as heat)',
-          'Ecosystem = biotic (living organisms) + abiotic (non-living: water, light, temperature)',
-          'Photosynthesis: 6CO₂ + 6H₂O + light energy → C₆H₁₂O₆ + 6O₂',
-          'Aerobic respiration: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 38 ATP',
-          'Anaerobic in yeast: glucose → ethanol + CO₂; in muscles: glucose → lactic acid',
-          'Nitrogen cycle: fixation → nitrification → assimilation → denitrification',
+          'Only ~10% of energy transfers between trophic levels; rest lost as heat',
+          'Nitrogen cycle: fixation (Rhizobium) → nitrification → assimilation → denitrification',
+          'Five kingdoms: Monera (bacteria), Protista (Amoeba), Fungi, Plantae, Animalia',
+          'Binomial nomenclature: two-part scientific name — genus (capital) + species (lowercase), e.g. Homo sapiens',
+          'Vertebrate classes: fish (cold-blooded, gills), amphibia, reptilia, aves (birds), mammalia',
         ]
       },
       {
-        title: 'Reproduction & Development',
+        level: 'SS3',
+        title: 'Microorganisms & Disease',
         points: [
-          'Asexual reproduction: one parent; offspring are genetically identical clones',
-          'Sexual reproduction: two parents; offspring show variation due to meiosis',
-          'Pollination: transfer of pollen from anther to stigma (wind or insect pollinated)',
-          'Fertilisation: fusion of male gamete (pollen) with female gamete (ovule)',
-          'Seed germination requires: water, oxygen and warmth (light not needed initially)',
-          'Male puberty: testosterone → voice deepens, facial hair, sperm production (testes)',
-          'Female puberty: oestrogen → breast development, menstrual cycle, widening hips (ovaries)',
-          'Menstrual cycle: 28 days; ovulation on day 14; progesterone maintains uterus lining',
+          'Bacteria: prokaryotes (no membrane-bound nucleus); some cause disease; antibiotics kill bacteria',
+          'Viruses: not cells; protein coat + nucleic acid; replicate inside host cells; cannot be treated with antibiotics',
+          'Malaria: caused by Plasmodium (protozoan); vector = female Anopheles mosquito; prevention: mosquito nets, insecticides',
+          'HIV/AIDS: retrovirus; destroys CD4 T-cells (immune system); spread through blood, sex, breast milk',
+          'Cholera: bacterial (Vibrio cholerae); spread through contaminated water; symptom: severe watery diarrhoea',
+          'Tuberculosis (TB): bacterial (Mycobacterium tuberculosis); airborne; affects lungs; BCG vaccine available',
+          'Immunisation: introduces antigen → body makes antibodies → memory cells provide future protection',
+        ]
+      },
+      {
+        level: 'SS3',
+        title: 'Biotechnology & Applied Biology',
+        points: [
+          'Fermentation: microorganisms break down sugars without oxygen; yeast produces ethanol + CO₂',
+          'Biogas: anaerobic digestion of organic waste produces methane (CH₄) — renewable fuel',
+          'Genetic engineering: cut desired gene with restriction enzymes → insert into host DNA using ligase',
+          'Recombinant DNA technology: produces insulin (from bacteria), vaccines, disease-resistant crops (GMOs)',
+          'Tissue culture (micropropagation): grow plant cells on nutrient medium → many identical plants',
+          'Antibiotic resistance: misuse of antibiotics selects for resistant bacteria — serious global health threat',
+          'Conservation: protect biodiversity through national parks, game reserves, seed banks and legislation',
         ]
       },
     ]
   },
 
+  /* ═══════════════════════════════════════════════════════════
+     GOVERNMENT
+  ═══════════════════════════════════════════════════════════ */
   'Government': {
     emoji: '🏛️',
-    desc: 'Nigerian government, constitutions, democracy, rights and international organisations',
+    desc: 'WAEC Government — Political theory, Nigerian history, democracy and international relations',
     topics: [
       {
-        title: 'Nigerian Political History',
+        level: 'SS1',
+        title: 'Introduction to Government & the State',
         points: [
-          'Independence: 1 October 1960; Republic: 1 October 1963 (Nnamdi Azikiwe — President)',
-          '1st Republic (1963–1966): parliamentary system; Tafawa Balewa as Prime Minister',
-          '1966: First military coup (Aguiyi-Ironsi); counter-coup → Gowon; Civil War 1967–1970',
-          'Gowon created 12 states (1967) to ensure federal loyalty during civil war',
-          '1975 coup: Murtala Muhammed; 1976 Obasanjo (who handed power to civilians in 1979)',
-          '2nd Republic (1979–1983): Shehu Shagari; presidential system introduced',
-          '1983: Buhari coup; 1985: Babangida; 1993: Abacha; 1998: Abdulsalami transitions',
-          '4th Republic: 29 May 1999 — Obasanjo elected; democracy restored to present day',
+          'Government: the institution through which the state exerts its authority and manages public affairs',
+          'Functions of government: law-making, execution/implementation, interpretation, maintaining order, providing welfare',
+          'The State: permanent political community; features — population, territory, government, sovereignty',
+          'Sovereignty: supreme legal authority; internal (over citizens) and external (independence from other states)',
+          'Legitimacy: people\'s acceptance of the right of government to rule; may come from elections, tradition or charisma',
+          'Types of government: democracy, monarchy, aristocracy, oligarchy, autocracy, theocracy',
+          'Politically active citizen: informed about laws, votes, pays taxes, respects others\' rights',
         ]
       },
       {
-        title: 'Organs of Government',
+        level: 'SS1',
+        title: 'Constitution & Organs of Government',
         points: [
-          'Legislature (National Assembly): Senate (109 senators) + House of Representatives (360 members)',
-          'Legislature functions: makes laws, approves budget, confirms presidential appointments',
-          'Executive: President, Vice President, Federal Executive Council — implements laws',
-          'Judiciary: Supreme Court → Court of Appeal → Federal High Court → State courts',
-          'Separation of powers: each arm is independent to prevent dictatorship',
-          'Checks and balances: Senate can remove President; courts can void unconstitutional laws',
-          'State level: Governor (executive) + State House of Assembly (legislature) + State High Court',
+          'Constitution: fundamental law of a state; defines structure of government and rights of citizens',
+          'Written (codified): single document — Nigeria 1999, USA; Unwritten: conventions and statutes — UK',
+          'Rigid: difficult to amend (special procedure, supermajority) — Nigeria; Flexible: easy to amend — UK',
+          'Legislature (Parliament/National Assembly): makes laws; may be unicameral or bicameral',
+          'Executive: implements laws; in presidential system, president is both head of state and government',
+          'Judiciary: interprets laws; must be independent to protect rights and check other arms',
+          'Separation of powers (Montesquieu): prevents abuse by keeping three arms distinct and independent',
         ]
       },
       {
-        title: 'Federalism & Systems of Government',
+        level: 'SS1',
+        title: 'Democracy, Rule of Law & Political Concepts',
         points: [
-          'Federalism: division of powers between federal and sub-national (state) governments',
-          'Nigeria: 36 states + FCT Abuja; 774 LGAs; 3 tiers of government',
-          'Exclusive legislative list: federal government only (defence, immigration, currency)',
-          'Concurrent list: both federal and state can legislate (education, health)',
-          'Residual powers: matters not on either list belong to states',
-          'Unitary system: all power at the centre; no state autonomy (e.g. UK, France)',
-          'Confederation: loose alliance of independent states; weak central authority',
-          'Presidential system (Nigeria, USA): president is both head of state and government',
+          'Democracy: government of the people, by the people, for the people (Lincoln)',
+          'Direct democracy: citizens vote directly on every issue (ancient Athens, Swiss referenda)',
+          'Representative (indirect) democracy: citizens elect representatives to decide on their behalf',
+          'Rule of law (A.V. Dicey): supremacy of law; equality before the law; rights protected by courts',
+          'Constitutionalism: government must act within the limits set by the constitution',
+          'Checks and balances: each arm of government limits the power of the others',
+          'Political socialisation: process by which people learn political values (family, school, media)',
         ]
       },
       {
-        title: 'Democracy & Electoral Process',
+        level: 'SS2',
+        title: 'Nigeria Under Colonial Rule & Independence',
         points: [
-          'Democracy: government of, by and for the people — Lincoln\'s definition',
-          'Features: free and fair elections, rule of law, protection of rights, majority rule, minority rights',
-          'Universal adult suffrage: every citizen 18+ can vote in Nigeria',
-          'INEC: Independent National Electoral Commission — conducts all federal elections',
-          'First-past-the-post (FPTP): candidate with most votes wins (used in Nigeria)',
-          'Proportional representation: seats allocated in proportion to votes received',
-          'Political party: organised group with shared ideology seeking to form government',
-          'Manifesto: written document stating a party\'s programme and policies if elected',
+          'British colonial policy: Indirect Rule (using traditional rulers as intermediaries) — introduced by Lugard',
+          'Amalgamation 1914: Northern and Southern Nigeria joined by Lord Lugard to form Nigeria',
+          'Nationalist movements: NCNC (Azikiwe, 1944), AG (Awolowo, 1951), NPC (Sardauna, 1951)',
+          'Constitutional conferences: Richards Constitution (1946), Macpherson (1951), Lyttleton (1954 — federalism)',
+          'Independence: 1 October 1960; Republic: 1 October 1963 (Nnamdi Azikiwe as first President)',
+          '1966 military coup: General Aguiyi-Ironsi; counter-coup 1966; Yakubu Gowon took power',
+          'Civil War (Biafra) 1967–1970: 12 states created by Gowon; ended with "No victor, no vanquished"',
         ]
       },
       {
-        title: 'Citizenship & Fundamental Rights',
+        level: 'SS2',
+        title: 'Nigerian Political Parties & Electoral System',
         points: [
-          'Nigerian citizenship: by birth (born in Nigeria or to Nigerian parent), by registration, by naturalisation',
-          'Chapter IV, 1999 Constitution: Fundamental Human Rights',
-          'Right to life (s.33), dignity (s.34), personal liberty (s.35), fair hearing (s.36)',
-          'Freedom of thought/religion (s.38), expression/press (s.39), peaceful assembly (s.40)',
-          'Rights can be restricted during emergency, war or in the interest of public order',
-          'Civic duties: pay taxes, obey laws, participate in elections, defend the nation',
-          'Ombudsman (Public Complaint Commission): investigates citizens\' complaints against government',
+          'Political party: organisation seeking to gain power through elections; formulates policies and manifestos',
+          'Functions: recruit leaders, provide candidates, educate voters, form government, provide opposition',
+          'One-party system: only one legal party (authoritarian); Two-party: two major parties dominate',
+          'Multi-party system: many parties; usually leads to coalition governments',
+          'INEC (Independent National Electoral Commission): conducts federal elections; registers voters and parties',
+          'Electoral systems: First Past the Post (FPTP) used in Nigeria — highest votes wins, regardless of majority',
+          'Franchise (right to vote): universal adult suffrage in Nigeria — citizens 18 years and above',
         ]
       },
       {
-        title: 'Local Government in Nigeria',
+        level: 'SS2',
+        title: 'Federalism & Public Administration',
         points: [
-          'LGA: third tier of government; 774 councils across Nigeria',
-          'Governed by elected Chairman, Vice Chairman and Councillors',
-          'LGA functions: primary education, primary health care, markets, refuse disposal, rural roads',
-          'Revenue: statutory allocation from Federation Account + internally generated revenue',
-          '1976 Local Government Reform (Murtala/Obasanjo era) established uniform structure',
-          'State-Local Government Joint Account: controversial — states often withhold LGA funds',
-          'Problems: inadequate funding, political interference, lack of autonomy',
+          'Federalism: powers constitutionally divided between central and regional/state governments',
+          'Features: written constitution, bicameral legislature, independent judiciary, revenue sharing',
+          'Nigeria: 36 states + FCT; Exclusive list (federal only), Concurrent list (both), Residual (states)',
+          'Revenue allocation: derived principle, equality of states, population, need; shared from Federation Account',
+          'Civil service: permanent, professional, impartial bureaucracy that executes government policy',
+          'Public corporations: government-owned enterprises (NNPC, PHCN, NPA); created by statute',
+          'Military government: unconstitutional; suspends constitution; rules by decree; no separation of powers',
         ]
       },
       {
-        title: 'International Organisations',
+        level: 'SS3',
+        title: 'Local Government & Citizenship',
         points: [
-          'United Nations (UN): founded 26 June 1945; HQ New York; 193 member states',
-          'UN Security Council: 5 permanent members (USA, UK, France, Russia, China) with veto power',
-          'ECOWAS: Economic Community of West African States; founded 1975 Lagos Treaty',
-          'African Union (AU): founded 2002; succeeds OAU (1963); HQ Addis Ababa; 55 members',
-          'Commonwealth of Nations: 56 members; mostly former British colonies',
-          'OPEC: Organisation of Petroleum Exporting Countries; Nigeria joined 1971',
-          'IMF: lends to countries with balance of payments problems; World Bank: funds development',
+          'Local government: third tier of government; 774 LGAs in Nigeria',
+          '1976 Reform (Murtala/Obasanjo): uniform structure — elected chairman + councillors established',
+          'LGA functions: primary education, primary health care, markets, refuse, community development',
+          'Revenue: statutory allocation from Federation Account + internally generated revenue (rates, fees)',
+          'Citizenship: by birth (jus soli/jus sanguinis), registration, or naturalisation',
+          'Fundamental Human Rights (Chapter IV, 1999 Constitution): life, dignity, liberty, fair hearing, expression, movement',
+          'Civic duties: obey laws, pay taxes, vote, defend the nation, respect others\' rights',
+        ]
+      },
+      {
+        level: 'SS3',
+        title: 'International Organisations & Foreign Policy',
+        points: [
+          'United Nations (1945): 193 members; General Assembly, Security Council (5 permanent with veto), ICJ, Secretariat',
+          'UN objectives: maintain peace and security, promote human rights and development',
+          'African Union (AU, 2002): succeeds OAU (1963); promotes African unity and development; HQ Addis Ababa',
+          'ECOWAS (1975 Lagos Treaty): promotes West African economic integration; peacekeeping (ECOMOG)',
+          'OPEC (1960): controls oil output to stabilise prices; Nigeria joined 1971',
+          'Nigeria\'s foreign policy: Africa as centrepiece, non-alignment, promotion of African unity, respect for sovereignty',
+          'Diplomacy: peaceful relations between states; ambassadors represent country abroad; embassies and high commissions',
         ]
       },
     ]
   },
 
+  /* ═══════════════════════════════════════════════════════════
+     ECONOMICS
+  ═══════════════════════════════════════════════════════════ */
   'Economics': {
     emoji: '💹',
-    desc: 'Microeconomics, macroeconomics, money, banking and Nigerian economy',
+    desc: 'WAEC Economics — Microeconomics, macroeconomics, money and Nigerian economy',
     topics: [
       {
-        title: 'Demand & Supply',
+        level: 'SS1',
+        title: 'Basic Economic Concepts',
         points: [
-          'Law of Demand: as price rises, quantity demanded falls (inverse/negative relationship)',
-          'Law of Supply: as price rises, quantity supplied rises (direct/positive relationship)',
-          'Market equilibrium: price where quantity demanded equals quantity supplied',
-          'Excess demand (shortage): price below equilibrium → price rises to equilibrium',
-          'Excess supply (surplus): price above equilibrium → price falls to equilibrium',
-          'Price Elasticity of Demand (PED) = % change in Qd / % change in price',
-          'Elastic demand (|PED| > 1): luxury goods; Inelastic (|PED| < 1): necessities and addictive goods',
-          'Normal goods: demand rises with income; Inferior goods: demand falls as income rises',
-        ]
-      },
-      {
-        title: 'Production & Cost Theory',
-        points: [
+          'Economics: study of how scarce resources are allocated to satisfy unlimited wants',
+          'Scarcity: resources (land, labour, capital) are limited; wants are unlimited → choices must be made',
+          'Opportunity cost: value of the next best alternative foregone when a choice is made',
+          'Scale of preference: ranking of wants in order of urgency',
+          'Production possibility curve (PPC): shows maximum combinations of two goods an economy can produce',
+          'Economic systems: capitalism (private ownership, market), socialism (state ownership), mixed (both)',
           'Factors of production: Land (rent), Labour (wages), Capital (interest), Entrepreneur (profit)',
-          'Law of Diminishing Returns: adding one factor while others fixed → marginal product eventually falls',
-          'Fixed costs: unchanged with output level (rent, insurance, depreciation)',
-          'Variable costs: change with output (raw materials, direct wages)',
-          'Total Cost = Fixed Cost + Variable Cost; Average Cost = Total Cost / Output',
-          'Marginal cost: extra cost of producing one additional unit',
-          'Economies of scale: falling average cost as output rises (bulk buying, specialisation)',
-          'Diseconomies of scale: rising average cost beyond optimal firm size (management problems)',
         ]
       },
       {
-        title: 'National Income & Macroeconomics',
+        level: 'SS1',
+        title: 'Demand Theory',
         points: [
-          'GDP: total market value of all goods and services produced in a country in one year',
-          'GDP by expenditure: C (private consumption) + I (investment) + G (government spending) + NX (exports minus imports)',
-          'GNP = GDP + net income from abroad (income of citizens regardless of location)',
-          'Per capita income = national income ÷ population (standard of living indicator)',
+          'Law of Demand: ceteris paribus, as price rises, quantity demanded falls (inverse relationship)',
+          'Demand schedule: table of price-quantity pairs; demand curve slopes downward left to right',
+          'Determinants of demand (shift factors): income, price of substitutes/complements, tastes, expectations, population',
+          'Price Elasticity of Demand (PED) = % change in Qd / % change in price',
+          'Elastic demand (|PED| > 1): luxury goods; Inelastic (|PED| < 1): necessities, addictive goods',
+          'Income elasticity: positive = normal good; negative = inferior good; >1 = luxury',
+          'Consumer surplus: difference between what consumer is willing to pay and what they actually pay',
+        ]
+      },
+      {
+        level: 'SS1',
+        title: 'Supply Theory & Market Price',
+        points: [
+          'Law of Supply: as price rises, quantity supplied rises (positive/direct relationship)',
+          'Determinants of supply: cost of production, technology, number of sellers, prices of related goods, taxes/subsidies',
+          'Price Elasticity of Supply (PES) = % change in Qs / % change in price',
+          'Equilibrium: price where quantity demanded = quantity supplied; market clears',
+          'Excess demand (shortage): price below equilibrium; price rises to restore balance',
+          'Excess supply (surplus): price above equilibrium; price falls to restore balance',
+          'Price controls: price ceiling (maximum price — below equilibrium) causes shortage; price floor (minimum — above equilibrium) causes surplus',
+        ]
+      },
+      {
+        level: 'SS2',
+        title: 'National Income & Economic Indicators',
+        points: [
+          'GDP: total market value of all final goods and services produced in a country in one year',
+          'Expenditure method: GDP = C + I + G + (X − M) where X = exports, M = imports',
+          'GNP = GDP + net income from abroad (citizens\' incomes wherever earned)',
+          'NNP = GNP − depreciation (capital consumption allowance)',
+          'Per capita income = national income ÷ population; measures average living standard',
           'Inflation: sustained rise in general price level; measured by Consumer Price Index (CPI)',
           'Types of unemployment: frictional (between jobs), structural (skills mismatch), cyclical (low demand), seasonal',
-          'Phillips Curve: inverse short-run relationship between inflation and unemployment',
         ]
       },
       {
+        level: 'SS2',
         title: 'Money, Banking & Monetary Policy',
         points: [
           'Functions of money: medium of exchange; store of value; unit of account; standard of deferred payment',
-          'CBN (Central Bank of Nigeria, est. 1958): issues naira, lender of last resort, regulates commercial banks',
+          'CBN (Central Bank, est. 1958): issues naira, banker to government, lender of last resort, regulates banks',
           'Commercial banks: accept deposits, give loans, create credit through fractional reserve banking',
           'Monetary Policy Rate (MPR): CBN\'s benchmark interest rate; raising it reduces money supply',
-          'Open market operations: CBN buys/sells government bonds to control money in circulation',
-          'Cash Reserve Ratio: proportion of deposits banks must keep with CBN; higher ratio = less lending',
-          'Quantitative easing: central bank creates money to buy assets (stimulus measure)',
+          'Cash Reserve Ratio (CRR): proportion of deposits banks must keep with CBN',
+          'Open Market Operations: CBN buys (injects money) or sells (withdraws money) government securities',
+          'Quantitative easing: creating money to buy assets; last resort stimulus measure',
         ]
       },
       {
-        title: 'Fiscal Policy & Government Finance',
+        level: 'SS2',
+        title: 'Production, Market Structures & Business',
         points: [
-          'Fiscal policy: use of government taxation and spending to influence the economy',
-          'Expansionary policy: increase spending or cut taxes → stimulate economic activity',
-          'Contractionary policy: cut spending or raise taxes → reduce inflation',
-          'Budget deficit: government spends more than it earns in tax revenue',
-          'Budget surplus: government earns more in taxes than it spends',
-          'Public debt: accumulated deficits; Nigeria has both domestic and external debt',
-          'Tax types: direct (income tax, company tax) vs indirect (VAT, customs duty)',
-          'VAT in Nigeria: 7.5% on goods and services (raised from 5% in 2020)',
+          'Law of Diminishing Returns: adding more of one variable factor (while others fixed) → eventually falling marginal product',
+          'Economies of scale: falling average cost as output rises (bulk buying, specialisation, automation)',
+          'Perfect competition: many sellers, identical product, free entry, price takers (agricultural markets)',
+          'Monopoly: one seller, unique product, high entry barriers, price maker; can earn supernormal profit',
+          'Oligopoly: few dominant firms; interdependence; kinked demand curve; common in Nigeria (telecoms)',
+          'Monopolistic competition: many sellers, differentiated products, some market power (restaurants, salons)',
+          'Business organisations: sole proprietorship, partnership, private limited company, public limited company',
         ]
       },
       {
-        title: 'Market Structures',
+        level: 'SS3',
+        title: 'International Trade & Balance of Payments',
         points: [
-          'Perfect competition: many buyers/sellers, identical products, free entry/exit, price takers',
-          'Monopoly: single seller, unique product, high barriers to entry, price maker',
-          'Oligopoly: few dominant firms, interdependence in pricing decisions (Nigerian telecoms: MTN, Airtel, Glo)',
-          'Monopolistic competition: many firms, differentiated products, some price control (restaurants)',
-          'Price discrimination: same product sold at different prices to different buyers',
-          'Cartel: producers collude to fix price and/or output (OPEC is an example)',
-          'Privatisation: transfer of government enterprise to private ownership (Nitel, PHCN)',
+          'Comparative advantage: produce what you are relatively most efficient at; basis for international trade',
+          'Absolute advantage: produce more of a good than another country with same resources',
+          'Advantages of trade: specialisation, access to goods not produced domestically, economies of scale',
+          'Barriers to trade: tariffs (import taxes), quotas (quantity limits), embargoes, voluntary export restraints',
+          'Balance of trade: value of visible exports minus value of visible imports',
+          'Balance of payments: total record of all transactions between a country and the rest of the world',
+          'Foreign exchange rate: price of one currency in terms of another; fixed vs floating exchange rates',
         ]
       },
       {
-        title: 'Nigerian Economy',
+        level: 'SS3',
+        title: 'Nigerian Economy & Development',
         points: [
-          'Africa\'s largest economy by GDP; overtook South Africa around 2014',
-          'Oil sector: accounts for ~90% of export earnings and ~50% of government revenue',
-          'Oil discovered in commercial quantities at Oloibiri, Niger Delta in 1956; NNPC manages oil sector',
-          'Agriculture: employs ~70% of workforce; major crops: cocoa (SW), groundnut (N), palm oil (SE/SS)',
-          'Economic problems: oil dependency, high inflation, unemployment, corruption, poor infrastructure',
-          'Nigeria Economic Sustainability Plan (NESP): COVID-era stimulus; economic diversification goals',
-          'Nigerian Exchange Group (NGX): Lagos-based stock exchange for capital market transactions',
+          'Nigeria: Africa\'s largest economy by GDP; oil accounts for ~90% export earnings',
+          'Oil dependency (Dutch Disease): large oil revenues can crowd out other sectors',
+          'Agriculture: ~25% of GDP; employs ~70% of workforce; cash crops — cocoa (SW), groundnut (N), palm oil (SE)',
+          'Economic problems: inflation, unemployment, corruption, poor infrastructure, oil price volatility',
+          'Economic development vs growth: growth = increase in GDP; development = improvement in living standards',
+          'Human Development Index (HDI): combines income per capita, life expectancy and education level',
+          'Vision 2050 / Nigeria Agenda: long-term plans to diversify economy and reduce poverty',
+        ]
+      },
+      {
+        level: 'SS3',
+        title: 'Fiscal Policy & Labour Market',
+        points: [
+          'Fiscal policy: government use of taxation and spending to influence economic activity',
+          'Expansionary fiscal policy: increase spending or cut taxes → stimulate growth; risks: inflation, debt',
+          'Contractionary fiscal policy: cut spending or raise taxes → reduce inflation; risk: recession',
+          'Tax types: direct (income tax, company tax — progressive); indirect (VAT 7.5%, customs duty)',
+          'Budget deficit: government spends more than revenue; surplus: revenue exceeds spending',
+          'Trade unions: workers\' organisations that negotiate wages and conditions (NLC in Nigeria)',
+          'Minimum wage: legally set floor on wages; Nigeria national minimum wage = ₦70,000 (2024)',
         ]
       },
     ]
   },
 
+  /* ═══════════════════════════════════════════════════════════
+     LITERATURE IN ENGLISH
+  ═══════════════════════════════════════════════════════════ */
   'Literature in English': {
     emoji: '📖',
-    desc: 'Poetry, prose, drama, African literature, literary devices and exam techniques',
+    desc: 'WAEC Literature — Poetry, prose, drama, African literature and exam techniques',
     topics: [
       {
-        title: 'Literary Genres',
+        level: 'SS1',
+        title: 'Introduction to Literature & Prose',
         points: [
-          'Poetry: condensed, rhythmic language; uses imagery, metaphor, metre and sound devices',
-          'Prose: ordinary written language; includes novels, short stories, novellas and essays',
-          'Drama: written to be performed on stage; contains acts, scenes, dialogue and stage directions',
-          'Tragedy: ends in suffering or death of the protagonist who has a fatal flaw (hamartia)',
-          'Comedy: light-hearted; often ends with resolution, reconciliation or marriage',
-          'Epic: long narrative poem about heroic deeds of legendary figures (Homer\'s Iliad, Milton\'s Paradise Lost)',
-          'Satire: uses irony and exaggeration to criticise society, politics or human folly',
+          'Literature: creative writing that explores human experience through language',
+          'Three main genres: prose (ordinary language), poetry (rhythmic, condensed), drama (for performance)',
+          'Purpose of literature: entertain, educate, provoke thought, preserve culture, challenge society',
+          'Prose elements: plot, character, setting, theme, point of view, style, tone',
+          'Plot: sequence of events; structure — exposition → rising action → climax → falling action → resolution',
+          'Characterisation: direct (author tells us) vs indirect (character revealed through actions/dialogue)',
+          'Point of view: first person ("I") — subjective; third person omniscient — all-knowing narrator',
         ]
       },
       {
-        title: 'Narrative Elements',
+        level: 'SS1',
+        title: 'Introduction to Poetry',
         points: [
-          'Plot structure: exposition → rising action → climax → falling action → resolution (denouement)',
-          'Protagonist: main character the story follows; Antagonist: opposing force or character',
-          'First-person narrator ("I"): subjective, limited to narrator\'s knowledge and perspective',
-          'Third-person omniscient: all-knowing narrator who can see all characters\' thoughts',
-          'Theme: the central idea or message of the work (e.g. colonialism, identity, love)',
-          'Motif: recurring image, symbol or concept that reinforces the theme',
-          'Conflict: man vs man, man vs nature, man vs society, man vs himself (internal)',
+          'Poetry: uses language intensely and economically; every word is carefully chosen',
+          'Lyric poetry: expresses personal emotion (love song, elegy, ode)',
+          'Narrative poetry: tells a story (ballad, epic)',
+          'Dramatic poetry: speech in character (dramatic monologue)',
+          'Rhyme scheme: pattern of rhymes at line ends — ABAB, AABB (couplet), ABBA',
+          'Rhythm and metre: pattern of stressed (/) and unstressed (x) syllables',
+          'Tone: the poet\'s attitude (melancholic, joyful, ironic, angry, reflective)',
         ]
       },
       {
-        title: 'Figures of Speech',
+        level: 'SS1',
+        title: 'Introduction to Drama',
         points: [
-          'Simile: direct comparison using "like" or "as" — "her voice was like music"',
-          'Metaphor: implied comparison without "like/as" — "life is a battlefield"',
-          'Personification: human qualities given to non-human things — "the trees whispered"',
-          'Paradox: seemingly contradictory statement revealing deeper truth — "less is more"',
-          'Apostrophe: addressing an absent or dead person, or abstract thing directly',
-          'Euphemism: mild word for unpleasant thing — "passed away" instead of died',
-          'Oxymoron: contradictory terms together — "sweet sorrow", "living death"',
-          'Symbolism: object/colour/event representing an abstract idea (white = purity)',
+          'Drama: written for performance; read differently from prose — focus on dialogue and action',
+          'Structure: acts (major divisions) → scenes (smaller units); stage directions guide performance',
+          'Dramatic conflict: the struggle that drives the plot (man vs man, society, nature, self)',
+          'Tragedy: protagonist with hamartia (fatal flaw) falls from greatness to suffering or death',
+          'Comedy: characters overcome obstacles; usually ends happily (marriage, reunion, reconciliation)',
+          'Tragicomedy: blends serious and comic elements (common in modern drama)',
+          'Setting in drama: time, place and social context; crucial for understanding characters\' behaviour',
         ]
       },
       {
-        title: 'Poetic Devices',
+        level: 'SS2',
+        title: 'Figures of Speech & Literary Devices',
         points: [
-          'Alliteration: repetition of initial consonant sounds — "Peter Piper picked"',
-          'Assonance: repetition of vowel sounds within words — "the rain in Spain"',
-          'Onomatopoeia: words that sound like what they describe — buzz, crack, hiss, clatter',
-          'Enjambment: sentence continues beyond the end of a poetic line without punctuation',
-          'Caesura: a deliberate pause in the middle of a poetic line (often marked by punctuation)',
-          'Sonnet: 14 lines — Shakespearean (3 quatrains + couplet) or Petrarchan (octave + sestet)',
-          'Elegy: poem mourning death; Ode: poem of praise; Ballad: narrative poem often with a refrain',
+          'Simile: comparison using "like" or "as" — "she moves like a graceful swan"',
+          'Metaphor: implied comparison without "like/as" — "the classroom was a marketplace"',
+          'Personification: human qualities to non-human — "the sun kissed the earth"',
+          'Symbolism: object represents abstract idea — dove = peace; darkness = evil/ignorance',
+          'Irony: verbal (say opposite of meaning); dramatic (audience knows more than character); situational (outcome opposite of expected)',
+          'Paradox: contradictory statement that contains truth — "I must be cruel, only to be kind"',
+          'Allusion: indirect reference to a historical event, text or person',
         ]
       },
       {
+        level: 'SS2',
+        title: 'Poetic Devices & Verse Forms',
+        points: [
+          'Alliteration: same consonant at start of successive words — "the wild winds weep"',
+          'Assonance: repetition of vowel sounds — "the rain in Spain stays mainly in the plain"',
+          'Onomatopoeia: words that mimic sounds — buzz, crack, hiss, murmur, thunder',
+          'Enjambment: sentence runs over a line break without pause; creates flowing, breathless effect',
+          'Caesura: deliberate pause within a line, often marked by punctuation',
+          'Sonnet: 14 lines; Shakespearean = 3 quatrains (ABAB) + couplet (GG); Petrarchan = octave + sestet',
+          'Free verse: no fixed rhyme or metre; relies on rhythm of speech and imagery (much modern poetry)',
+        ]
+      },
+      {
+        level: 'SS2',
         title: 'African & Nigerian Literature',
         points: [
-          'Chinua Achebe: Things Fall Apart (1958) — colonialism and Igbo culture; Arrow of God; A Man of the People',
-          'Wole Soyinka: 1st African Nobel laureate in Literature (1986); Death and the King\'s Horseman; The Lion and the Jewel',
-          'J.P. Clark-Bekederemo: Song of a Goat; The Raft — Niger Delta tragedy',
-          'Buchi Emecheta: The Joys of Motherhood; Second Class Citizen — feminist and diaspora themes',
+          'Chinua Achebe: Things Fall Apart (1958) — colonialism destroys Okonkwo\'s Igbo world; Arrow of God; No Longer at Ease',
+          'Wole Soyinka: first African Nobel Laureate in Literature (1986); Death and the King\'s Horseman; The Lion and the Jewel; The Trials of Brother Jero',
+          'J.P. Clark: Song of a Goat; The Raft; Ozidi — Niger Delta tragedy and myth',
+          'Buchi Emecheta: The Joys of Motherhood; Second Class Citizen — feminism and diaspora',
           'Cyprian Ekwensi: Jagua Nana; People of the City — urban Nigerian life',
           'Ngugi wa Thiong\'o (Kenya): Weep Not Child; A Grain of Wheat — colonialism in East Africa',
-          'Ben Okri (Nigeria): The Famished Road (1991 Booker Prize) — spirit world and Nigerian life',
+          'Ben Okri: The Famished Road (1991 Booker Prize) — spirit world and abiku in Nigerian life',
         ]
       },
       {
-        title: 'Drama & Theatre',
+        level: 'SS3',
+        title: 'Drama Analysis & Stagecraft',
         points: [
-          'Greek tragedy: Sophocles (Oedipus Rex), Aeschylus (Oresteia), Euripides (Medea)',
-          'Dramatic irony: audience knows something characters on stage do not know',
-          'Soliloquy: character speaks thoughts aloud alone on stage — reveals inner feelings',
+          'Dramatic irony: audience knows something that one or more characters do not know',
+          'Soliloquy: character speaks thoughts aloud alone on stage — reveals inner conflict and motivation',
           'Aside: character speaks briefly to audience, unheard by other characters on stage',
-          'Catharsis: emotional purging (pity and fear) felt by audience at end of tragedy (Aristotle)',
-          'Deus ex machina: contrived resolution by an unexpected external force',
-          'Soyinka blends Yoruba mythology, ritual and music with European drama traditions',
+          'Catharsis (Aristotle): emotional purging of pity and fear felt by audience at end of tragedy',
+          'Deus ex machina: contrived resolution by an unexpected external force — seen as poor plotting',
+          'Soyinka fuses Yoruba ritual, masquerade and mythology with Western dramatic conventions',
+          'Epic theatre (Brecht): alienation effect — audience should think critically, not be emotionally swept away',
         ]
       },
       {
-        title: 'Exam Techniques',
+        level: 'SS3',
+        title: 'WAEC Exam Techniques',
         points: [
-          'Always identify genre (prose/poetry/drama) before answering — approach differs for each',
-          'Quote directly from the text to support every major point you make',
-          'Discuss HOW language creates effect, not just WHAT is said',
-          'Character analysis: discuss motivation, development, role in theme, relationships',
-          'For poetry: analyse tone, mood, structure, imagery, sound devices and rhythm',
-          'Common JAMB/WAEC texts: Things Fall Apart, Wuthering Heights, selected poetry anthologies',
-          'In essays: clear introduction → well-developed body paragraphs → concise conclusion',
+          'Read the question carefully — distinguish between "discuss", "analyse", "compare" and "comment on"',
+          'Always quote from the text to support your points; integrate quotations smoothly into sentences',
+          'For character questions: describe the character, support with evidence, link to theme',
+          'For theme questions: define the theme, show how it is developed, use examples from text',
+          'For poetry: comment on form, tone, imagery, language and effect on the reader',
+          'For drama: consider stage action, dialogue, dramatic tension and audience impact',
+          'Write a clear introduction (name text and author), developed body paragraphs and a conclusion',
+        ]
+      },
+      {
+        level: 'SS3',
+        title: 'Oral Literature & Revision',
+        points: [
+          'Oral literature: passed down verbally — proverbs, folktales, myths, legends, riddles, praise poetry',
+          'Proverbs: short wise sayings expressing truth — "When the music changes, so does the dance"',
+          'Folktale: short story with animals or humans that teaches a moral lesson',
+          'Praise poetry (oriki): celebrates individuals, families or towns; important in Yoruba culture',
+          'Myth: story explaining origins of the world, natural phenomena or cultural practices',
+          'Riddle: question with a clever or unexpected answer; tests observation and intelligence',
+          'WAEC prescribed texts change regularly — always confirm the current list before exams',
         ]
       },
     ]
   },
 
+  /* ═══════════════════════════════════════════════════════════
+     GEOGRAPHY
+  ═══════════════════════════════════════════════════════════ */
   'Geography': {
     emoji: '🌍',
-    desc: 'Physical geography, map reading, climate, Nigeria and economic geography',
+    desc: 'WAEC Geography — Maps, climate, physical geography, Nigeria and economic geography',
     topics: [
       {
+        level: 'SS1',
         title: 'Map Reading & Cartography',
         points: [
-          'Contour lines: join points of equal altitude; closely spaced = steep slope',
-          'Map scale: 1:50,000 means 1 cm on map = 50,000 cm (500 m) on the ground',
-          'Grid reference: eastings (horizontal) before northings (vertical) — "along the corridor, up the stairs"',
-          'Bearing: direction in degrees clockwise from North (north = 000°, east = 090°, south = 180°)',
-          'Relief features from contours: hill (concentric ovals), valley (V pointing uphill), cliff (contours touching)',
-          'Types of maps: topographical, political, choropleth, isoline, dot distribution, proportional symbol',
+          'Map: flat representation of all or part of the earth\'s surface',
+          'Scale types: representative fraction (1:50,000), linear/graphic scale, statement scale',
+          'Grid reference: six-figure — easting (x) before northing (y); "along the corridor, then up the stairs"',
+          'Bearing: direction measured clockwise from north in degrees (north = 000°; east = 090°; south = 180°)',
+          'Contour lines: join points of equal altitude; closely spaced = steep slope; widely spaced = gentle slope',
+          'Relief features: hill (concentric ovals), valley (V pointing upstream), cliff (contours touch), ridge, spur',
+          'Types of maps: topographic (physical features), political, thematic (choropleth, isoline, dot, proportional symbol)',
         ]
       },
       {
-        title: 'Nigerian Geography',
-        points: [
-          'Nigeria: 4°N–14°N latitude; 3°E–15°E longitude; area ≈ 924,000 km²',
-          'Climatic zones (south to north): equatorial/rainforest → guinea savanna → sudan savanna → sahel',
-          'Harmattan: dry, dusty north-east trade wind from Sahara; blows November–March',
-          'Major rivers: Niger (4,100 km total; enters NW) and Benue meet at Lokoja, flow south to delta',
-          'Highlands: Jos Plateau (1,300 m avg), Mambilla Plateau (highest at ~1,800 m), Adamawa',
-          'Six geopolitical zones: North-West, North-East, North-Central, South-West, South-East, South-South',
-          'Population ≈ 220 million (most populous country in Africa); majority under 30 years old',
-        ]
-      },
-      {
-        title: 'Climate & Weather',
+        level: 'SS1',
+        title: 'Weather, Climate & Atmosphere',
         points: [
           'Weather: short-term atmospheric conditions at a specific place and time',
-          'Climate: average weather conditions over 30+ years for a region',
-          'Factors affecting climate: latitude, altitude, distance from sea, ocean currents, prevailing winds',
-          'ITCZ (Inter-Tropical Convergence Zone): where trade winds meet → heavy rainfall belt',
-          'ITCZ moves north in June–August (wet season in Nigeria) and south in December–February (dry)',
-          'Greenhouse gases: CO₂, CH₄, N₂O trap infrared radiation → global warming → climate change',
-          'Consequences: rising sea levels, more extreme weather, desertification, flooding',
+          'Climate: average atmospheric conditions of a place over at least 30 years',
+          'Elements of weather: temperature, rainfall (precipitation), humidity, wind direction and speed, cloud cover',
+          'Climate controls: latitude, altitude, distance from sea, ocean currents, prevailing winds, vegetation',
+          'Weather instruments: thermometer (temperature), barometer (pressure), rain gauge (rainfall), hygrometer (humidity), anemometer (wind speed)',
+          'ITCZ (Inter-Tropical Convergence Zone): where NE and SE trade winds meet → heavy rainfall; moves seasonally',
+          'Rainfall types: convectional (heated air rises), relief/orographic (air forced up mountains), frontal (cold/warm front)',
         ]
       },
       {
-        title: 'Physical Geography',
+        level: 'SS1',
+        title: 'Rocks, Weathering & Soil Formation',
         points: [
-          'Igneous rocks: formed from cooled magma (granite, basalt); resistant and good for buildings',
-          'Sedimentary rocks: formed from compressed sediments; contain fossils (limestone, sandstone, coal)',
-          'Metamorphic rocks: changed by heat and pressure (marble from limestone, slate from shale)',
-          'River stages: upper course (V-valleys, waterfalls, rapids) → middle (meanders, ox-bow lakes) → lower (floodplains, deltas)',
-          'Types of weathering: physical (freeze-thaw, exfoliation), chemical (acid rain, carbonation), biological (root action)',
-          'Plate tectonics: convergent (mountain building), divergent (ocean ridges, rift valleys), transform (earthquakes)',
-          'Earthquake terms: focus/hypocentre (underground origin); epicentre (point on surface above focus)',
+          'Igneous rocks: from cooled magma; intrusive (granite, slow cooling) or extrusive (basalt, fast cooling)',
+          'Sedimentary rocks: from compressed sediments; contain fossils; limestone, sandstone, shale',
+          'Metamorphic rocks: changed by heat and pressure; marble (from limestone), slate (from shale)',
+          'Physical weathering: freeze-thaw, exfoliation (onion peeling), pressure release — breaks rock without chemical change',
+          'Chemical weathering: solution (acid rain on limestone), hydration, oxidation (iron rust)',
+          'Biological weathering: roots break rock; burrowing animals; organic acids from decomposition',
+          'Soil profile: O horizon (organic humus) → A horizon (topsoil) → B horizon (subsoil) → C (weathered rock) → R (bedrock)',
         ]
       },
       {
-        title: 'Soils & Vegetation',
+        level: 'SS2',
+        title: 'Population & Migration',
         points: [
-          'Soil profile: O horizon (humus) → A (topsoil) → B (subsoil) → C (weathered parent rock) → R (bedrock)',
-          'Laterite (ferralitic) soils: red/yellow; heavily leached; dominant in southern Nigeria; low fertility',
-          'Alluvial soils: deposited by rivers; highly fertile; good for farming (Niger floodplains)',
-          'Tropical rainforest: multi-layered canopy, high biodiversity, ever-green, found in south Nigeria',
-          'Guinea savanna: dominant vegetation in Nigeria; tall grasses and fire-resistant trees',
-          'Sahel: semi-desert; sparse thorny shrubs; found near Lake Chad, Borno state',
-          'Mangrove swamp: salt-tolerant vegetation along Niger Delta coast; important nursery for fish',
+          'Population distribution: uneven; influenced by climate, water supply, fertile land, resources, political stability',
+          'Population density = number of people per km²; Nigeria\'s most dense areas: Lagos, Anambra',
+          'Population growth = birth rate − death rate + net migration',
+          'Demographic transition model: 4 stages from high birth/death rate to low birth/death rate',
+          'Push factors (to leave): poverty, drought, conflict, poor services, unemployment',
+          'Pull factors (to attract): jobs, education, healthcare, infrastructure, safety',
+          'Rural-urban migration: causes rapid urbanisation; Lagos has ~15 million people (West Africa\'s largest)',
         ]
       },
       {
-        title: 'Population & Settlement',
+        level: 'SS2',
+        title: 'Agriculture & Natural Resources',
         points: [
-          'Population density = number of people per km²; varies by resources, relief, climate',
-          'Population growth rate = (birth rate − death rate) + net migration',
-          'Nigeria\'s population density highest in Lagos, Anambra, Imo; lowest in Borno, Niger state',
-          'Rural-urban migration: people move to cities for jobs, education and services',
-          'Push factors (leave rural area): poverty, drought, conflict, poor services',
-          'Pull factors (attract to cities): employment, schools, hospitals, infrastructure',
-          'Urbanisation: Lagos (~15 million) is Nigeria\'s and West Africa\'s largest city',
+          'Subsistence farming: for own consumption; common in rural Nigeria; low technology',
+          'Commercial farming: for profit and market; large-scale; uses technology and capital',
+          'Nigeria\'s agricultural zones: forest zone (cocoa, rubber, palm oil) → guinea savanna (yam, maize) → sudan savanna (groundnut, cotton) → sahel (millet, sorghum)',
+          'Problems of Nigerian agriculture: poor roads, lack of storage, inadequate capital, pests and disease, land tenure issues',
+          'Nigeria\'s minerals: crude oil and natural gas (Niger Delta), coal (Enugu), tin (Jos Plateau), limestone, gold',
+          'Renewable resources: forests, soil, water, fish stocks — can be replenished if managed sustainably',
+          'Non-renewable: coal, oil, natural gas, minerals — finite; once used, cannot be replaced',
         ]
       },
       {
-        title: 'Economic Geography & Resources',
+        level: 'SS2',
+        title: 'Mining, Industry & Transport',
         points: [
-          'Primary sector: agriculture, fishing, mining, forestry',
-          'Secondary sector: manufacturing, construction, processing',
-          'Tertiary sector: services — banking, education, healthcare, transport, retail',
-          'Nigeria\'s minerals: crude oil and natural gas (Niger Delta), coal (Enugu), tin/columbite (Jos Plateau)',
-          'Renewable energy sources: solar, wind, hydroelectric (Kainji, Jebba, Shiroro dams), geothermal, biomass',
-          'Non-renewable: coal, oil, natural gas — finite; burning releases greenhouse gases',
-          'Desertification threatens northern Nigeria: caused by overgrazing, deforestation and drought',
+          'Types of mining: shaft/underground (deep deposits), opencast/surface (near surface), alluvial (river deposits), quarrying (building materials)',
+          'Factors of industrial location: raw materials, power, labour, transport, capital, market, government policy',
+          'Primary industry: extracts raw materials (farming, fishing, mining)',
+          'Secondary industry: manufactures goods (factories, processing plants)',
+          'Tertiary industry: provides services (banking, education, retail, transport)',
+          'Transport modes: road (flexible, door-to-door), rail (heavy goods, no congestion), air (fast, expensive), water (bulky goods, cheap)',
+          'Nigeria\'s transport challenges: poor road maintenance, inadequate rail network, congested ports',
+        ]
+      },
+      {
+        level: 'SS3',
+        title: 'Settlement & Urbanisation',
+        points: [
+          'Rural settlements: dispersed (scattered homesteads), nucleated (grouped around feature), linear (along road/river)',
+          'Urban settlements: larger, more complex, specialised functions; higher population density',
+          'Factors of town location: defence (hilltop), trade route junction, river crossing, resource availability',
+          'Urbanisation: increasing proportion of population living in urban areas',
+          'Problems of rapid urbanisation: housing shortage (slums), traffic congestion, pollution, inadequate services',
+          'Conurbation: merger of adjacent cities into one continuous built-up area (Lagos-Badagry corridor)',
+          'Primate city: dominant city far larger than second city; Lagos (Nigeria), Cairo (Egypt)',
+        ]
+      },
+      {
+        level: 'SS3',
+        title: 'Nigerian & West African Geography',
+        points: [
+          'Nigeria: 923,768 km²; bordered by Benin (W), Niger (N), Chad (NE), Cameroon (E); coastline on Gulf of Guinea',
+          'Six geopolitical zones: NW, NE, NC (Middle Belt), SW, SE, SS (South-South)',
+          'River Niger: 4,100 km total; enters Nigeria from NW via Kebbi; forms massive delta (9th largest in world)',
+          'Major Nigerian cities: Lagos (commercial), Abuja (federal capital), Kano (northern commerce), Port Harcourt (oil)',
+          'West African countries: Nigeria, Ghana, Senegal, Côte d\'Ivoire, Mali, Guinea, Sierra Leone, Liberia, Togo, Benin, Burkina Faso, Gambia, Guinea-Bissau, Mauritania, Cape Verde',
+          'ECOWAS: promotes free movement of persons, goods and services in West Africa',
+          'West Africa\'s economy: dominated by agriculture; oil (Nigeria, Ghana); gold and cocoa (Ghana); groundnuts (Senegal)',
+        ]
+      },
+      {
+        level: 'SS3',
+        title: 'World Geography & Environmental Issues',
+        points: [
+          'World\'s continents: Africa (largest by population density), Asia (largest by area and population), Europe, North America, South America, Australia/Oceania, Antarctica',
+          'Major ocean currents: warm currents (Gulf Stream — warms NW Europe); cold currents (Benguela — cools SW Africa)',
+          'Desertification: expansion of desert; caused by overgrazing, deforestation, drought, poor land use',
+          'Deforestation: removal of forest cover → soil erosion, flooding, loss of biodiversity, CO₂ release',
+          'Greenhouse effect: CO₂, CH₄, N₂O trap heat → global warming → sea level rise, extreme weather',
+          'Acid rain: SO₂ and NOₓ dissolve in rainwater → sulfuric and nitric acids → damages ecosystems',
+          'Sustainable development: meeting present needs without compromising future generations\' ability to meet theirs',
         ]
       },
     ]
   },
 
+  /* ═══════════════════════════════════════════════════════════
+     COMMERCE
+  ═══════════════════════════════════════════════════════════ */
   'Commerce': {
     emoji: '🏪',
-    desc: 'Trade, aids to trade, banking, insurance, business organisations and consumer protection',
+    desc: 'WAEC Commerce — Trade, banking, insurance, business organisations and consumer protection',
     topics: [
       {
-        title: 'Trade & Distribution',
+        level: 'SS1',
+        title: 'Introduction to Commerce & Trade',
         points: [
-          'Commerce: all activities that help transfer goods from producer to consumer',
-          'Home trade: buying and selling within a country (retail + wholesale)',
-          'Foreign/International trade: buying and selling between countries (imports and exports)',
-          'Visible trade: physical goods (exports and imports); Invisible trade: services (tourism, shipping)',
-          'Channels of distribution: Producer → Wholesaler → Retailer → Consumer',
-          'Wholesaler: buys in bulk from producers; provides warehousing, credit, transport to retailers',
-          'Retailer: sells to final consumers in small quantities; offers after-sales service',
+          'Commerce: all activities that facilitate the exchange of goods and services',
+          'Branches of commerce: trade (home and foreign) + aids to trade (transport, banking, insurance, warehousing, communication, advertising)',
+          'Home trade: buying and selling within a country; Foreign/International trade: between countries',
+          'Visible trade: physical goods (merchandise); Invisible trade: services (tourism, shipping, insurance)',
           'Balance of trade: value of visible exports minus value of visible imports',
+          'Surplus: exports > imports (favourable); Deficit: imports > exports (unfavourable)',
+          'Balance of payments: complete record of all economic transactions with the rest of the world',
         ]
       },
       {
-        title: 'Aids to Trade',
+        level: 'SS1',
+        title: 'Retail Trade',
         points: [
-          'Banking: provides safe custody of money, loans, transfer of funds internationally',
-          'Insurance: spreads risk of loss among many policyholders; essential for trade',
-          'Transport: moves goods from where produced to where needed (road, rail, sea, air, pipeline)',
-          'Warehousing: stores goods between production and sale; creates time utility',
-          'Advertising: informs buyers about products and persuades them to purchase',
-          'Communication: enables trade transactions (phone, internet, postal services)',
-          'Tourism is an invisible export: foreign visitors spending in Nigeria earns foreign exchange',
+          'Retailer: last link in distribution; sells directly to final consumers in small quantities',
+          'Types of small retailers: itinerant traders, market traders, general stores, convenience stores, speciality shops',
+          'Large-scale retailers: supermarkets (self-service, wide range), department stores (many departments), chain stores (many branches)',
+          'Mail order: customers order from catalogue; goods delivered by post/courier',
+          'E-commerce: buying and selling via the internet; growing rapidly in Nigeria (Jumia, Konga)',
+          'Advantages of large-scale retailing: economies of scale, lower prices, wide variety, convenience',
+          'Disadvantages: destroys small businesses, less personal service, creates unemployment in small trade',
         ]
       },
       {
-        title: 'Trade Documents',
+        level: 'SS1',
+        title: 'Wholesale Trade & Distribution',
         points: [
-          'Enquiry: buyer requests price information and terms from seller',
-          'Quotation (Pro-forma invoice): seller\'s formal price offer before dispatch',
-          'Purchase order: buyer formally requests goods or services',
-          'Invoice: detailed list of goods supplied with prices; forms basis for payment',
-          'Debit note: informs buyer that amount owed has increased (price was undercharged)',
-          'Credit note: informs buyer that amount owed has decreased (goods returned)',
-          'Statement of account: summary of all transactions in an accounting period',
-          'Bill of lading: receipt for goods shipped by sea; Waybill: for road/rail transport',
+          'Wholesaler: middle person between producer and retailer; buys in large quantities (bulk buying)',
+          'Wholesaler functions: breaking bulk, storage, risk-bearing, credit provision, market information',
+          'Direct channel: Producer → Consumer (farm gate sales, factory outlet)',
+          'Short channel: Producer → Retailer → Consumer (common for perishables)',
+          'Long channel: Producer → Wholesaler → Retailer → Consumer (most manufactured goods)',
+          'Factors affecting channel choice: product type (perishable, technical), market size, producer resources',
+          'Decline of wholesaler: supermarkets buy directly from producers, bypassing wholesalers',
         ]
       },
       {
-        title: 'Banking & Finance',
-        points: [
-          'Central Bank of Nigeria (CBN, 1958): issues currency, acts as banker to government, regulates banks',
-          'Commercial banks: GTBank, Zenith, UBA, First Bank — accept deposits and give loans',
-          'Current account: no interest; cheque book provided; for business use',
-          'Savings account: earns interest; passbook used; limited number of withdrawals',
-          'Crossed cheque: two parallel lines; must be paid into bank account (cannot be cashed)',
-          'Letter of credit: bank guarantees payment to an exporter on behalf of importer',
-          'Nigerian Exchange Group (NGX, formerly NSE): facilitates buying and selling of shares (capital market)',
-        ]
-      },
-      {
-        title: 'Insurance',
-        points: [
-          'Insurable interest: insured must stand to lose if insured event occurs',
-          'Utmost good faith (uberrimae fidei): all material facts must be disclosed',
-          'Indemnity: insured restored to same financial position as before loss (not profit)',
-          'Subrogation: after paying claim, insurer takes over insured\'s legal rights against third party',
-          'Contribution: if insured with multiple insurers, each pays proportionate share',
-          'Life assurance: covers death or survival; premiums invested long-term',
-          'Motor insurance: Third-party (compulsory, covers others) or Comprehensive (covers own vehicle too)',
-          'Marine insurance: covers ships (hull) and cargo against perils of the sea',
-        ]
-      },
-      {
+        level: 'SS2',
         title: 'Business Organisations',
         points: [
-          'Sole proprietorship: one owner; unlimited liability; simple to set up; common in Nigeria',
+          'Sole proprietorship: one owner; unlimited liability; unlimited working hours; easy to set up',
           'Partnership: 2–20 members; governed by Partnership Deed; joint and several liability',
-          'Private limited company (Ltd): limited liability; shares NOT publicly traded; minimum 2 shareholders',
-          'Public limited company (Plc): shares traded on stock exchange; must publish accounts; min. 7 shareholders',
-          'Cooperative society: owned and managed by members for mutual benefit; democratic voting',
-          'Public corporation: government-owned enterprise (NNPC, NIMASA, NITEL)',
-          'Franchise: licensee operates under franchisor\'s brand and system (KFC, Shoprite)',
+          'Private limited company (Ltd): 2–50 shareholders; limited liability; shares NOT publicly traded',
+          'Public limited company (Plc): minimum 7 shareholders; shares traded on NGX (Nigerian Exchange Group)',
+          'Cooperative society: owned and controlled by members; democratic (one member, one vote); surplus shared as dividends',
+          'Public corporation: wholly government-owned (NNPC, NIMASA, NPA); created by statute; policy-driven not profit-driven',
+          'Sources of finance: owners\' capital, retained profits, bank loans, debentures, share issues, trade credit',
         ]
       },
       {
-        title: 'Consumer Protection',
+        level: 'SS2',
+        title: 'Banking & Insurance',
         points: [
-          'Consumer rights (UN guidelines): right to safety, to information, to choose, to be heard',
-          'Consumer Protection Council (CPC) of Nigeria: investigates and resolves consumer complaints',
-          'NAFDAC: regulates food, drugs, cosmetics and beverages — prevents substandard products',
-          'Standards Organisation of Nigeria (SON): sets and enforces quality standards for products',
-          'Federal Competition and Consumer Protection Commission (FCCPC): enforces competition and consumer law',
-          'False advertising: illegal — all claims must be truthful and not misleading',
-          'Hire purchase: buyer pays in instalments; ownership transfers only after final payment',
+          'CBN (Central Bank): issues currency, regulates commercial banks, implements monetary policy',
+          'Commercial bank services: current account, savings account, fixed deposits, loans, overdraft, foreign exchange',
+          'Cheques: open (can be cashed), crossed (must be paid into account), marked ("account payee only")',
+          'Principles of insurance: insurable interest, utmost good faith, indemnity, subrogation, contribution',
+          'Life assurance: pays out on death or maturity; premiums invested; no indemnity (life is priceless)',
+          'Fire insurance: covers damage to property by fire; insured must prove loss',
+          'Motor vehicle: Third-party only (compulsory, covers other parties); Comprehensive (covers own vehicle too)',
+        ]
+      },
+      {
+        level: 'SS2',
+        title: 'Aids to Trade',
+        points: [
+          'Transport: creates place utility — moves goods from where produced to where needed',
+          'Warehousing: creates time utility — stores goods until needed; types: private, public, bonded',
+          'Advertising: informs consumers; creates demand; media: TV, radio, newspapers, billboards, social media',
+          'Communication: telephone, email, post, internet — enables trade transactions across distances',
+          'Tourism: export of services; foreign visitors spending = invisible export; earns foreign exchange',
+          'Standards: SON (Standards Organisation of Nigeria) sets product quality standards to protect consumers',
+          'NAFDAC: regulates food, drugs, cosmetics — ensures safety and quality of products in Nigeria',
+        ]
+      },
+      {
+        level: 'SS3',
+        title: 'International Trade & Documents',
+        points: [
+          'Advantages of international trade: comparative advantage, specialisation, access to scarce goods, economies of scale',
+          'Barriers: tariffs (tax on imports), quotas (quantity limits), embargoes (total ban), exchange controls',
+          'Common trade documents: bill of lading (sea), airway bill (air), invoice, certificate of origin, bill of exchange',
+          'Letter of credit: bank guarantees payment to exporter; safest method for international payment',
+          'Terms of trade: ratio of export price index to import price index; improvement means more imports per unit export',
+          'Free trade zones: areas with relaxed regulations to attract foreign investment (Lekki Free Zone, Lagos)',
+          'WTO (World Trade Organisation): promotes free trade globally; settles trade disputes',
+        ]
+      },
+      {
+        level: 'SS3',
+        title: 'Capital Market & Entrepreneurship',
+        points: [
+          'Capital market: provides long-term finance (5+ years); instruments: ordinary shares, preference shares, debentures, bonds',
+          'Nigerian Exchange Group (NGX): stock exchange where shares of listed companies are bought and sold',
+          'Primary market: new securities issued for the first time (IPO); Secondary market: existing securities traded',
+          'Stockbroker: licensed intermediary who buys and sells shares on behalf of investors',
+          'Entrepreneurship: identifying business opportunities and taking risks to create value',
+          'Characteristics of an entrepreneur: risk-taking, innovative, self-motivated, organised, goal-oriented',
+          'Problems of Nigerian entrepreneurs: inadequate capital, poor infrastructure, policy instability, high interest rates',
+        ]
+      },
+      {
+        level: 'SS3',
+        title: 'Consumer Protection & Business Ethics',
+        points: [
+          'Consumer rights (UN): right to safety, to be informed, to choose, to be heard, to redress',
+          'Consumer Protection Council (CPC): investigates complaints; bans unsafe products; mediates disputes',
+          'FCCPC (Federal Competition & Consumer Protection Commission): enforces competition and consumer protection law',
+          'Hire purchase: buyer takes goods and pays in instalments; ownership transfers only on final payment',
+          'Counterfeit goods: fake products that violate intellectual property rights; illegal and dangerous',
+          'Corporate social responsibility (CSR): businesses contributing positively to society beyond profit',
+          'Business ethics: honesty, fairness, transparency, environmental responsibility in all business dealings',
         ]
       },
     ]
   },
+
 };
 
-/* ── Render tabs and panels ── */
+/* ════════════════════════════════════════════════════════════
+   RENDER ENGINE — builds tabs, filter bar and notes panels
+════════════════════════════════════════════════════════════ */
 (function renderNotes() {
   const tabsEl   = document.getElementById('notesTabs');
   const panelsEl = document.getElementById('notesPanels');
@@ -969,7 +1282,7 @@ const NOTES_DATA = {
     const data = NOTES_DATA[subjectName];
     const id   = 'notes-' + subjectName.replace(/\s+/g, '-').toLowerCase();
 
-    /* ── Tab button ── */
+    /* ── Subject tab button ── */
     const tab = document.createElement('button');
     tab.type      = 'button';
     tab.className = 'notes-tab' + (subjectName === initialSubject ? ' active' : '');
@@ -996,6 +1309,18 @@ const NOTES_DATA = {
     panel.className = 'notes-panel' + (subjectName === initialSubject ? ' active' : '');
     panel.setAttribute('role', 'tabpanel');
 
+    const topicsHtml = data.topics.map(t => `
+      <div class="topic-card" data-level="${t.level}">
+        <div class="topic-title">
+          ${escapeHtml(t.title)}
+          <span class="topic-level ${t.level.toLowerCase()}">${t.level}</span>
+        </div>
+        <ul class="topic-points">
+          ${t.points.map(p => `<li>${escapeHtml(p)}</li>`).join('')}
+        </ul>
+      </div>
+    `).join('');
+
     panel.innerHTML = `
       <div class="notes-header">
         <span class="notes-header-emoji" aria-hidden="true">${data.emoji}</span>
@@ -1004,16 +1329,14 @@ const NOTES_DATA = {
           <p>${escapeHtml(data.desc)}</p>
         </div>
       </div>
-      <div class="topics-grid">
-        ${data.topics.map(t => `
-          <div class="topic-card">
-            <div class="topic-title">${escapeHtml(t.title)}</div>
-            <ul class="topic-points">
-              ${t.points.map(p => `<li>${escapeHtml(p)}</li>`).join('')}
-            </ul>
-          </div>
-        `).join('')}
+      <div class="notes-filter">
+        <span class="notes-filter-label">Filter:</span>
+        <button class="level-btn active" data-level="all">All</button>
+        <button class="level-btn" data-level="SS1">SS1</button>
+        <button class="level-btn" data-level="SS2">SS2</button>
+        <button class="level-btn" data-level="SS3">SS3</button>
       </div>
+      <div class="topics-grid">${topicsHtml}</div>
       <div class="notes-cta">
         <p>📚 Ready to test your knowledge on ${escapeHtml(subjectName)}?</p>
         <div class="cta-btns">
@@ -1025,6 +1348,18 @@ const NOTES_DATA = {
         </div>
       </div>
     `;
+
+    /* ── Level filter logic ── */
+    panel.querySelectorAll('.level-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        panel.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const level = btn.dataset.level;
+        panel.querySelectorAll('.topic-card').forEach(card => {
+          card.classList.toggle('level-hidden', level !== 'all' && card.dataset.level !== level);
+        });
+      });
+    });
 
     panelsEl.appendChild(panel);
   });
